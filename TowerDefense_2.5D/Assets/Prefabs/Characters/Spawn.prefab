@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4315709786515292505}
   - component: {fileID: 5546637895908206516}
+  - component: {fileID: 8288739012550225758}
   m_Layer: 0
   m_Name: Spawn
   m_TagString: Untagged
@@ -82,3 +83,29 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8288739012550225758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5196543906975613253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f9ebe1dcf98be4a838d35a5f7eeee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 8239060523995320160, guid: 823dc3b32b48cdf4ca1b4a6c3ff8c091, type: 3}
+  path:
+  - {x: 0, y: 0}
+  - {x: 0, y: -1}
+  - {x: 2, y: -1}
+  - {x: 2, y: -2}
+  - {x: 3, y: -2}
+  - {x: 3, y: -3}
+  - {x: 5, y: -3}
+  - {x: 5, y: -4}
+  - {x: 6, y: -4}
+  - {x: 6, y: -5}
+  - {x: 8, y: -5}
+  waveTime: 0.8

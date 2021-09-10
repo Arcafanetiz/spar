@@ -6,8 +6,6 @@ using System.Linq;
 
 public class MapGenerator : MonoBehaviour
 {
-    [SerializeField] private Transform cameraPos;
-
     // For Checking that this grid has tower or not
     public static bool[,] mapCheck;
     private GameObject[,] mapData;
@@ -48,7 +46,6 @@ public class MapGenerator : MonoBehaviour
             int y = Mathf.Abs((int)checkMapGrid[j].transform.position.y);
             mapData[x,y] = checkMapGrid[j];
         }
-        cameraPos.transform.position = new Vector3(width / 2.0f, -height / 2.0f, -10.0f);
     }
 
     private void Check()
@@ -64,14 +61,21 @@ public class MapGenerator : MonoBehaviour
     }
 
 
+    
+    // Other Function used to SET/GET value
     public Vector2 GetMapSize()
     {
         return new Vector2(width, height);
     }
 
-    public GameObject GetTower(int _xPos,int _yPos)
+    public GameObject GetTowerData(int _xPos,int _yPos)
     {
         return towerData[_xPos, _yPos];
+    }
+
+    public GameObject GetMapData(int _xPos,int _yPos)
+    {
+        return mapData[_xPos, _yPos];
     }
 
     public void SetTower(int _xPos, int _yPos,GameObject _object)

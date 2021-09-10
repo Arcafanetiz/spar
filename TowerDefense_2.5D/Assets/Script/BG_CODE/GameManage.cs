@@ -11,16 +11,19 @@ public class GameManage : MonoBehaviour
 
 
     [Header("UI Setting")]
-        // Create TowerUI
-        [SerializeField] private Canvas createTowerCanvas;
-        [SerializeField] private RectTransform createTowerImage;
+    // Create TowerUI
+    [SerializeField] private Canvas createTowerCanvas;
+    [SerializeField] private RectTransform createTowerImage;
 
-        // Upgrade TowerUI
-        [SerializeField] private Canvas upgradeTowerCanvas;
-        [SerializeField] private RectTransform upgradeTowerImage;
+    // Upgrade TowerUI
+    [SerializeField] private Canvas upgradeTowerCanvas;
+    [SerializeField] private RectTransform upgradeTowerImage;
 
-        // PauseUI
-        [SerializeField] private GameObject pauseUI;
+    // PauseUI
+    [SerializeField] private GameObject pauseUI;
+
+    // GameOverUI
+    [SerializeField] private GameObject gameoverUI;
 
         // OtherUI which run while playing
         [SerializeField] private Text moneyUI;
@@ -35,7 +38,14 @@ public class GameManage : MonoBehaviour
 
     private int money;
 
-
+    // GameStage
+    /*
+    PLAY : while playing game
+    CREATE : when click to create tower
+    UPGRADE : when click to upgrade tower
+    PAUSE : when Press ESC to pause game
+    GAMEOVER : when enemies go through tower over limit
+    */
     public enum GameStatus
     {
         PLAY,
@@ -45,8 +55,8 @@ public class GameManage : MonoBehaviour
         GAMEOVER
     };
 
-    public static GameStatus currentGameStatus = GameStatus.PLAY;
-    public static Vector3 clickPos;
+    public static GameStatus currentGameStatus = GameStatus.PLAY; // Track GameStage
+    public static Vector3 clickPos; // Track position of tile which have been clicked
 
 
     private void Start()
@@ -71,6 +81,10 @@ public class GameManage : MonoBehaviour
             {
                 money += 10;
             }
+        }
+        else
+        {
+            gameoverUI.SetActive(true);
         }
     }
 

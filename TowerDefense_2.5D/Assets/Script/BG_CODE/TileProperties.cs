@@ -8,6 +8,13 @@ public class TileProperties : MonoBehaviour
     private Color currentColor;
     private Vector2 nowPos;
     
+    public enum TileType
+    {
+        Grass,
+        ATK
+    }
+
+    [SerializeField] private TileType tileType;
 
     private void Start()
     {
@@ -36,9 +43,11 @@ public class TileProperties : MonoBehaviour
         // Mouse Click -> Show createTowerUI if there is no tower on that grid
         if (GameManage.currentGameStatus == GameManage.GameStatus.PLAY)
         {
-            Vector3 nowPos = GetComponent<Transform>().position;
             // Track the position that have been clicked
+            Vector3 nowPos = GetComponent<Transform>().position;
             GameManage.clickPos = nowPos;
+
+            // Check for Existance of Tower
             if (MapGenerator.mapCheck[(int)nowPos.x, (int)-nowPos.y])
             {
                 GameManage.currentGameStatus = GameManage.GameStatus.UPGRADE;
@@ -50,4 +59,9 @@ public class TileProperties : MonoBehaviour
         }
     }
 
+    // Other Function used to SET/GET value
+    public TileType GetTileType()
+    {
+        return tileType;
+    }
 }

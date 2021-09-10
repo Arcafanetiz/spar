@@ -4,52 +4,44 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
-    [SerializeField] Camera mainCamera;
-    [SerializeField] float cameraSpeed;
+    [SerializeField] private GameObject[] camList;
+    private int index;
 
-    private Vector2 posMax;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        posMax = GetComponent<MapGenerator>().GetMapSize();
+        index = 0;
+
+        camList[0].SetActive(true);
+        for (int j = 1; j < camList.Length; j++)
+        {
+            camList[j].SetActive(false);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        GetInput();
+        if (GameManage.currentGameStatus != GameManage.GameStatus.GAMEOVER &&
+            GameManage.currentGameStatus != GameManage.GameStatus.PAUSE)
+        {
+            GetInput();
+        }
     }
 
     private void GetInput()
     {
-        /*
-        if (Input.GetKey(KeyCode.W))
-        {
-            mainCamera.transform.Translate(Vector3.up * cameraSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            mainCamera.transform.Translate(Vector3.down* cameraSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            mainCamera.transform.Translate(Vector3.left * cameraSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            mainCamera.transform.Translate(Vector3.right * cameraSpeed * Time.deltaTime);
-        }
-        */
-
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            mainCamera.transform.localRotation = Quaternion.Euler(0, 0, mainCamera.transform.localRotation.z - 90);
+            camList[index].SetActive(false);
+            index = (index - 1 < 0) ? camList.Length - 1 : index - 1;
+            camList[index].SetActive(true);
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            mainCamera.transform.localRotation = Quaternion.Euler(0, 0, mainCamera.transform.localRotation.z + 90);
+            camList[index].SetActive(false);
+            index = (index + 1) % camList.Length;
+            camList[index].SetActive(true);
         }
     }
 

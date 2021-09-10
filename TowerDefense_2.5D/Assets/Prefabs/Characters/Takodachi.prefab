@@ -128,9 +128,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1617935929322705423, guid: a200fa768b229e24cbdcfe1f430e1e19, type: 3}
+  ATK: 20
   range: 1.5
   rangeArea: {fileID: 8082913673979223310}
-  shootDelay: 0.4
+  Cooldown: 0.6
 --- !u!1 &8082913673979223310
 GameObject:
   m_ObjectHideFlags: 0

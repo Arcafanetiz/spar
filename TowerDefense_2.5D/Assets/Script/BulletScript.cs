@@ -6,14 +6,7 @@ public class BulletScript : MonoBehaviour
 {
     private GameObject target;
     private float speed = 10f;
-    [SerializeField] private int damage;
-
-
-    public void Seek(GameObject _target)
-    {
-        target = _target;
-    }
-
+    private float damage;
 
     private void Update()
     {
@@ -44,5 +37,17 @@ public class BulletScript : MonoBehaviour
     {
         target.GetComponent<EnemyControl>().AddHealth(-damage);
         Destroy(gameObject);
+    }
+
+
+    // Other Functions used to SET/GET value
+    public void Seek(GameObject _target)
+    {
+        target = _target;
+    }
+
+    public void SetDamage(float _damage)
+    {
+        damage = _damage;
     }
 }

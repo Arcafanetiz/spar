@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPath : MonoBehaviour
+public class SpawnerControl : MonoBehaviour
 {
     [SerializeField] private GameObject enemy;
     [SerializeField] private Vector2[] path;
@@ -11,7 +11,8 @@ public class EnemyPath : MonoBehaviour
 
     private void Update()
     {
-        if(GameManage.currentGameStatus != GameManage.GameStatus.PAUSE)
+        if(GameManage.currentGameStatus != GameManage.GameStatus.PAUSE &&
+            GameManage.currentGameStatus != GameManage.GameStatus.GAMEOVER)
         {
             GenerateEnemy();
         }

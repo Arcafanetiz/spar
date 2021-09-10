@@ -6,12 +6,24 @@ public class TowerControl : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
 
-    [SerializeField] private float range;
-    [SerializeField] private GameObject rangeArea;
-    [SerializeField] private float shootDelay;
+    [Header("Tower Properties")]
+
+        [SerializeField] private float ATK;
+        [SerializeField] private float range;
+        [SerializeField] private GameObject rangeArea;
+        [SerializeField] private float Cooldown;
+
+    private struct TowerData
+    {
+        public int Type;
+        public int Level;
+    }
+
+    private TowerData info;
     private float shootTimeCounter = 0.0f;
     private bool foundEnemy = false;
 
+    private GameObject compTile;
     private LinkedList<GameObject> enemyList;
 
     private void Start()
@@ -20,6 +32,8 @@ public class TowerControl : MonoBehaviour
         rangeArea.transform.localScale = new Vector2(rangeArea.transform.localScale.x * range * 2, 
                                                     rangeArea.transform.localScale.y * range * 2);
         rangeArea.SetActive(false);
+
+        CheckBuff();
     }
 
     private void Update()
@@ -45,7 +59,7 @@ public class TowerControl : MonoBehaviour
     // Cool down for Shooting bullet
     private void CoolDown()
     {
-        if (shootTimeCounter >= shootDelay)
+        if (shootTimeCounter >= Cooldown)
         {
             if (foundEnemy)
             {
@@ -66,6 +80,7 @@ public class TowerControl : MonoBehaviour
         BulletScript bullet = bulletGo.GetComponent<BulletScript>();
         if (bullet != null)
         {
+            bullet.SetDamage(ATK);
             bullet.Seek(enemyList.First.Value);
         }
     }
@@ -115,4 +130,34 @@ public class TowerControl : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, range);
     }
 
+    // Check Buff for speacial abilities Tiles
+    private void CheckBuff()
+    {
+        if(compTile.GetComponent<TileProperties>().GetTileType() == TileProperties.TileType.ATK)
+        {
+            ATK *= 1.5f;
+        }
+    }
+
+    // Other Function used to SET/GET value
+    public void SetCompTile(GameObject _compTile)
+    {
+        compTile = _compTile;
+    }
+
+    public void SetTowerType(int _Type, int _Level)
+    {
+        info.Type = _Type;
+        info.Level = _Level;
+    }
+
+    public int GetTowerType()
+    {
+        return info.Type;
+    }
+
+    public int GetTowerLevel()
+    {
+        return info.Level;
+    }
 }
