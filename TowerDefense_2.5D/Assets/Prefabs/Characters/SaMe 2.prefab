@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1781521296812263527}
   - component: {fileID: 984218349519299836}
   m_Layer: 0
-  m_Name: Sprite_Same
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,8 +71,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: e16d6d8e58f972946a5f98070a2934fd, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: ac33fbae33414184fa81683fbb956665, type: 3}
+  m_Color: {r: 0, g: 0.6603774, b: 0.6474289, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -153,8 +153,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.39215687}
+  m_Sprite: {fileID: 21300000, guid: e2ef295d449e31f4e9799094f0fbe341, type: 3}
+  m_Color: {r: 1, g: 0, b: 0, a: 0.49019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 2084339880516991478}
   m_Layer: 0
   m_Name: SaMe 2
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -210,6 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1617935929322705423, guid: fedfee305303d58489c252ffc1c03b78, type: 3}
+  towerSprite: {fileID: 1685549193360873783}
   ATK: 25
   range: 3
   rangeArea: {fileID: 4053161015355926887}

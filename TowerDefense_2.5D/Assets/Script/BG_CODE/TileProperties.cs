@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TileProperties : MonoBehaviour
 {
+    private GameObject mapGenerator;
     private SpriteRenderer currentRenderer;
     private Color currentColor;
     private Vector2 nowPos;
@@ -26,7 +27,7 @@ public class TileProperties : MonoBehaviour
     // Mouse Event will work when Object has Collision
     private void OnMouseOver()
     {
-        // Change Color when Mouse Hover if there is no tower on that grid
+        // Change Color when Mouse Hover
         if (GameManage.currentGameStatus == GameManage.GameStatus.PLAY)
         {
             currentRenderer.color = new Color(currentColor.r + 0.1f, currentColor.g + 0.1f, currentColor.b + 0.1f);
@@ -48,7 +49,7 @@ public class TileProperties : MonoBehaviour
             GameManage.clickPos = nowPos;
 
             // Check for Existance of Tower
-            if (MapGenerator.mapCheck[(int)nowPos.x, (int)-nowPos.y])
+            if (mapGenerator.GetComponent<MapGenerator>().CheckMap((int)nowPos.x, (int)-nowPos.y))
             {
                 GameManage.currentGameStatus = GameManage.GameStatus.UPGRADE;
             }
@@ -63,5 +64,10 @@ public class TileProperties : MonoBehaviour
     public TileType GetTileType()
     {
         return tileType;
+    }
+
+    public void SetMapGenerator(GameObject _mapGenerator)
+    {
+        mapGenerator = _mapGenerator;
     }
 }

@@ -25,19 +25,6 @@ public class GameManage : MonoBehaviour
     // GameOverUI
     [SerializeField] private GameObject gameoverUI;
 
-        // OtherUI which run while playing
-        [SerializeField] private Text moneyUI;
-        [SerializeField] private Text healthUI;
-
-
-    [Header("Money Setting")]
-        [SerializeField] private int InitialMoney;
-
-    [Header("Health Setting")]
-        [SerializeField] private int health;
-
-    private int money;
-
     // GameStage
     /*
     PLAY : while playing game
@@ -58,12 +45,6 @@ public class GameManage : MonoBehaviour
     public static GameStatus currentGameStatus = GameStatus.PLAY; // Track GameStage
     public static Vector3 clickPos; // Track position of tile which have been clicked
 
-
-    private void Start()
-    {
-        money = InitialMoney;
-    }
-
     private void Update()
     {
         // Check If GAMEOVER no need to update
@@ -71,16 +52,6 @@ public class GameManage : MonoBehaviour
         {
             CheckEscButton();
             CheckUI();
-            
-            ShowMoney();
-
-            ShowHealth();
-            CheckHealth();
-
-            if (Input.GetKey(KeyCode.M))
-            {
-                money += 10;
-            }
         }
         else
         {
@@ -103,7 +74,6 @@ public class GameManage : MonoBehaviour
         }
         else if (currentGameStatus == GameStatus.UPGRADE)
         {
-            MoveCanvas(upgradeTowerImage);
             upgradeTowerCanvas.gameObject.SetActive(true);
         }
         else
@@ -139,41 +109,6 @@ public class GameManage : MonoBehaviour
     }
 
     /* UI Script */
-    // Money
-    private void ShowMoney()
-    {
-        moneyUI.text = "$ " + money.ToString();
-    }
-
-    public void AddMoney(int val)
-    {
-        money += val;
-    }
-
-    public int GetMoney()
-    {
-        return money;
-    }
-
-    // Health
-    private void ShowHealth()
-    {
-        healthUI.text = "Health : " + health.ToString();
-    }
-
-    public void AddHealth(int val)
-    {
-        health += val;
-    }
-
-    private void CheckHealth()
-    {
-        if (health <= 0)
-        {
-            currentGameStatus = GameStatus.GAMEOVER;
-        }
-    }
-
     private void MoveCanvas(RectTransform _Image)
     {
         // Show Canvas to the position that was click

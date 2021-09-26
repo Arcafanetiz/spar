@@ -30,6 +30,7 @@ public class CameraControl : MonoBehaviour
 
     private void GetInput()
     {
+        // Pressed Q to Rotate Counter-Clockwise
         if (Input.GetKeyDown(KeyCode.Q))
         {
             camList[index].SetActive(false);
@@ -37,6 +38,7 @@ public class CameraControl : MonoBehaviour
             camList[index].SetActive(true);
         }
 
+        // Pressed R to Rotate Clockwise
         if (Input.GetKeyDown(KeyCode.E))
         {
             camList[index].SetActive(false);

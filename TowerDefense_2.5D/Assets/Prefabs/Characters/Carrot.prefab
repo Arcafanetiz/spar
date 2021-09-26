@@ -71,8 +71,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.39215687}
+  m_Sprite: {fileID: 21300000, guid: e2ef295d449e31f4e9799094f0fbe341, type: 3}
+  m_Color: {r: 1, g: 0, b: 0, a: 0.49019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 2415645963748346942}
   - component: {fileID: 4306428019591229689}
   m_Layer: 0
-  m_Name: Sprite_Carrot
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,12 +153,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 4da511cb2ce7b8c468173b6c9f866cf3, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: ac33fbae33414184fa81683fbb956665, type: 3}
+  m_Color: {r: 1, g: 0.5615011, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 8904190905793436223}
   m_Layer: 0
   m_Name: Carrot
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -210,6 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1617935929322705423, guid: baa4e5b1783470a4ca48c78798428501, type: 3}
+  towerSprite: {fileID: 5367367592747515400}
   ATK: 10
   range: 1.5
   rangeArea: {fileID: 4188069669387408102}

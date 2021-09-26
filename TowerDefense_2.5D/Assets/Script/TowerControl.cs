@@ -5,6 +5,7 @@ using UnityEngine;
 public class TowerControl : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private GameObject towerSprite;
 
     [Header("Tower Properties")]
 
@@ -76,6 +77,9 @@ public class TowerControl : MonoBehaviour
     // Shoot bullet to Enemy
     private void Shoot()
     {
+        Vector3 dir = transform.position - enemyList.First.Value.gameObject.transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
         GameObject bulletGo = Instantiate(bulletPrefab, transform.position, transform.rotation);
         BulletScript bullet = bulletGo.GetComponent<BulletScript>();
         if (bullet != null)
@@ -159,5 +163,20 @@ public class TowerControl : MonoBehaviour
     public int GetTowerLevel()
     {
         return info.Level;
+    }
+
+    public float GetATK()
+    {
+        return ATK;
+    }
+
+    public float GetSpeed()
+    {
+        return 1/Cooldown;
+    }
+
+    public float GetRange()
+    {
+        return range;
     }
 }

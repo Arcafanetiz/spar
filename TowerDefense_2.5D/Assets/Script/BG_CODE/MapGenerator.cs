@@ -7,7 +7,8 @@ using System.Linq;
 public class MapGenerator : MonoBehaviour
 {
     // For Checking that this grid has tower or not
-    public static bool[,] mapCheck;
+    //public static bool[,] mapCheck;
+    private bool[,] mapCheck;
     private GameObject[,] mapData;
     private GameObject[,] towerData;
 
@@ -19,7 +20,6 @@ public class MapGenerator : MonoBehaviour
     {
         // Set size of 2D Array
         GenerateGrid();
-        //Check();
     }
 
     private void GenerateGrid()
@@ -32,6 +32,10 @@ public class MapGenerator : MonoBehaviour
         {
             int x = Mathf.Abs((int)checkMapGrid[j].transform.position.x);
             int y = Mathf.Abs((int)checkMapGrid[j].transform.position.y);
+            if(checkMapGrid[j].GetComponent<TileProperties>() != null)
+            {
+                checkMapGrid[j].GetComponent<TileProperties>().SetMapGenerator(this.gameObject);
+            }
             width = (width < x) ? x : width;
             height = (height < y) ? y : height;
         }
@@ -48,6 +52,7 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
+    // For Debugging
     private void Check()
     {
         print(width + " " + height);
@@ -81,5 +86,15 @@ public class MapGenerator : MonoBehaviour
     public void SetTower(int _xPos, int _yPos,GameObject _object)
     {
         towerData[_xPos, _yPos] = _object;
+    }
+
+    public bool CheckMap(int _xPos,int _yPos)
+    {
+        return mapCheck[_xPos, _yPos];
+    }
+
+    public void SetMapCheck(int _xPos,int _yPos,bool con)
+    {
+        mapCheck[_xPos, _yPos] = con;
     }
 }
