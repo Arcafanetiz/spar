@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c6703081ca1c8489cdd0dd0e97e3f6, type: 3}
   m_Name: Card005
   m_EditorClassIdentifier: 
-  cardName: 
-  cardType: 0
-  description: 
+  cardName: Slowdown 200%
+  cardType: 1
+  description: Slowdown enemy 200%
   image: {fileID: 0}
-  _abilities: {fileID: 0}
+  _abilities: {fileID: 11400000, guid: 00ce845d1bf4fa842a6ea801359e1fab, type: 2}

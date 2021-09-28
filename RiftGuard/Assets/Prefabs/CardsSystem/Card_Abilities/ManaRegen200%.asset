@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8138b1ecf266663429ba058e98c4b4b9, type: 3}
   m_Name: ManaRegen200%
   m_EditorClassIdentifier: 
-  _regenRate: 0
+  _regenRate: 200

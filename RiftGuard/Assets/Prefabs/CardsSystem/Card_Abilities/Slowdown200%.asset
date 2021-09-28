@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21c80c6374beae4ebf7b4d05a4818b2, type: 3}
   m_Name: Slowdown200%
   m_EditorClassIdentifier: 
-  _slow: 0
+  _slow: 200
