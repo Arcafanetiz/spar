@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 83b223e010c63b24db6ae574739811a2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - createTowerUI: {fileID: 8733427525909730293, guid: ab39b2972d9a5644fb4d3ed412f63032, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
