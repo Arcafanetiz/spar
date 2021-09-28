@@ -27,6 +27,8 @@ public class SpawnTower : MonoBehaviour
 
     private GameObject mapGenerator;
 
+    private bool doOnce = true;
+
     private void Start()
     {
         mapGenerator = this.gameObject;
@@ -34,19 +36,22 @@ public class SpawnTower : MonoBehaviour
 
     private void Update()
     {
-        if(GameManage.currentGameStatus == GameManage.GameStatus.UPGRADE)
+        if(doOnce && GameManage.currentGameStatus == GameManage.GameStatus.UPGRADE)
         {
             ShowCostSell();
-            ShowInfo();
+            doOnce = false;
+        }
+        else if(GameManage.currentGameStatus == GameManage.GameStatus.PLAY)
+        {
+            doOnce = true;
         }
     }
 
     // Generate Tower When Clicked in UI
     public void GenTower_1()
     {
-        if (basePrefab.GetMoney() >= Tower_1[0].cost && basePrefab.GetMana() >= Tower_1[0].mana)
+        if (basePrefab.money >= Tower_1[0].cost && basePrefab.mana >= Tower_1[0].mana)
         {
-            print("GenTower1");
             // Initialize Postion X & Y
             int posX = (int)GameManage.clickPos.x;
             int posY = (int)-GameManage.clickPos.y;
@@ -58,22 +63,21 @@ public class SpawnTower : MonoBehaviour
 
             // Set TileType in Tower script to Check for Special Buff
             GetComponent<MapGenerator>().SetTower(posX, posY, T1);
-            T1.GetComponent<TowerControl>().SetCompTile(GetComponent<MapGenerator>().GetMapData(posX, posY));
+            T1.GetComponent<TowerControl>().compTile = GetComponent<MapGenerator>().GetMapData(posX, posY);
             T1.GetComponent<TowerControl>().SetTowerType(1,0);
+            T1.GetComponent<TowerCardScript>().gameManager = this.gameObject;
+            T1.GetComponent<TowerCardScript>().objectCardUI = this.GetComponent<GameManage>().objectCard;
 
             // Reduce Money & Mana
             basePrefab.AddMoney(-Tower_1[0].cost);
             basePrefab.AddMana(-Tower_1[0].mana);
-            basePrefab.UpdateMoney();
-            basePrefab.UpdateMana();
         }
     }
 
     public void GenTower_2()
     {
-        if (basePrefab.GetMoney() >= Tower_2[0].cost && basePrefab.GetMana() >= Tower_2[0].mana)
+        if (basePrefab.money >= Tower_2[0].cost && basePrefab.mana >= Tower_2[0].mana)
         {
-            print("GenTower2");
 
             // Initialize Postion X & Y
             int posX = (int)GameManage.clickPos.x;
@@ -86,22 +90,21 @@ public class SpawnTower : MonoBehaviour
 
             // Set TileType in Tower script to Check for Special Buff
             GetComponent<MapGenerator>().SetTower(posX, posY, T2);
-            T2.GetComponent<TowerControl>().SetCompTile(GetComponent<MapGenerator>().GetMapData(posX, posY));
+            T2.GetComponent<TowerControl>().compTile = GetComponent<MapGenerator>().GetMapData(posX, posY);
             T2.GetComponent<TowerControl>().SetTowerType(2,0);
+            T2.GetComponent<TowerCardScript>().gameManager = this.gameObject;
+            T2.GetComponent<TowerCardScript>().objectCardUI = this.GetComponent<GameManage>().objectCard;
 
             // Reduce Money & Mana
             basePrefab.AddMoney(-Tower_2[0].cost);
             basePrefab.AddMana(-Tower_2[0].mana);
-            basePrefab.UpdateMoney();
-            basePrefab.UpdateMana();
         }
     }
 
     public void GenTower_3()
     {
-        if (basePrefab.GetMoney() >= Tower_3[0].cost && basePrefab.GetMana() >= Tower_3[0].mana)
+        if (basePrefab.money >= Tower_3[0].cost && basePrefab.mana >= Tower_3[0].mana)
         {
-            print("GenTower3");
 
             // Initialize Postion X & Y
             int posX = (int)GameManage.clickPos.x;
@@ -114,14 +117,14 @@ public class SpawnTower : MonoBehaviour
 
             // Set TileType in Tower script to Check for Special Buff
             GetComponent<MapGenerator>().SetTower(posX, posY, T3);
-            T3.GetComponent<TowerControl>().SetCompTile(GetComponent<MapGenerator>().GetMapData(posX, posY));
+            T3.GetComponent<TowerControl>().compTile = GetComponent<MapGenerator>().GetMapData(posX, posY);
             T3.GetComponent<TowerControl>().SetTowerType(3,0);
+            T3.GetComponent<TowerCardScript>().gameManager = this.gameObject;
+            T3.GetComponent<TowerCardScript>().objectCardUI = this.GetComponent<GameManage>().objectCard;
 
             // Reduce Money & Mana
             basePrefab.AddMoney(-Tower_3[0].cost);
             basePrefab.AddMana(-Tower_3[0].mana);
-            basePrefab.UpdateMoney();
-            basePrefab.UpdateMana();
         }
     }
 
@@ -138,23 +141,22 @@ public class SpawnTower : MonoBehaviour
 
         GameObject SellTower = GetComponent<MapGenerator>().GetTowerData(_xPos, -_yPos);
 
-        int CheckType = SellTower.GetComponent<TowerControl>().GetTowerType();
-        int CheckLevel = SellTower.GetComponent<TowerControl>().GetTowerLevel();
+        SellTower.GetComponent<TowerCardScript>().DelAllCard();
+
+        int CheckType = SellTower.GetComponent<TowerControl>().info.Type;
+        int CheckLevel = SellTower.GetComponent<TowerControl>().info.Level;
         
         if (CheckType == 1)
         {
             basePrefab.AddMoney(Tower_1[CheckLevel].sell);
-            basePrefab.UpdateMoney();
         }
         else if(CheckType == 2)
         {
             basePrefab.AddMoney(Tower_2[CheckLevel].sell);
-            basePrefab.UpdateMoney();
         }
         else if(CheckType == 3)
         {
             basePrefab.AddMoney(Tower_3[CheckLevel].sell);
-            basePrefab.UpdateMoney();
         }
 
         Destroy(SellTower);
@@ -168,20 +170,20 @@ public class SpawnTower : MonoBehaviour
         int _yPos = (int)GameManage.clickPos.y;
 
         GameObject SellTower = GetComponent<MapGenerator>().GetTowerData(_xPos, -_yPos);
-        int CheckType = SellTower.GetComponent<TowerControl>().GetTowerType();
-        int CheckLevel = SellTower.GetComponent<TowerControl>().GetTowerLevel();
+        int CheckType = SellTower.GetComponent<TowerControl>().info.Type;
+        int CheckLevel = SellTower.GetComponent<TowerControl>().info.Level;
 
-        if (CheckType == 1 && basePrefab.GetMoney() >= Tower_1[CheckLevel].cost)
+        if (CheckType == 1 && basePrefab.money >= Tower_1[CheckLevel].cost)
         {
             Destroy(SellTower);
             GenTower_1(CheckLevel+1);
         }
-        else if (CheckType == 2 && basePrefab.GetMoney() >= Tower_2[CheckLevel].cost)
+        else if (CheckType == 2 && basePrefab.money >= Tower_2[CheckLevel].cost)
         {
             Destroy(SellTower);
             GenTower_2(CheckLevel+1);
         }
-        else if (CheckType == 3 && basePrefab.GetMoney() >= Tower_3[CheckLevel].cost)
+        else if (CheckType == 3 && basePrefab.money >= Tower_3[CheckLevel].cost)
         {
             Destroy(SellTower);
             GenTower_3(CheckLevel+1);
@@ -197,37 +199,33 @@ public class SpawnTower : MonoBehaviour
         int _yPos = (int)GameManage.clickPos.y;
 
         GameObject tempTower = GetComponent<MapGenerator>().GetTowerData(_xPos, -_yPos);
-        int CheckType = tempTower.GetComponent<TowerControl>().GetTowerType();
-        int CheckLevel = tempTower.GetComponent<TowerControl>().GetTowerLevel();
+
+        tempTower.GetComponent<TowerCardScript>().SetActivate();
+
+        TowerControl towerStat = tempTower.GetComponent<TowerControl>();
+
+        int CheckType = tempTower.GetComponent<TowerControl>().info.Type;
+        int CheckLevel = tempTower.GetComponent<TowerControl>().info.Level;
 
         if(CheckType == 1)
         {
             upgradeUI.text = Tower_1[CheckLevel].cost.ToString();
             sellUI.text = Tower_1[CheckLevel].sell.ToString();
-            ATK_Text.text = "ATK : " + Tower_1[CheckLevel].tower.GetComponent<TowerControl>().GetATK().ToString();
-            Speed_Text.text = "Speed : " + Tower_1[CheckLevel].tower.GetComponent<TowerControl>().GetSpeed().ToString();
-            Range_Text.text = "Range : " + Tower_1[CheckLevel].tower.GetComponent<TowerControl>().GetRange().ToString();
         }
         else if (CheckType == 2)
         {
             upgradeUI.text = Tower_2[CheckLevel].cost.ToString();
             sellUI.text = Tower_2[CheckLevel].sell.ToString();
-            ATK_Text.text = "ATK : " + Tower_2[CheckLevel].tower.GetComponent<TowerControl>().GetATK().ToString();
-            Speed_Text.text = "Speed : " + Tower_2[CheckLevel].tower.GetComponent<TowerControl>().GetSpeed().ToString();
-            Range_Text.text = "Range : " + Tower_2[CheckLevel].tower.GetComponent<TowerControl>().GetRange().ToString();
         }
         else if (CheckType == 3)
         {
             upgradeUI.text = Tower_3[CheckLevel].cost.ToString();
             sellUI.text = Tower_3[CheckLevel].sell.ToString();
-            ATK_Text.text = "ATK : " + Tower_3[CheckLevel].tower.GetComponent<TowerControl>().GetATK().ToString();
-            Speed_Text.text = "Speed : " + Tower_3[CheckLevel].tower.GetComponent<TowerControl>().GetSpeed().ToString();
-            Range_Text.text = "Range : " + Tower_3[CheckLevel].tower.GetComponent<TowerControl>().GetRange().ToString();
         }
-    }
-    private void ShowInfo()
-    {
 
+        ATK_Text.text = "ATK : " + towerStat.ATK.ToString();
+        Speed_Text.text = "Speed : " + (1/towerStat.Cooldown).ToString();
+        Range_Text.text = "Range : " + towerStat.Range.ToString();
     }
 
     // Use In Script(Function Upgrade) (NOT FOR UI!!)
@@ -243,12 +241,11 @@ public class SpawnTower : MonoBehaviour
 
         // Set TileType in Tower script to Check for Special Buff
         GetComponent<MapGenerator>().SetTower(posX, posY, T1);
-        T1.GetComponent<TowerControl>().SetCompTile(GetComponent<MapGenerator>().GetMapData(posX, posY));
+        T1.GetComponent<TowerControl>().compTile = GetComponent<MapGenerator>().GetMapData(posX, posY);
         T1.GetComponent<TowerControl>().SetTowerType(1, level);
 
         // Reduce Money
         basePrefab.AddMoney(-Tower_1[level].cost);
-        basePrefab.UpdateMoney();
     }
 
     private void GenTower_2(int level)
@@ -264,12 +261,11 @@ public class SpawnTower : MonoBehaviour
 
         // Set TileType in Tower script to Check for Special Buff
         GetComponent<MapGenerator>().SetTower(posX, posY, T2);
-        T2.GetComponent<TowerControl>().SetCompTile(GetComponent<MapGenerator>().GetMapData(posX, posY));
+        T2.GetComponent<TowerControl>().compTile = GetComponent<MapGenerator>().GetMapData(posX, posY);
         T2.GetComponent<TowerControl>().SetTowerType(2, level);
 
         // Reduce Money
         basePrefab.AddMoney(-Tower_2[level].cost);
-        basePrefab.UpdateMoney();
     }
 
     private void GenTower_3(int level)
@@ -285,12 +281,11 @@ public class SpawnTower : MonoBehaviour
 
         // Set TileType in Tower script to Check for Special Buff
         GetComponent<MapGenerator>().SetTower(posX, posY, T3);
-        T3.GetComponent<TowerControl>().SetCompTile(GetComponent<MapGenerator>().GetMapData(posX, posY));
+        T3.GetComponent<TowerControl>().compTile = GetComponent<MapGenerator>().GetMapData(posX, posY);
         T3.GetComponent<TowerControl>().SetTowerType(3, level);
 
         // Reduce Money
         basePrefab.AddMoney(-Tower_3[level].cost);
-        basePrefab.UpdateMoney();
     }
 
 }

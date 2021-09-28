@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 5732380194986584374}
-  SPD: 5
+  SPD: 3
   DEF: 1
   HP: 30
   getMoney: 1

@@ -7,9 +7,10 @@ using System.Linq;
 public class MapGenerator : MonoBehaviour
 {
     // For Checking that this grid has tower or not
-    //public static bool[,] mapCheck;
     private bool[,] mapCheck;
+    // mapData -> Collect Ref to each Tile
     private GameObject[,] mapData;
+    // towerData -> Collect Ref to each Tower
     private GameObject[,] towerData;
 
     private int width;

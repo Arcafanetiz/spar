@@ -8,16 +8,19 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 {
     [SerializeField] private Canvas canvas;
     [SerializeField] private GameObject refGameManage;
+    private GameObject cardKeeper;
+    public Card_SO cardInfo;
 
     private CanvasGroup canvasGroup;
     private RectTransform rectTransform;
     private Transform parentToReturnTo = null;
 
+    private GameObject attachWith;
+
     private bool endDrag = false;
     private bool hit = false;
     private bool doOnce = false;
     private bool drag = false;
-    private int frame = 0;
 
     private void Start()
     {
@@ -29,16 +32,11 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     {
         if(hit)
         {
-            Destroy(this.gameObject);
-        }
-        else if(doOnce && !drag && frame > 1)
-        {
-            frame = 0;
-            this.transform.SetParent(parentToReturnTo);
+            Check();
         }
         else if(doOnce && !drag)
         {
-            frame++;
+            this.transform.SetParent(parentToReturnTo);
         }
     }
 
@@ -75,10 +73,81 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         // Collision Only Tile
         // Check if That grid have tower and EndDrag
         if (refGameManage.GetComponent<MapGenerator>().CheckMap((int)(collision.transform.position.x), (int)(-collision.transform.position.y))
-            && collision.gameObject.CompareTag("Platform") 
-            && endDrag)
+            && collision.gameObject.CompareTag("Platform") && endDrag && cardInfo.cardType == Card_SO.Type.TOWER)
         {
+            attachWith = collision.gameObject;
             hit = true;
+        }
+
+        if (collision.gameObject.CompareTag("Base") && endDrag && cardInfo.cardType == Card_SO.Type.BASE)
+        {
+            attachWith = collision.gameObject;
+            hit = true;
+        }
+
+        if (collision.gameObject.CompareTag("Spawner") && endDrag && cardInfo.cardType == Card_SO.Type.SPAWNER)
+        {
+            attachWith = collision.gameObject;
+            hit = true;
+        }
+    }
+
+    void Check()
+    {
+        if(attachWith.CompareTag("Platform"))
+        {
+            print("Tower");
+            int x = (int)attachWith.transform.position.x;
+            int y = -(int)attachWith.transform.position.y;
+            GameObject Tower = refGameManage.GetComponent<MapGenerator>().GetTowerData(x,y);
+            cardInfo._abilities.ActivateAbility(Tower);
+            TowerCardScript TCS = Tower.GetComponent<TowerCardScript>();
+            if (TCS.Check())
+            {
+                TCS.Add(this.gameObject);
+                TCS.GenCard();
+                this.transform.SetParent(cardKeeper.transform);
+
+            }
+            else
+            {
+                hit = false;
+                return;
+            }
+        }
+        else if(attachWith.CompareTag("Base"))
+        {
+            print("Base");
+            BaseCardScript BCS = attachWith.GetComponent<BaseCardScript>();
+            if(BCS.Check())
+            {
+                BCS.Add(this.gameObject);
+                BCS.GenCard();
+                this.transform.SetParent(cardKeeper.transform);
+
+            }
+            else
+            {
+                hit = false;
+                return;
+            }
+        }
+        else if (attachWith.CompareTag("Spawner"))
+        {
+            print("Spawner");
+            SpawnerCardScript SCS = attachWith.GetComponent<SpawnerCardScript>();
+            if (SCS.Check())
+            {
+                SCS.Add(this.gameObject);
+                SCS.GenCard();
+                this.transform.SetParent(cardKeeper.transform);
+
+            }
+            else
+            {
+                hit = false;
+                return;
+            }
         }
     }
 
@@ -91,5 +160,15 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     public void SetGameManage(GameObject _object)
     {
         refGameManage = _object;
+    }
+
+    public void SetCardKeeper(GameObject _object)
+    {
+        cardKeeper = _object;
+    }
+
+    public void SetCardInfo(Card_SO _cardInfo)
+    {
+        cardInfo = _cardInfo;
     }
 }

@@ -15,9 +15,17 @@ public class GameManage : MonoBehaviour
     [SerializeField] private Canvas createTowerCanvas;
     [SerializeField] private RectTransform createTowerImage;
 
+    [SerializeField] private GameObject _objectCard;
+    public GameObject objectCard => _objectCard;
+
     // Upgrade TowerUI
-    [SerializeField] private Canvas upgradeTowerCanvas;
-    [SerializeField] private RectTransform upgradeTowerImage;
+    [SerializeField] private GameObject UpgradeUI;
+
+    // Tower UI
+    [SerializeField] private GameObject towerUI;
+
+    // Spawner UI
+    [SerializeField] private GameObject spawnerUI;
 
     // PauseUI
     [SerializeField] private GameObject pauseUI;
@@ -30,6 +38,8 @@ public class GameManage : MonoBehaviour
     PLAY : while playing game
     CREATE : when click to create tower
     UPGRADE : when click to upgrade tower
+    BASE : when click at base -> Card UI appear
+    SPAWNER : when click at spawner -> Card UI appear
     PAUSE : when Press ESC to pause game
     GAMEOVER : when enemies go through tower over limit
     */
@@ -38,8 +48,10 @@ public class GameManage : MonoBehaviour
         PLAY,
         CREATE,
         UPGRADE,
+        BASE,
+        SPAWNER,
         PAUSE,
-        GAMEOVER
+        GAMEOVER,
     };
 
     public static GameStatus currentGameStatus = GameStatus.PLAY; // Track GameStage
@@ -65,7 +77,7 @@ public class GameManage : MonoBehaviour
         {
             pauseUI.SetActive(true);
             createTowerCanvas.gameObject.SetActive(false);
-            upgradeTowerCanvas.gameObject.SetActive(false);
+            UpgradeUI.SetActive(false);
         }
         else if (currentGameStatus == GameStatus.CREATE)
         {
@@ -74,13 +86,27 @@ public class GameManage : MonoBehaviour
         }
         else if (currentGameStatus == GameStatus.UPGRADE)
         {
-            upgradeTowerCanvas.gameObject.SetActive(true);
+            UpgradeUI.SetActive(true);
+            _objectCard.SetActive(true);
+        }
+        else if(currentGameStatus == GameStatus.BASE)
+        {
+            towerUI.SetActive(true);
+            _objectCard.SetActive(true);
+        }
+        else if (currentGameStatus == GameStatus.SPAWNER)
+        {
+            spawnerUI.SetActive(true);
+            _objectCard.SetActive(true);
         }
         else
         {
-            pauseUI.SetActive(false);
             createTowerCanvas.gameObject.SetActive(false);
-            upgradeTowerCanvas.gameObject.SetActive(false);
+            _objectCard.SetActive(false);
+            UpgradeUI.SetActive(false);
+            towerUI.SetActive(false);
+            spawnerUI.SetActive(false);
+            pauseUI.SetActive(false);
         }
     }
 
@@ -94,7 +120,10 @@ public class GameManage : MonoBehaviour
     
     public void CloseUI()
     {
-        if (GameManage.currentGameStatus == GameManage.GameStatus.CREATE || GameManage.currentGameStatus == GameManage.GameStatus.UPGRADE)
+        if (GameManage.currentGameStatus == GameManage.GameStatus.CREATE  || 
+            GameManage.currentGameStatus == GameManage.GameStatus.UPGRADE ||
+            GameManage.currentGameStatus == GameManage.GameStatus.BASE    ||
+            GameManage.currentGameStatus == GameManage.GameStatus.SPAWNER)
         {
             GameManage.currentGameStatus = GameManage.GameStatus.PLAY;
         }

@@ -6,6 +6,8 @@ public class DeckController : MonoBehaviour
 {
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private GameObject gameManager;
+    [SerializeField] private GameObject cardStored;
+    [SerializeField] private GameObject cardList;
 
     // Update is called once per frame
     void Update()
@@ -20,7 +22,12 @@ public class DeckController : MonoBehaviour
     {
         GameObject card = Instantiate(cardPrefab, transform);
         card.transform.SetParent(card.transform.parent.gameObject.transform);
+
+        int index = Random.Range(0, 2);
+
+        card.GetComponent<DragDrop>().SetCardInfo(cardList.GetComponent<CardList>().cardList[index]);
         card.GetComponent<DragDrop>().SetCanvas(card.transform.parent.parent.gameObject.GetComponent<Canvas>());
         card.GetComponent<DragDrop>().SetGameManage(gameManager);
+        card.GetComponent<DragDrop>().SetCardKeeper(cardStored);
     }
 }

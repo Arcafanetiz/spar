@@ -13,6 +13,9 @@ GameObject:
   - component: {fileID: 3647056685012097941}
   - component: {fileID: 2196189459345413991}
   - component: {fileID: 1850827440177220060}
+  - component: {fileID: 7983816477291655412}
+  - component: {fileID: 4884714866617966717}
+  - component: {fileID: 3365823877494453715}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -144,4 +147,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701aede37c5e0b04e80da040b4f287d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
+  _money: 0
+  _health: 0
+  _maxMana: 0
+  manaRegen: 0
+--- !u!114 &7983816477291655412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4625776562592342183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32d2751ae703bfd43a7dd933511a376c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moneyUI: {fileID: 0}
+  healthUI: {fileID: 0}
+  manaUI: {fileID: 0}
+--- !u!114 &4884714866617966717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4625776562592342183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1869b717d7b202a4587e6d8826fe4318, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3365823877494453715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4625776562592342183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07dc9b1186eba5049b18a5641e173dca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
