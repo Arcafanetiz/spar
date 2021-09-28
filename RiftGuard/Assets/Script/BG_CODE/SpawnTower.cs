@@ -175,18 +175,15 @@ public class SpawnTower : MonoBehaviour
 
         if (CheckType == 1 && basePrefab.money >= Tower_1[CheckLevel].cost)
         {
-            Destroy(SellTower);
-            GenTower_1(CheckLevel+1);
+            UpgradeTower_1(CheckLevel+1);
         }
         else if (CheckType == 2 && basePrefab.money >= Tower_2[CheckLevel].cost)
         {
-            Destroy(SellTower);
-            GenTower_2(CheckLevel+1);
+            UpgradeTower_2(CheckLevel+1);
         }
         else if (CheckType == 3 && basePrefab.money >= Tower_3[CheckLevel].cost)
         {
-            Destroy(SellTower);
-            GenTower_3(CheckLevel+1);
+            UpgradeTower_3(CheckLevel+1);
         }
 
         GameManage.currentGameStatus = GameManage.GameStatus.PLAY;
@@ -223,32 +220,39 @@ public class SpawnTower : MonoBehaviour
             sellUI.text = Tower_3[CheckLevel].sell.ToString();
         }
 
-        ATK_Text.text = "ATK : " + towerStat.ATK.ToString();
-        Speed_Text.text = "Speed : " + (1/towerStat.Cooldown).ToString();
-        Range_Text.text = "Range : " + towerStat.Range.ToString();
+        ATK_Text.text = "ATK : " + ((int)towerStat.ATK).ToString();
+        Speed_Text.text = "Speed : " + ((int)(1/towerStat.Cooldown)).ToString();
+        Range_Text.text = "Range : " + ((int)towerStat.Range).ToString();
     }
 
     // Use In Script(Function Upgrade) (NOT FOR UI!!)
-    private void GenTower_1(int level)
+    private void UpgradeTower_1(int level)
     {
         print("GenTower1.1");
         // Initialize Postion X & Y
         int posX = (int)GameManage.clickPos.x;
         int posY = (int)-GameManage.clickPos.y;
 
+        GameObject oldTower = GetComponent<MapGenerator>().GetTowerData(posX, posY);
         // Create Tower and Set MapCheck to true
         GameObject T1 = Instantiate(Tower_1[level].tower, GameManage.clickPos, Quaternion.identity);
+        TowerCardScript TCS = T1.GetComponent<TowerCardScript>();
 
         // Set TileType in Tower script to Check for Special Buff
         GetComponent<MapGenerator>().SetTower(posX, posY, T1);
         T1.GetComponent<TowerControl>().compTile = GetComponent<MapGenerator>().GetMapData(posX, posY);
         T1.GetComponent<TowerControl>().SetTowerType(1, level);
+        TCS.SetListCard(oldTower.GetComponent<TowerCardScript>().GetListCard());
+        TCS.gameManager = this.gameObject;
+        TCS.objectCardUI = this.GetComponent<GameManage>().objectCard;
+        TCS.CardActivate();
 
+        Destroy(oldTower.gameObject);
         // Reduce Money
         basePrefab.AddMoney(-Tower_1[level].cost);
     }
 
-    private void GenTower_2(int level)
+    private void UpgradeTower_2(int level)
     {
         print("GenTower2.2");
 
@@ -256,19 +260,26 @@ public class SpawnTower : MonoBehaviour
         int posX = (int)GameManage.clickPos.x;
         int posY = (int)-GameManage.clickPos.y;
 
+        GameObject oldTower = GetComponent<MapGenerator>().GetTowerData(posX, posY);
         // Create Tower and Set MapCheck to true
         GameObject T2 = Instantiate(Tower_2[level].tower, GameManage.clickPos, Quaternion.identity);
+        TowerCardScript TCS = T2.GetComponent<TowerCardScript>();
 
         // Set TileType in Tower script to Check for Special Buff
         GetComponent<MapGenerator>().SetTower(posX, posY, T2);
         T2.GetComponent<TowerControl>().compTile = GetComponent<MapGenerator>().GetMapData(posX, posY);
         T2.GetComponent<TowerControl>().SetTowerType(2, level);
+        TCS.SetListCard(oldTower.GetComponent<TowerCardScript>().GetListCard());
+        TCS.gameManager = this.gameObject;
+        TCS.objectCardUI = this.GetComponent<GameManage>().objectCard;
+        TCS.CardActivate();
 
+        Destroy(oldTower.gameObject);
         // Reduce Money
         basePrefab.AddMoney(-Tower_2[level].cost);
     }
 
-    private void GenTower_3(int level)
+    private void UpgradeTower_3(int level)
     {
         print("GenTower3.3");
 
@@ -276,14 +287,21 @@ public class SpawnTower : MonoBehaviour
         int posX = (int)GameManage.clickPos.x;
         int posY = (int)-GameManage.clickPos.y;
 
+        GameObject oldTower = GetComponent<MapGenerator>().GetTowerData(posX, posY);
         // Create Tower and Set MapCheck to true
         GameObject T3 = Instantiate(Tower_3[level].tower, GameManage.clickPos, Quaternion.identity);
+        TowerCardScript TCS = T3.GetComponent<TowerCardScript>();
 
         // Set TileType in Tower script to Check for Special Buff
         GetComponent<MapGenerator>().SetTower(posX, posY, T3);
         T3.GetComponent<TowerControl>().compTile = GetComponent<MapGenerator>().GetMapData(posX, posY);
         T3.GetComponent<TowerControl>().SetTowerType(3, level);
+        TCS.SetListCard(oldTower.GetComponent<TowerCardScript>().GetListCard());
+        TCS.gameManager = this.gameObject;
+        TCS.objectCardUI = this.GetComponent<GameManage>().objectCard;
+        TCS.CardActivate();
 
+        Destroy(oldTower.gameObject);
         // Reduce Money
         basePrefab.AddMoney(-Tower_3[level].cost);
     }

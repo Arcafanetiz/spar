@@ -14,9 +14,9 @@ public class TowerControl : MonoBehaviour
         [SerializeField] private GameObject rangeArea;
         [SerializeField] private float _Cooldown;
 
-    public float ATK;
-    public float Range;
-    public float Cooldown;
+    [HideInInspector] public float ATK;
+    [HideInInspector] public float Range;
+    [HideInInspector] public float Cooldown;
 
     public struct TowerData
     {
@@ -31,15 +31,23 @@ public class TowerControl : MonoBehaviour
     [HideInInspector] public GameObject compTile;
     private LinkedList<GameObject> enemyList;
 
+    private float ScaleX;
+    private float ScaleY;
 
-    private void Start()
+    private void Awake()
     {
         ATK = _ATK;
         Range = _Range;
         Cooldown = _Cooldown;
         enemyList = new LinkedList<GameObject>();
-        rangeArea.transform.localScale = new Vector2(rangeArea.transform.localScale.x * _Range * 2, 
-                                                    rangeArea.transform.localScale.y * _Range * 2);
+        ScaleX = rangeArea.transform.localScale.x;
+        ScaleY = rangeArea.transform.localScale.y;
+    }
+
+    private void Start()
+    {
+        rangeArea.transform.localScale = new Vector2(ScaleX * Range * 2, 
+                                                    ScaleY * Range * 2);
         rangeArea.SetActive(false);
 
         CheckBuff();
@@ -82,12 +90,16 @@ public class TowerControl : MonoBehaviour
         }
     }
 
-    // Shoot bullet to Enemy
+    // Shoot Single bullet to Enemy
     private void Shoot()
     {
+        // Go to Direction of Enemy
+        CheckEnemy();
         Vector3 dir = transform.position - enemyList.First.Value.gameObject.transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+
+
         GameObject bulletGo = Instantiate(bulletPrefab, transform.position, transform.rotation);
         BulletScript bullet = bulletGo.GetComponent<BulletScript>();
         if (bullet != null)
@@ -103,7 +115,7 @@ public class TowerControl : MonoBehaviour
         // No Enemies / Enemies in range are killed then !! Check OverlapCircle !!
         if(enemyList.Count == 0)
         {
-            Collider2D[] enemyRef = Physics2D.OverlapCircleAll(transform.position, _Range);
+            Collider2D[] enemyRef = Physics2D.OverlapCircleAll(transform.position, Range);
             foreach (var enemy in enemyRef)
             {
                 if (enemy.gameObject.CompareTag("Enemy"))
@@ -157,5 +169,12 @@ public class TowerControl : MonoBehaviour
         ATK = _ATK;
         Range = _Range;
         Cooldown = _Cooldown;
+    }
+
+    public void UpdateRangeArea()
+    {
+
+        rangeArea.transform.localScale = new Vector2(ScaleX * Range * 2,
+                                                    ScaleY * Range * 2);
     }
 }

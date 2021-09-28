@@ -12,13 +12,22 @@ public class BaseScript : MonoBehaviour
 
     [Header("Mana Setting")]
         [SerializeField] private float _maxMana;
-        [SerializeField] private float manaRegen;
+        [SerializeField] private float _manaRegen;
         private float currentMana;
 
-    public int health => _health;
-    public int money => _money;
+    [HideInInspector] public int health;
+    [HideInInspector] public int money;
+    [HideInInspector] public float manaRegen;
+    [HideInInspector] public float maxMana;
     public float mana => currentMana;
-    public float maxMana => _maxMana;
+
+    private void Awake()
+    {
+        health = _health;
+        money = _money;
+        manaRegen = _manaRegen;
+        maxMana = _maxMana;
+    }
 
     private void Update()
     {
@@ -30,7 +39,7 @@ public class BaseScript : MonoBehaviour
 
             if (Input.GetKey(KeyCode.M))
             {
-                _money += 10;
+                money += 10;
             }
         }
     }
@@ -39,7 +48,7 @@ public class BaseScript : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Enemy"))
         {
-            _health--;
+            health--;
             CheckHealth();
 
             collision.GetComponent<EnemyControl>().GetRefWaveControl().GetComponent<WaveControl>().DecreaseEnemy();
@@ -51,18 +60,18 @@ public class BaseScript : MonoBehaviour
     // Money
     public void AddMoney(int val)
     {
-        _money += val;
+        money += val;
     }
 
     // Health
     public void AddHealth(int val)
     {
-        _health += val;
+        health += val;
     }
 
     public void CheckHealth()
     {
-        if (_health <= 0)
+        if (health <= 0)
         {
             GameManage.currentGameStatus = GameManage.GameStatus.GAMEOVER;
         }
@@ -71,13 +80,13 @@ public class BaseScript : MonoBehaviour
     // Mana
     private void CheckMana()
     {
-        if (currentMana < _maxMana)
+        if (currentMana < maxMana)
         {
             currentMana += manaRegen * Time.deltaTime;
         }
-        else if (currentMana > _maxMana)
+        else if (currentMana > maxMana)
         {
-            currentMana = _maxMana;
+            currentMana = maxMana;
         }
     }
 

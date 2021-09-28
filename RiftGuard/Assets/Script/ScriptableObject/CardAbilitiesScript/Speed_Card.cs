@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(menuName = "Cards/Abilities/SPD")]
+[CreateAssetMenu(menuName = "Cards/Abilities/Tower/SPD")]
 public class Speed_Card : CardAbilities
 {
     [SerializeField] float _speed;

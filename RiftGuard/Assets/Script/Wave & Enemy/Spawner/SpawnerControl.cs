@@ -7,7 +7,7 @@ public class SpawnerControl : MonoBehaviour
     [System.Serializable] private class WaveInfo
     {
         public int amount;
-        public int speed;
+        public float speed;
     }
 
     [SerializeField] private GameObject enemy;
@@ -19,6 +19,8 @@ public class SpawnerControl : MonoBehaviour
     private bool readyToSpawn = false;
     private int currentWave = 0;
     private int checkEnemy = 0;
+
+    public float slowRate = 1.0f;
 
     private void Update()
     {
@@ -39,7 +41,7 @@ public class SpawnerControl : MonoBehaviour
         if(GameManage.currentGameStatus != GameManage.GameStatus.PAUSE &&
             GameManage.currentGameStatus != GameManage.GameStatus.GAMEOVER)
         {
-            if (timeCount >= wave[index].speed)
+            if (timeCount >= wave[index].speed * slowRate)
             {
                 GameObject spawnEnemy = Instantiate(enemy, transform.position, Quaternion.identity);
                 spawnEnemy.GetComponent<EnemyControl>().SetPath(path);

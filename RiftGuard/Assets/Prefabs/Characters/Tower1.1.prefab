@@ -216,6 +216,11 @@ MonoBehaviour:
   _Range: 1.5
   rangeArea: {fileID: 4188069669387408102}
   _Cooldown: 0.5
+  _ShootType: 0
+  ATK: 0
+  Range: 0
+  Cooldown: 0
+  ShootType: 0
   compTile: {fileID: 0}
 --- !u!114 &-6619156495505971273
 MonoBehaviour:

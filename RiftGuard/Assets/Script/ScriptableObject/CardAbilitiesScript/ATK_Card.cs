@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu (menuName = "Cards/Abilities/ATK")]
+[CreateAssetMenu (menuName = "Cards/Abilities/Tower/ATK")]
 public class ATK_Card : CardAbilities
 {
     [SerializeField] float _damage;

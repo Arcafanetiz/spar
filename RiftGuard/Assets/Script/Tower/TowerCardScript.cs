@@ -13,7 +13,7 @@ public class TowerCardScript : MonoBehaviour
     private bool doOnce = false;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         card = new List<GameObject>();
     }
@@ -62,6 +62,14 @@ public class TowerCardScript : MonoBehaviour
 
     }
 
+    public void CardActivate()
+    {
+        foreach (GameObject _object in card)
+        {
+            _object.GetComponent<DragDrop>().cardInfo._abilities.ActivateAbility(this.gameObject);
+        }
+    }
+
     public void Add(GameObject _object)
     {
         _currentCardCapacity++;
@@ -76,5 +84,14 @@ public class TowerCardScript : MonoBehaviour
     public void SetActivate()
     {
         doOnce = true;
+    }
+
+    public List<GameObject> GetListCard()
+    {
+        return card;
+    }
+    public void SetListCard(List<GameObject> _card)
+    {
+        card = _card;
     }
 }

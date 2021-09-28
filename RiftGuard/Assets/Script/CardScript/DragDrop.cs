@@ -119,7 +119,8 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         {
             print("Base");
             BaseCardScript BCS = attachWith.GetComponent<BaseCardScript>();
-            if(BCS.Check())
+            cardInfo._abilities.ActivateAbility(attachWith);
+            if (BCS.Check())
             {
                 BCS.Add(this.gameObject);
                 BCS.GenCard();
@@ -136,6 +137,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         {
             print("Spawner");
             SpawnerCardScript SCS = attachWith.GetComponent<SpawnerCardScript>();
+            cardInfo._abilities.ActivateAbility(attachWith);
             if (SCS.Check())
             {
                 SCS.Add(this.gameObject);

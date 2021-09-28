@@ -23,7 +23,7 @@ public class DeckController : MonoBehaviour
         GameObject card = Instantiate(cardPrefab, transform);
         card.transform.SetParent(card.transform.parent.gameObject.transform);
 
-        int index = Random.Range(0, 2);
+        int index = Random.Range(0, cardList.GetComponent<CardList>().cardList.Count);
 
         card.GetComponent<DragDrop>().SetCardInfo(cardList.GetComponent<CardList>().cardList[index]);
         card.GetComponent<DragDrop>().SetCanvas(card.transform.parent.parent.gameObject.GetComponent<Canvas>());
