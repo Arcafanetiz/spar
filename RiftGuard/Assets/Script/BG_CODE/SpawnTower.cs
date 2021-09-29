@@ -24,6 +24,7 @@ public class SpawnTower : MonoBehaviour
     [SerializeField] private TowerData[] Tower_1;
     [SerializeField] private TowerData[] Tower_2;
     [SerializeField] private TowerData[] Tower_3;
+    [SerializeField] private TowerData[] Tower_4;
 
     private GameObject mapGenerator;
 
@@ -128,6 +129,33 @@ public class SpawnTower : MonoBehaviour
         }
     }
 
+    public void GenTower_4()
+    {
+        if (basePrefab.money >= Tower_4[0].cost && basePrefab.mana >= Tower_4[0].mana)
+        {
+
+            // Initialize Postion X & Y
+            int posX = (int)GameManage.clickPos.x;
+            int posY = (int)-GameManage.clickPos.y;
+
+            // Create Tower and Set MapCheck to true
+            GameObject T4 = Instantiate(Tower_4[0].tower, GameManage.clickPos, Quaternion.identity);
+            GameManage.currentGameStatus = GameManage.GameStatus.PLAY;
+            mapGenerator.GetComponent<MapGenerator>().SetMapCheck(posX, posY, true);
+
+            // Set TileType in Tower script to Check for Special Buff
+            GetComponent<MapGenerator>().SetTower(posX, posY, T4);
+            T4.GetComponent<TowerControl>().compTile = GetComponent<MapGenerator>().GetMapData(posX, posY);
+            T4.GetComponent<TowerControl>().SetTowerType(4, 0);
+            T4.GetComponent<TowerCardScript>().gameManager = this.gameObject;
+            T4.GetComponent<TowerCardScript>().objectCardUI = this.GetComponent<GameManage>().objectCard;
+
+            // Reduce Money & Mana
+            basePrefab.AddMoney(-Tower_4[0].cost);
+            basePrefab.AddMana(-Tower_4[0].mana);
+        }
+    }
+
 
     // Click for Sell & Upgrade
     public void Sell()
@@ -158,6 +186,10 @@ public class SpawnTower : MonoBehaviour
         {
             basePrefab.AddMoney(Tower_3[CheckLevel].sell);
         }
+        else if (CheckType == 4)
+        {
+            basePrefab.AddMoney(Tower_4[CheckLevel].sell);
+        }
 
         Destroy(SellTower);
         GameManage.currentGameStatus = GameManage.GameStatus.PLAY;
@@ -184,6 +216,10 @@ public class SpawnTower : MonoBehaviour
         else if (CheckType == 3 && basePrefab.money >= Tower_3[CheckLevel].cost)
         {
             UpgradeTower_3(CheckLevel+1);
+        }
+        else if (CheckType == 4 && basePrefab.money >= Tower_4[CheckLevel].cost)
+        {
+            UpgradeTower_4(CheckLevel + 1);
         }
 
         GameManage.currentGameStatus = GameManage.GameStatus.PLAY;
@@ -221,6 +257,11 @@ public class SpawnTower : MonoBehaviour
         {
             upgradeUI.text = Tower_3[CheckLevel].cost.ToString();
             sellUI.text = Tower_3[CheckLevel].sell.ToString();
+        }
+        else if (CheckType == 4)
+        {
+            upgradeUI.text = Tower_4[CheckLevel].cost.ToString();
+            sellUI.text = Tower_4[CheckLevel].sell.ToString();
         }
 
         ATK_Text.text = "ATK : " + ((int)towerStat.ATK).ToString();
@@ -307,6 +348,33 @@ public class SpawnTower : MonoBehaviour
         Destroy(oldTower.gameObject);
         // Reduce Money
         basePrefab.AddMoney(-Tower_3[level].cost);
+    }
+
+    private void UpgradeTower_4(int level)
+    {
+        print("GenTower4.3");
+
+        // Initialize Postion X & Y
+        int posX = (int)GameManage.clickPos.x;
+        int posY = (int)-GameManage.clickPos.y;
+
+        GameObject oldTower = GetComponent<MapGenerator>().GetTowerData(posX, posY);
+        // Create Tower and Set MapCheck to true
+        GameObject T4 = Instantiate(Tower_4[level].tower, GameManage.clickPos, Quaternion.identity);
+        TowerCardScript TCS = T4.GetComponent<TowerCardScript>();
+
+        // Set TileType in Tower script to Check for Special Buff
+        GetComponent<MapGenerator>().SetTower(posX, posY, T4);
+        T4.GetComponent<TowerControl>().compTile = GetComponent<MapGenerator>().GetMapData(posX, posY);
+        T4.GetComponent<TowerControl>().SetTowerType(4, level);
+        TCS.SetListCard(oldTower.GetComponent<TowerCardScript>().GetListCard());
+        TCS.gameManager = this.gameObject;
+        TCS.objectCardUI = this.GetComponent<GameManage>().objectCard;
+        TCS.CardActivate();
+
+        Destroy(oldTower.gameObject);
+        // Reduce Money
+        basePrefab.AddMoney(-Tower_4[level].cost);
     }
 
 }

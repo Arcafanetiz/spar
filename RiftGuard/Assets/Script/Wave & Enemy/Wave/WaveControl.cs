@@ -32,6 +32,11 @@ public class WaveControl : MonoBehaviour
     {
         if (waveReady)
         {
+            if (_currentWave == maxWave + 1)
+            {
+                return;
+            }
+
             waveAmount = 0;
             for (int j = 0; j < allSpawn.Count; j++)
             {

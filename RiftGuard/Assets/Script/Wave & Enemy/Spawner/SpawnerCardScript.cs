@@ -9,6 +9,7 @@ public class SpawnerCardScript : MonoBehaviour
     public GameObject objectCardUI;
     private int _currentCardCapacity;
     private List<GameObject> card;
+    private bool[] cardCheck;
 
     private bool doOnce = false;
 
@@ -16,6 +17,7 @@ public class SpawnerCardScript : MonoBehaviour
     void Start()
     {
         card = new List<GameObject>();
+        cardCheck = new bool[_cardCapacity];
     }
 
     // Update is called once per frame
@@ -37,12 +39,17 @@ public class SpawnerCardScript : MonoBehaviour
     {
         for (int j = 0; j < card.Count; j++)
         {
+            if (cardCheck[j])
+            {
+                continue;
+            }
             GameObject cardGen = Instantiate(card[j], objectCardUI.transform);
             cardGen.GetComponent<DragDrop>().parentRef = card[j];
             cardGen.transform.localScale = new Vector2(0.75f, 0.75f);
             cardGen.transform.SetParent(objectCardUI.transform);
             cardGen.GetComponent<DragDrop>().SetCanvas(objectCardUI.transform.parent.gameObject.GetComponent<Canvas>());
             cardGen.GetComponent<DragDrop>().SetGameManage(gameManager);
+            cardCheck[j] = true;
         }
     }
 
@@ -51,6 +58,10 @@ public class SpawnerCardScript : MonoBehaviour
         foreach (Transform child in objectCardUI.transform)
         {
             GameObject.Destroy(child.gameObject);
+        }
+        for (int j = 0; j < card.Count; j++)
+        {
+            cardCheck[j] = false;
         }
     }
 
@@ -81,7 +92,16 @@ public class SpawnerCardScript : MonoBehaviour
     public void Remove(GameObject _card)
     {
         GameObject temp = _card.GetComponent<DragDrop>().parentRef;
+        for (int j = 0; j < card.Count; j++)
+        {
+            if (card[j] == temp)
+            {
+                cardCheck[j] = false;
+                break;
+            }
+        }
         card.Remove(temp);
+        _currentCardCapacity--;
         temp.GetComponent<DragDrop>().cardInfo._abilities.DeactivateAbility(this.gameObject);
         Destroy(temp);
     }
