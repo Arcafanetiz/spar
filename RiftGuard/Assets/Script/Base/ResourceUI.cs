@@ -13,13 +13,9 @@ public class ResourceUI : MonoBehaviour
 
     void Update()
     {
-        if (GameManage.currentGameStatus != GameManage.GameStatus.GAMEOVER &&
-            GameManage.currentGameStatus != GameManage.GameStatus.PAUSE)
-        {
-            ShowMoney();
-            ShowHealth();
-            ShowMana();
-        }
+        ShowMoney();
+        ShowHealth();
+        ShowMana();
     }
 
     public void ShowMoney()
