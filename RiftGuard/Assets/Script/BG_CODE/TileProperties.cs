@@ -48,6 +48,11 @@ public class TileProperties : MonoBehaviour
             Vector3 nowPos = GetComponent<Transform>().position;
             GameManage.clickPos = nowPos;
 
+            if(nowPos.x < 0 || nowPos.y > 0)
+            {
+                return;
+            }
+
             // Check for Existance of Tower
             if (mapGenerator.GetComponent<MapGenerator>().CheckMap((int)nowPos.x, (int)-nowPos.y))
             {

@@ -12,4 +12,8 @@ public class Speed_Card : CardAbilities
     {
         _tower.GetComponent<TowerControl>().Cooldown /= (_speed / 100);
     }
+    public override void DeactivateAbility(GameObject _tower)
+    {
+        _tower.GetComponent<TowerControl>().Cooldown *= (_speed / 100);
+    }
 }

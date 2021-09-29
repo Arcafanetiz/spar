@@ -38,6 +38,7 @@ public class TowerCardScript : MonoBehaviour
         for (int j = 0; j < card.Count; j++)
         {
             GameObject cardGen = Instantiate(card[j], objectCardUI.transform);
+            cardGen.GetComponent<DragDrop>().parentRef = card[j];
             cardGen.transform.localScale = new Vector2(0.75f, 0.75f);
             cardGen.transform.SetParent(objectCardUI.transform);
             cardGen.GetComponent<DragDrop>().SetCanvas(objectCardUI.transform.parent.gameObject.GetComponent<Canvas>());
@@ -93,5 +94,13 @@ public class TowerCardScript : MonoBehaviour
     public void SetListCard(List<GameObject> _card)
     {
         card = _card;
+    }
+    public void Remove(GameObject _card)
+    {
+        print("HELLO");
+        GameObject temp = _card.GetComponent<DragDrop>().parentRef;
+        card.Remove(temp);
+        temp.GetComponent<DragDrop>().cardInfo._abilities.DeactivateAbility(this.gameObject);
+        Destroy(temp);
     }
 }

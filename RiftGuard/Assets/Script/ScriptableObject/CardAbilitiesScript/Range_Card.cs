@@ -12,4 +12,10 @@ public class Range_Card : CardAbilities
         _tower.GetComponent<TowerControl>().Range *= (_range/100);
         _tower.GetComponent<TowerControl>().UpdateRangeArea();
     }
+
+    public override void DeactivateAbility(GameObject _tower)
+    {
+        _tower.GetComponent<TowerControl>().Range /= (_range / 100);
+        _tower.GetComponent<TowerControl>().UpdateRangeArea();
+    }
 }

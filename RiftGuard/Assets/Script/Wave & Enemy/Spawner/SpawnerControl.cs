@@ -20,7 +20,7 @@ public class SpawnerControl : MonoBehaviour
     private int currentWave = 0;
     private int checkEnemy = 0;
 
-    public float slowRate = 1.0f;
+    [HideInInspector] public float slowRate = 1.0f;
 
     private void Update()
     {

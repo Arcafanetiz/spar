@@ -15,12 +15,14 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     private RectTransform rectTransform;
     private Transform parentToReturnTo = null;
 
-    private GameObject attachWith;
+    public GameObject attachWith;
+    public GameObject parentRef;
 
     private bool endDrag = false;
     private bool hit = false;
     private bool doOnce = false;
     private bool drag = false;
+    public bool onDeck = true;
 
     private void Start()
     {
@@ -72,23 +74,32 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     {
         // Collision Only Tile
         // Check if That grid have tower and EndDrag
+
+        if(collision.transform.position.x < 0 || collision.transform.position.y > 0)
+        {
+            return;
+        }
+
         if (refGameManage.GetComponent<MapGenerator>().CheckMap((int)(collision.transform.position.x), (int)(-collision.transform.position.y))
             && collision.gameObject.CompareTag("Platform") && endDrag && cardInfo.cardType == Card_SO.Type.TOWER)
         {
             attachWith = collision.gameObject;
             hit = true;
+            onDeck = false;
         }
 
         if (collision.gameObject.CompareTag("Base") && endDrag && cardInfo.cardType == Card_SO.Type.BASE)
         {
             attachWith = collision.gameObject;
             hit = true;
+            onDeck = false;
         }
 
         if (collision.gameObject.CompareTag("Spawner") && endDrag && cardInfo.cardType == Card_SO.Type.SPAWNER)
         {
             attachWith = collision.gameObject;
             hit = true;
+            onDeck = false;
         }
     }
 
@@ -96,7 +107,6 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     {
         if(attachWith.CompareTag("Platform"))
         {
-            print("Tower");
             int x = (int)attachWith.transform.position.x;
             int y = -(int)attachWith.transform.position.y;
             GameObject Tower = refGameManage.GetComponent<MapGenerator>().GetTowerData(x,y);
@@ -105,7 +115,10 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             if (TCS.Check())
             {
                 TCS.Add(this.gameObject);
-                TCS.GenCard();
+                if (GameManage.currentGameStatus == GameManage.GameStatus.UPGRADE)
+                {
+                    TCS.GenCard();
+                }
                 this.transform.SetParent(cardKeeper.transform);
 
             }
@@ -117,15 +130,16 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         }
         else if(attachWith.CompareTag("Base"))
         {
-            print("Base");
             BaseCardScript BCS = attachWith.GetComponent<BaseCardScript>();
             cardInfo._abilities.ActivateAbility(attachWith);
             if (BCS.Check())
             {
                 BCS.Add(this.gameObject);
-                BCS.GenCard();
+                if(GameManage.currentGameStatus == GameManage.GameStatus.BASE)
+                {
+                    BCS.GenCard();
+                }
                 this.transform.SetParent(cardKeeper.transform);
-
             }
             else
             {
@@ -135,13 +149,15 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         }
         else if (attachWith.CompareTag("Spawner"))
         {
-            print("Spawner");
             SpawnerCardScript SCS = attachWith.GetComponent<SpawnerCardScript>();
             cardInfo._abilities.ActivateAbility(attachWith);
             if (SCS.Check())
             {
                 SCS.Add(this.gameObject);
-                SCS.GenCard();
+                if (GameManage.currentGameStatus == GameManage.GameStatus.SPAWNER)
+                {
+                    SCS.GenCard();
+                }
                 this.transform.SetParent(cardKeeper.transform);
 
             }

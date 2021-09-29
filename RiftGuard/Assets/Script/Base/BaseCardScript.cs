@@ -39,6 +39,7 @@ public class BaseCardScript : MonoBehaviour
         for (int j = 0; j < card.Count; j++)
         {
             GameObject cardGen = Instantiate(card[j], objectCardUI.transform);
+            cardGen.GetComponent<DragDrop>().parentRef = card[j];
             cardGen.transform.localScale = new Vector2(0.75f, 0.75f);
             cardGen.transform.SetParent(objectCardUI.transform);
             cardGen.GetComponent<DragDrop>().SetCanvas(objectCardUI.transform.parent.gameObject.GetComponent<Canvas>());
@@ -63,5 +64,12 @@ public class BaseCardScript : MonoBehaviour
     public bool Check()
     {
         return (_currentCardCapacity < _cardCapacity) ? true : false;
+    }
+    public void Remove(GameObject _card)
+    {
+        GameObject temp = _card.GetComponent<DragDrop>().parentRef;
+        card.Remove(temp);
+        temp.GetComponent<DragDrop>().cardInfo._abilities.DeactivateAbility(this.gameObject);
+        Destroy(temp);
     }
 }

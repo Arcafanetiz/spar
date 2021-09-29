@@ -12,4 +12,9 @@ public class ATK_Card : CardAbilities
     {
         _tower.GetComponent<TowerControl>().ATK *=  _damage/100;
     }
+
+    public override void DeactivateAbility(GameObject _tower)
+    {
+        _tower.GetComponent<TowerControl>().ATK /= _damage / 100;
+    }
 }

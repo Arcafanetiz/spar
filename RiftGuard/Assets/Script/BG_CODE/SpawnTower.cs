@@ -36,7 +36,7 @@ public class SpawnTower : MonoBehaviour
 
     private void Update()
     {
-        if(doOnce && GameManage.currentGameStatus == GameManage.GameStatus.UPGRADE)
+        if(GameManage.currentGameStatus == GameManage.GameStatus.UPGRADE)
         {
             ShowCostSell();
             doOnce = false;
@@ -197,7 +197,10 @@ public class SpawnTower : MonoBehaviour
 
         GameObject tempTower = GetComponent<MapGenerator>().GetTowerData(_xPos, -_yPos);
 
-        tempTower.GetComponent<TowerCardScript>().SetActivate();
+        if(doOnce)
+        {
+            tempTower.GetComponent<TowerCardScript>().SetActivate();
+        }
 
         TowerControl towerStat = tempTower.GetComponent<TowerControl>();
 
