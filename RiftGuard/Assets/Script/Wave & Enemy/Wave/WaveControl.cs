@@ -32,7 +32,7 @@ public class WaveControl : MonoBehaviour
     {
         if (waveReady)
         {
-            if (_currentWave == maxWave + 1)
+            if (_currentWave == maxWave)
             {
                 return;
             }

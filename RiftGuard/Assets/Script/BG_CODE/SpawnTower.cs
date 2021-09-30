@@ -243,6 +243,15 @@ public class SpawnTower : MonoBehaviour
         int CheckType = tempTower.GetComponent<TowerControl>().info.Type;
         int CheckLevel = tempTower.GetComponent<TowerControl>().info.Level;
 
+        if (CheckLevel == Tower_1.Length-1)
+        {
+            upgradeUI.transform.parent.gameObject.SetActive(false);
+        }
+        else
+        {
+            upgradeUI.transform.parent.gameObject.SetActive(true);
+        }
+
         if(CheckType == 1)
         {
             upgradeUI.text = Tower_1[CheckLevel].cost.ToString();
