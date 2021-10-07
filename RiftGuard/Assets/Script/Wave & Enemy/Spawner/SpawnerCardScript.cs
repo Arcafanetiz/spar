@@ -5,11 +5,16 @@ using UnityEngine;
 public class SpawnerCardScript : MonoBehaviour
 {
     [SerializeField] private int _cardCapacity;
-    public GameObject gameManager;
-    public GameObject objectCardUI;
+    [HideInInspector] public GameObject gameManager;
+    [HideInInspector] public GameObject objectCardUI;
+    [HideInInspector] public GameObject baseRef;
+
+
     private int _currentCardCapacity;
     private List<GameObject> card;
     private bool[] cardCheck;
+
+    public GameObject cardInteract; // Can drag -> Green Color / Can't drag Red Color
 
     private bool doOnce = false;
 
@@ -44,11 +49,16 @@ public class SpawnerCardScript : MonoBehaviour
                 continue;
             }
             GameObject cardGen = Instantiate(card[j], objectCardUI.transform);
-            cardGen.GetComponent<DragDrop>().parentRef = card[j];
+            cardGen.gameObject.name = "(" + this.gameObject.name + ")#" + j;
+            cardGen.GetComponent<DragDrop>().parentCard = card[j];
             cardGen.transform.localScale = new Vector2(0.75f, 0.75f);
             cardGen.transform.SetParent(objectCardUI.transform);
+            cardGen.GetComponent<DragDrop>().parentObject = this.gameObject;
+            cardGen.GetComponent<DragDrop>().cardKeeper = card[j].GetComponent<DragDrop>().cardKeeper;
             cardGen.GetComponent<DragDrop>().SetCanvas(objectCardUI.transform.parent.gameObject.GetComponent<Canvas>());
             cardGen.GetComponent<DragDrop>().SetGameManage(gameManager);
+            cardGen.GetComponent<DragDrop>().baseRef = baseRef;
+
             cardCheck[j] = true;
         }
     }
@@ -89,9 +99,9 @@ public class SpawnerCardScript : MonoBehaviour
     {
         doOnce = true;
     }
-    public void Remove(GameObject _card)
+    public void RemoveDel(GameObject _card)
     {
-        GameObject temp = _card.GetComponent<DragDrop>().parentRef;
+        GameObject temp = _card.GetComponent<DragDrop>().parentCard;
         for (int j = 0; j < card.Count; j++)
         {
             if (card[j] == temp)
@@ -104,5 +114,18 @@ public class SpawnerCardScript : MonoBehaviour
         _currentCardCapacity--;
         temp.GetComponent<DragDrop>().cardInfo._abilities.DeactivateAbility(this.gameObject);
         Destroy(temp);
+    }
+
+    public void CardActive(bool value)
+    {
+        cardInteract.SetActive(true);
+        if (value)
+        {
+            cardInteract.GetComponent<SpriteRenderer>().color = new Vector4(0.0f, 1.0f, 0.0f, 0.5f);
+        }
+        else
+        {
+            cardInteract.GetComponent<SpriteRenderer>().color = new Vector4(1.0f, 0.0f, 0.0f, 0.5f);
+        }
     }
 }

@@ -27,6 +27,9 @@ public class GameManage : MonoBehaviour
     // Spawner UI
     [SerializeField] private GameObject spawnerUI;
 
+    // Shop UI
+    [SerializeField] private GameObject shopUI;
+
     // PauseUI
     [SerializeField] private GameObject pauseUI;
 
@@ -40,6 +43,7 @@ public class GameManage : MonoBehaviour
     UPGRADE : when click to upgrade tower
     BASE : when click at base -> Card UI appear
     SPAWNER : when click at spawner -> Card UI appear
+    SHOP : Every n wave shop UI will appear
     PAUSE : when Press ESC to pause game
     GAMEOVER : when enemies go through tower over limit
     */
@@ -50,6 +54,7 @@ public class GameManage : MonoBehaviour
         UPGRADE,
         BASE,
         SPAWNER,
+        SHOP,
         PAUSE,
         GAMEOVER,
     };
@@ -63,6 +68,12 @@ public class GameManage : MonoBehaviour
         if (currentGameStatus != GameStatus.GAMEOVER)
         {
             CheckEscButton();
+
+            if(Input.GetKeyDown(KeyCode.Y))
+            {
+                currentGameStatus = GameStatus.SHOP;
+            }
+
             CheckUI();
         }
         else
@@ -99,13 +110,20 @@ public class GameManage : MonoBehaviour
             spawnerUI.SetActive(true);
             _objectCard.SetActive(true);
         }
+        else if (currentGameStatus == GameStatus.SHOP)
+        {
+            shopUI.SetActive(true);
+            createTowerCanvas.gameObject.SetActive(false);
+        }
         else
         {
+            // Set all UI (except ResoureUI) to be false
             createTowerCanvas.gameObject.SetActive(false);
             _objectCard.SetActive(false);
             UpgradeUI.SetActive(false);
             towerUI.SetActive(false);
             spawnerUI.SetActive(false);
+            shopUI.SetActive(false);
             pauseUI.SetActive(false);
         }
     }

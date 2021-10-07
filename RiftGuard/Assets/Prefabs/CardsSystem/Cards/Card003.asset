@@ -17,3 +17,5 @@ MonoBehaviour:
   description: Range increase 150%
   image: {fileID: 0}
   _abilities: {fileID: 11400000, guid: 7e92e9c0e413c9d41ae11e776785bf6c, type: 2}
+  buy: 20
+  sell: 20

@@ -17,3 +17,5 @@ MonoBehaviour:
   description: Slowdown enemy 200%
   image: {fileID: 0}
   _abilities: {fileID: 11400000, guid: 00ce845d1bf4fa842a6ea801359e1fab, type: 2}
+  buy: 20
+  sell: 20

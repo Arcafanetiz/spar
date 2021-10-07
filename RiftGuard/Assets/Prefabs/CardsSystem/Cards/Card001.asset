@@ -17,3 +17,5 @@ MonoBehaviour:
   description: ATK increase 200%
   image: {fileID: 0}
   _abilities: {fileID: 11400000, guid: d3ca7b60be32e9e4eaa96dce0cbcfec5, type: 2}
+  buy: 20
+  sell: 20

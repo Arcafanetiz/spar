@@ -10,6 +10,16 @@ public class SpawnerControl : MonoBehaviour
         public float speed;
     }
 
+    // Collect Direction of spawner
+    public enum Direction
+    {
+        Top,
+        Bottom,
+        Left,
+        Right
+    };
+
+    [SerializeField] public Direction direction;
     [SerializeField] private GameObject enemy;
     [SerializeField] private Vector2[] path;
     [SerializeField] private List<WaveInfo> wave;
@@ -24,14 +34,16 @@ public class SpawnerControl : MonoBehaviour
 
     private void Update()
     {
-        if(readyToSpawn)
+        if(readyToSpawn) // Receive from WaveControl.cs
         {
+            // Spawn Enemy
             GenerateEnemy(currentWave);
         }
     }
 
     private void GenerateEnemy(int index)
     {
+        // if this Spawner spawn all enemy then stop and wait for next Wave
         if(checkEnemy == wave[index].amount)
         {
             readyToSpawn = false;
@@ -41,13 +53,17 @@ public class SpawnerControl : MonoBehaviour
         if(GameManage.currentGameStatus != GameManage.GameStatus.PAUSE &&
             GameManage.currentGameStatus != GameManage.GameStatus.GAMEOVER)
         {
+            // Use Time.deltaTime to count time (including slowRate)
             if (timeCount >= wave[index].speed * slowRate)
             {
                 GameObject spawnEnemy = Instantiate(enemy, transform.position, Quaternion.identity);
+                // Access EnemyControl to set value
                 spawnEnemy.GetComponent<EnemyControl>().SetPath(path);
                 spawnEnemy.GetComponent<EnemyControl>().SetRefWaveControl(refWaveControl);
                 spawnEnemy.GetComponent<EnemyControl>().SetBaseScript(baseScript);
+                // Increase checkEnemy
                 checkEnemy++;
+                //Reset time to 0
                 timeCount = 0;
             }
             else
@@ -57,6 +73,8 @@ public class SpawnerControl : MonoBehaviour
         }
     }
 
+
+    // GET/SET value
     public void ReadyToSpawn(bool _check)
     {
         readyToSpawn = _check;

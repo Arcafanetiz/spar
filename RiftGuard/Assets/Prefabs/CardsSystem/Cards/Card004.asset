@@ -17,3 +17,5 @@ MonoBehaviour:
   description: Regen mana 200%
   image: {fileID: 0}
   _abilities: {fileID: 11400000, guid: bb36f50ecc7b72e4ab077bb2b6ab8188, type: 2}
+  buy: 20
+  sell: 20

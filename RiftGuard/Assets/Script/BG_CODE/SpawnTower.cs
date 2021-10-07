@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class SpawnTower : MonoBehaviour
 {
+    // Struct for keep Tower data
     [System.Serializable] private class TowerData
     {
         public GameObject tower;
@@ -12,8 +13,12 @@ public class SpawnTower : MonoBehaviour
         public int sell;
         public int mana;
     }
-    [SerializeField] private BaseScript basePrefab;
+    // Used as reference
+    [SerializeField] private GameObject basePrefab;
+    private BaseScript _baseScipt;
+    private GameObject mapGenerator;
 
+    // UI for update in every event
     [SerializeField] private Text upgradeUI;
     [SerializeField] private Text sellUI;
     [SerializeField] private Text ATK_Text;
@@ -26,12 +31,13 @@ public class SpawnTower : MonoBehaviour
     [SerializeField] private TowerData[] Tower_3;
     [SerializeField] private TowerData[] Tower_4;
 
-    private GameObject mapGenerator;
 
     private bool doOnce = true;
 
     private void Start()
     {
+        // Set reference
+        _baseScipt = basePrefab.GetComponent<BaseScript>();
         mapGenerator = this.gameObject;
     }
 
@@ -51,7 +57,7 @@ public class SpawnTower : MonoBehaviour
     // Generate Tower When Clicked in UI
     public void GenTower_1()
     {
-        if (basePrefab.money >= Tower_1[0].cost && basePrefab.mana >= Tower_1[0].mana)
+        if (_baseScipt.money >= Tower_1[0].cost && _baseScipt.mana >= Tower_1[0].mana)
         {
             // Initialize Postion X & Y
             int posX = (int)GameManage.clickPos.x;
@@ -68,16 +74,17 @@ public class SpawnTower : MonoBehaviour
             T1.GetComponent<TowerControl>().SetTowerType(1,0);
             T1.GetComponent<TowerCardScript>().gameManager = this.gameObject;
             T1.GetComponent<TowerCardScript>().objectCardUI = this.GetComponent<GameManage>().objectCard;
+            T1.GetComponent<TowerCardScript>().baseRef = basePrefab;
 
             // Reduce Money & Mana
-            basePrefab.AddMoney(-Tower_1[0].cost);
-            basePrefab.AddMana(-Tower_1[0].mana);
+            _baseScipt.AddMoney(-Tower_1[0].cost);
+            _baseScipt.AddMana(-Tower_1[0].mana);
         }
     }
 
     public void GenTower_2()
     {
-        if (basePrefab.money >= Tower_2[0].cost && basePrefab.mana >= Tower_2[0].mana)
+        if (_baseScipt.money >= Tower_2[0].cost && _baseScipt.mana >= Tower_2[0].mana)
         {
 
             // Initialize Postion X & Y
@@ -95,16 +102,17 @@ public class SpawnTower : MonoBehaviour
             T2.GetComponent<TowerControl>().SetTowerType(2,0);
             T2.GetComponent<TowerCardScript>().gameManager = this.gameObject;
             T2.GetComponent<TowerCardScript>().objectCardUI = this.GetComponent<GameManage>().objectCard;
+            T2.GetComponent<TowerCardScript>().baseRef = basePrefab;
 
             // Reduce Money & Mana
-            basePrefab.AddMoney(-Tower_2[0].cost);
-            basePrefab.AddMana(-Tower_2[0].mana);
+            _baseScipt.AddMoney(-Tower_2[0].cost);
+            _baseScipt.AddMana(-Tower_2[0].mana);
         }
     }
 
     public void GenTower_3()
     {
-        if (basePrefab.money >= Tower_3[0].cost && basePrefab.mana >= Tower_3[0].mana)
+        if (_baseScipt.money >= Tower_3[0].cost && _baseScipt.mana >= Tower_3[0].mana)
         {
 
             // Initialize Postion X & Y
@@ -122,16 +130,17 @@ public class SpawnTower : MonoBehaviour
             T3.GetComponent<TowerControl>().SetTowerType(3,0);
             T3.GetComponent<TowerCardScript>().gameManager = this.gameObject;
             T3.GetComponent<TowerCardScript>().objectCardUI = this.GetComponent<GameManage>().objectCard;
+            T3.GetComponent<TowerCardScript>().baseRef = basePrefab;
 
             // Reduce Money & Mana
-            basePrefab.AddMoney(-Tower_3[0].cost);
-            basePrefab.AddMana(-Tower_3[0].mana);
+            _baseScipt.AddMoney(-Tower_3[0].cost);
+            _baseScipt.AddMana(-Tower_3[0].mana);
         }
     }
 
     public void GenTower_4()
     {
-        if (basePrefab.money >= Tower_4[0].cost && basePrefab.mana >= Tower_4[0].mana)
+        if (_baseScipt.money >= Tower_4[0].cost && _baseScipt.mana >= Tower_4[0].mana)
         {
 
             // Initialize Postion X & Y
@@ -149,10 +158,11 @@ public class SpawnTower : MonoBehaviour
             T4.GetComponent<TowerControl>().SetTowerType(4, 0);
             T4.GetComponent<TowerCardScript>().gameManager = this.gameObject;
             T4.GetComponent<TowerCardScript>().objectCardUI = this.GetComponent<GameManage>().objectCard;
+            T4.GetComponent<TowerCardScript>().baseRef = basePrefab;
 
             // Reduce Money & Mana
-            basePrefab.AddMoney(-Tower_4[0].cost);
-            basePrefab.AddMana(-Tower_4[0].mana);
+            _baseScipt.AddMoney(-Tower_4[0].cost);
+            _baseScipt.AddMana(-Tower_4[0].mana);
         }
     }
 
@@ -176,19 +186,19 @@ public class SpawnTower : MonoBehaviour
         
         if (CheckType == 1)
         {
-            basePrefab.AddMoney(Tower_1[CheckLevel].sell);
+            _baseScipt.AddMoney(Tower_1[CheckLevel].sell);
         }
         else if(CheckType == 2)
         {
-            basePrefab.AddMoney(Tower_2[CheckLevel].sell);
+            _baseScipt.AddMoney(Tower_2[CheckLevel].sell);
         }
         else if(CheckType == 3)
         {
-            basePrefab.AddMoney(Tower_3[CheckLevel].sell);
+            _baseScipt.AddMoney(Tower_3[CheckLevel].sell);
         }
         else if (CheckType == 4)
         {
-            basePrefab.AddMoney(Tower_4[CheckLevel].sell);
+            _baseScipt.AddMoney(Tower_4[CheckLevel].sell);
         }
 
         Destroy(SellTower);
@@ -205,19 +215,19 @@ public class SpawnTower : MonoBehaviour
         int CheckType = SellTower.GetComponent<TowerControl>().info.Type;
         int CheckLevel = SellTower.GetComponent<TowerControl>().info.Level;
 
-        if (CheckType == 1 && basePrefab.money >= Tower_1[CheckLevel].cost)
+        if (CheckType == 1 && _baseScipt.money >= Tower_1[CheckLevel].cost)
         {
             UpgradeTower_1(CheckLevel+1);
         }
-        else if (CheckType == 2 && basePrefab.money >= Tower_2[CheckLevel].cost)
+        else if (CheckType == 2 && _baseScipt.money >= Tower_2[CheckLevel].cost)
         {
             UpgradeTower_2(CheckLevel+1);
         }
-        else if (CheckType == 3 && basePrefab.money >= Tower_3[CheckLevel].cost)
+        else if (CheckType == 3 && _baseScipt.money >= Tower_3[CheckLevel].cost)
         {
             UpgradeTower_3(CheckLevel+1);
         }
-        else if (CheckType == 4 && basePrefab.money >= Tower_4[CheckLevel].cost)
+        else if (CheckType == 4 && _baseScipt.money >= Tower_4[CheckLevel].cost)
         {
             UpgradeTower_4(CheckLevel + 1);
         }
@@ -298,11 +308,12 @@ public class SpawnTower : MonoBehaviour
         TCS.SetListCard(oldTower.GetComponent<TowerCardScript>().GetListCard());
         TCS.gameManager = this.gameObject;
         TCS.objectCardUI = this.GetComponent<GameManage>().objectCard;
+        TCS.baseRef = basePrefab;
         TCS.CardActivate();
 
         Destroy(oldTower.gameObject);
         // Reduce Money
-        basePrefab.AddMoney(-Tower_1[level].cost);
+        _baseScipt.AddMoney(-Tower_1[level].cost);
     }
 
     private void UpgradeTower_2(int level)
@@ -325,11 +336,12 @@ public class SpawnTower : MonoBehaviour
         TCS.SetListCard(oldTower.GetComponent<TowerCardScript>().GetListCard());
         TCS.gameManager = this.gameObject;
         TCS.objectCardUI = this.GetComponent<GameManage>().objectCard;
+        TCS.baseRef = basePrefab;
         TCS.CardActivate();
 
         Destroy(oldTower.gameObject);
         // Reduce Money
-        basePrefab.AddMoney(-Tower_2[level].cost);
+        _baseScipt.AddMoney(-Tower_2[level].cost);
     }
 
     private void UpgradeTower_3(int level)
@@ -352,11 +364,12 @@ public class SpawnTower : MonoBehaviour
         TCS.SetListCard(oldTower.GetComponent<TowerCardScript>().GetListCard());
         TCS.gameManager = this.gameObject;
         TCS.objectCardUI = this.GetComponent<GameManage>().objectCard;
+        TCS.baseRef = basePrefab;
         TCS.CardActivate();
 
         Destroy(oldTower.gameObject);
         // Reduce Money
-        basePrefab.AddMoney(-Tower_3[level].cost);
+        _baseScipt.AddMoney(-Tower_3[level].cost);
     }
 
     private void UpgradeTower_4(int level)
@@ -379,11 +392,12 @@ public class SpawnTower : MonoBehaviour
         TCS.SetListCard(oldTower.GetComponent<TowerCardScript>().GetListCard());
         TCS.gameManager = this.gameObject;
         TCS.objectCardUI = this.GetComponent<GameManage>().objectCard;
+        TCS.baseRef = basePrefab;
         TCS.CardActivate();
 
         Destroy(oldTower.gameObject);
         // Reduce Money
-        basePrefab.AddMoney(-Tower_4[level].cost);
+        _baseScipt.AddMoney(-Tower_4[level].cost);
     }
 
 }
