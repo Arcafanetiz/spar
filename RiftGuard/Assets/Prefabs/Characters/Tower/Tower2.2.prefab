@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4464230041259232070
+--- !u!1 &1685549193360873783
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8596248313391627784}
-  - component: {fileID: 5523230810676707201}
+  - component: {fileID: 1781521296812263527}
+  - component: {fileID: 984218349519299836}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -17,27 +17,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8596248313391627784
+--- !u!4 &1781521296812263527
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4464230041259232070}
+  m_GameObject: {fileID: 1685549193360873783}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 742238009937193743}
+  m_Father: {fileID: 3754177537077551467}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &5523230810676707201
+--- !u!212 &984218349519299836
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4464230041259232070}
+  m_GameObject: {fileID: 1685549193360873783}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: ac33fbae33414184fa81683fbb956665, type: 3}
-  m_Color: {r: 0.56041306, g: 0.08699717, b: 0.8018868, a: 1}
+  m_Color: {r: 0, g: 0.6603774, b: 0.6474289, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &6351491504620109354
+--- !u!1 &2847919369222602553
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,8 +90,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3469177188366390425}
-  - component: {fileID: 5124083003082861360}
+  - component: {fileID: 2908144664110427264}
+  - component: {fileID: 8254963063878541876}
   m_Layer: 0
   m_Name: CardInteract
   m_TagString: Untagged
@@ -99,27 +99,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!4 &3469177188366390425
+--- !u!4 &2908144664110427264
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6351491504620109354}
+  m_GameObject: {fileID: 2847919369222602553}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 742238009937193743}
+  m_Father: {fileID: 3754177537077551467}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &5124083003082861360
+--- !u!212 &8254963063878541876
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6351491504620109354}
+  m_GameObject: {fileID: 2847919369222602553}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -164,7 +164,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &7569744472164907647
+--- !u!1 &8804906256867833623
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,61 +172,61 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 742238009937193743}
-  - component: {fileID: 5062667136306150802}
-  - component: {fileID: -6256099623927576805}
-  - component: {fileID: 7427158291757458628}
+  - component: {fileID: 3754177537077551467}
+  - component: {fileID: 2084339880516991478}
+  - component: {fileID: -5815142062653818838}
+  - component: {fileID: -584447956650726326}
   m_Layer: 0
-  m_Name: Tower3.2
+  m_Name: Tower2
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &742238009937193743
+--- !u!4 &3754177537077551467
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7569744472164907647}
+  m_GameObject: {fileID: 8804906256867833623}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8596248313391627784}
-  - {fileID: 3469177188366390425}
+  - {fileID: 1781521296812263527}
+  - {fileID: 2908144664110427264}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5062667136306150802
+--- !u!114 &2084339880516991478
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7569744472164907647}
+  m_GameObject: {fileID: 8804906256867833623}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 975390f9124dacb40af6b1f1d47a09f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 1617935929322705423, guid: a200fa768b229e24cbdcfe1f430e1e19, type: 3}
-  towerSprite: {fileID: 4464230041259232070}
-  _ATK: 30
-  _Range: 2.5
-  _Cooldown: 0.65
+  bulletPrefab: {fileID: 1617935929322705423, guid: fedfee305303d58489c252ffc1c03b78, type: 3}
+  towerSprite: {fileID: 1685549193360873783}
+  _ATK: 15
+  _Range: 2.2
+  _Cooldown: 0.3
   ATK: 0
   Range: 0
   Cooldown: 0
   compTile: {fileID: 0}
---- !u!114 &-6256099623927576805
+--- !u!114 &-5815142062653818838
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7569744472164907647}
+  m_GameObject: {fileID: 8804906256867833623}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f76574c340b406449a0656fe18122e8, type: 3}
@@ -235,14 +235,14 @@ MonoBehaviour:
   _cardCapacity: 2
   gameManager: {fileID: 0}
   objectCardUI: {fileID: 0}
-  cardInteract: {fileID: 6351491504620109354}
---- !u!120 &7427158291757458628
+  cardInteract: {fileID: 2847919369222602553}
+--- !u!120 &-584447956650726326
 LineRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7569744472164907647}
+  m_GameObject: {fileID: 8804906256867833623}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
