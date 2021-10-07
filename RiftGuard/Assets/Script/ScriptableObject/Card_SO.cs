@@ -32,4 +32,8 @@ public class Card_SO : ScriptableObject
 
     public CardAbilities _abilities;
 
+    public int buy;
+
+    public int sell;
+
 }

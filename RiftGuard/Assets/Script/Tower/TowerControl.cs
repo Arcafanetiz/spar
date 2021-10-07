@@ -11,7 +11,6 @@ public class TowerControl : MonoBehaviour
 
         [SerializeField] private float _ATK;
         [SerializeField] private float _Range;
-        [SerializeField] private GameObject rangeArea;
         [SerializeField] private float _Cooldown;
 
     [HideInInspector] public float ATK;
@@ -39,17 +38,14 @@ public class TowerControl : MonoBehaviour
         ATK = _ATK;
         Range = _Range;
         Cooldown = _Cooldown;
+        GetComponent<LineRenderer>().material = new Material(Shader.Find("Sprites/Default"));
+        GetComponent<LineRenderer>().startColor = new Color(1.0f, 0.0f, 0.0f, 0.5f);
+        GetComponent<LineRenderer>().endColor = new Color(1.0f, 0.0f, 0.0f, 0.5f);
         enemyList = new LinkedList<GameObject>();
-        ScaleX = rangeArea.transform.localScale.x;
-        ScaleY = rangeArea.transform.localScale.y;
     }
 
     private void Start()
     {
-        rangeArea.transform.localScale = new Vector2(ScaleX * Range * 2, 
-                                                    ScaleY * Range * 2);
-        rangeArea.SetActive(false);
-
         CheckBuff();
     }
 
@@ -58,15 +54,16 @@ public class TowerControl : MonoBehaviour
         if (GameManage.currentGameStatus != GameManage.GameStatus.PAUSE &&
             GameManage.currentGameStatus != GameManage.GameStatus.GAMEOVER)
         {
-            // If tower was clicked -> Show RangeArea that can shoot
+            // If tower was clicked -> Show RangeArea(LineRenderer) that can shoot
             if(GameManage.currentGameStatus == GameManage.GameStatus.UPGRADE &&
                 GameManage.clickPos == transform.position)
             {
-                rangeArea.SetActive(true);
+                GetComponent<LineRenderer>().enabled = true;
+                DrawCircle(Range, 0.05f);
             }
             else
             {
-                rangeArea.SetActive(false);
+                GetComponent<LineRenderer>().enabled = false;
             }
             CheckEnemy();
             CoolDown();
@@ -95,9 +92,9 @@ public class TowerControl : MonoBehaviour
     {
         // Go to Direction of Enemy
         CheckEnemy();
-        Vector3 dir = transform.position - enemyList.First.Value.gameObject.transform.position;
+        Vector3 dir = towerSprite.transform.position - enemyList.First.Value.gameObject.transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+        towerSprite.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
 
 
         GameObject bulletGo = Instantiate(bulletPrefab, transform.position, transform.rotation);
@@ -171,10 +168,24 @@ public class TowerControl : MonoBehaviour
         Cooldown = _Cooldown;
     }
 
-    public void UpdateRangeArea()
+    // Draw Circle (Range that can shoot)
+    public void DrawCircle(float radius, float lineWidth)
     {
+        var segment = 360;
+        var line = GetComponent<LineRenderer>();
+        line.useWorldSpace = false;
+        line.startWidth = lineWidth;
+        line.endWidth = lineWidth;
+        line.positionCount = segment + 1;
 
-        rangeArea.transform.localScale = new Vector2(ScaleX * Range * 2,
-                                                    ScaleY * Range * 2);
+        var pointCount = segment + 1;
+        var points = new Vector3[pointCount];
+
+        for (int i = 0; i < pointCount; i++)
+        {
+            var rad = Mathf.Deg2Rad * (i * 360.0f / segment);
+            points[i] = new Vector3(Mathf.Sin(rad) * radius, Mathf.Cos(rad) * radius, -1.0f);
+        }
+        line.SetPositions(points);
     }
 }

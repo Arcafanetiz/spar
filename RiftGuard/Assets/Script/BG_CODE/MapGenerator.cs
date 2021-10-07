@@ -37,14 +37,17 @@ public class MapGenerator : MonoBehaviour
             {
                 checkMapGrid[j].GetComponent<TileProperties>().SetMapGenerator(this.gameObject);
             }
+            // Find width and height using findMax
             width = (width < x) ? x : width;
             height = (height < y) ? y : height;
         }
 
+        // Allocate each array to width and height
         mapData = new GameObject[width+1, height+1];
         mapCheck = new bool[width+1, height+1];
         towerData = new GameObject[width + 1, height + 1];
 
+        // Store all gameObject (tag = "Platform") in array
         for (int j = 0; j < checkMapGrid.Length; j++)
         {
             int x = Mathf.Abs((int)checkMapGrid[j].transform.position.x);

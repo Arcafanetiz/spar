@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class TileProperties : MonoBehaviour
 {
+    // Used as reference
     private GameObject mapGenerator;
+
+    // Sprite & Color in Tile
     private SpriteRenderer currentRenderer;
     private Color currentColor;
+
     private Vector2 nowPos;
     
     public enum TileType

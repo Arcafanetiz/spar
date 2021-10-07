@@ -17,3 +17,5 @@ MonoBehaviour:
   description: Speed increase 200%
   image: {fileID: 0}
   _abilities: {fileID: 11400000, guid: 0b5a46fcede7d7f408661f5eeac713d7, type: 2}
+  buy: 20
+  sell: 20
