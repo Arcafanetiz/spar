@@ -56,8 +56,11 @@ public class SpawnerControl : MonoBehaviour
             // Use Time.deltaTime to count time (including slowRate)
             if (timeCount >= wave[index].speed * slowRate)
             {
-                GameObject spawnEnemy = Instantiate(enemy, transform.position, Quaternion.identity);
+                Vector3 targetOffset;
+                targetOffset = new Vector3(Random.Range(-0.4f, 0.4f), Random.Range(-0.4f, 0.4f), 0);
+                GameObject spawnEnemy = Instantiate(enemy, transform.position + targetOffset, Quaternion.identity);
                 // Access EnemyControl to set value
+                spawnEnemy.GetComponent<EnemyControl>().SetOffset(targetOffset);
                 spawnEnemy.GetComponent<EnemyControl>().SetPath(path);
                 spawnEnemy.GetComponent<EnemyControl>().SetRefWaveControl(refWaveControl);
                 spawnEnemy.GetComponent<EnemyControl>().SetBaseScript(baseScript);

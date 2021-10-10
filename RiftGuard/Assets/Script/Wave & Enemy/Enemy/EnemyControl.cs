@@ -14,6 +14,7 @@ public class EnemyControl : MonoBehaviour
         [SerializeField] private int getMoney;
 
     private Vector2[] path;
+    private Vector3 pathOffset;
     private GameObject refWaveControl;
     private GameObject baseScript;
     private float currentHP;
@@ -46,7 +47,7 @@ public class EnemyControl : MonoBehaviour
         if((int)dif.x > 0)
         {
             transform.Translate(Vector3.right * SPD * Time.deltaTime);
-            if (transform.position.x >= path[now + 1].x)
+            if (transform.position.x >= path[now + 1].x + pathOffset.x)
             {
                 now++;
             }
@@ -54,7 +55,7 @@ public class EnemyControl : MonoBehaviour
         else if((int)dif.x < 0)
         {
             transform.Translate(Vector3.left * SPD * Time.deltaTime);
-            if (transform.position.x <= path[now + 1].x)
+            if (transform.position.x <= path[now + 1].x + pathOffset.x)
             {
                 now++;
             }
@@ -62,7 +63,7 @@ public class EnemyControl : MonoBehaviour
         else if ((int)dif.y > 0)
         {
             transform.Translate(Vector3.up * SPD * Time.deltaTime);
-            if (transform.position.y >= path[now + 1].y)
+            if (transform.position.y >= path[now + 1].y + pathOffset.y)
             {
                 now++;
             }
@@ -70,7 +71,7 @@ public class EnemyControl : MonoBehaviour
         else if ((int)dif.y < 0)
         {
             transform.Translate(Vector3.down * SPD * Time.deltaTime);
-            if (transform.position.y <= path[now + 1].y)
+            if (transform.position.y <= path[now + 1].y + pathOffset.y)
             {
                 now++;
             }
@@ -100,6 +101,10 @@ public class EnemyControl : MonoBehaviour
     public void SetPath(Vector2[] pathRef)
     {
         path = pathRef;
+    }
+    public void SetOffset(Vector3 offset)
+    {
+        pathOffset = offset;
     }
 
     public void SetRefWaveControl(GameObject _object)
