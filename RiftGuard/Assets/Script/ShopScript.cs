@@ -58,6 +58,7 @@ public class ShopScript : MonoBehaviour, IDropHandler
         card.GetComponent<DragDrop>().SetCardKeeper(cardStored);
         card.GetComponent<DragDrop>().SetCanvas(card.transform.parent.parent.gameObject.GetComponent<Canvas>());
         card.GetComponent<DragDrop>().inShop = true;
+        card.GetComponent<DragDrop>().onDeck = false;
 
         // Set card info (use info from CardList)
         card.GetComponent<DragDrop>().SetCardInfo(_cardInfo);
@@ -88,10 +89,11 @@ public class ShopScript : MonoBehaviour, IDropHandler
 
         if (_DG.onDeck)
         {
-            print("HIT");
             int _money = _DG.cardInfo.sell;
             _Base.AddMoney(_money);
             Destroy(_card);
+
+            DeckController.currentCapacity--;
         }
     }
 }

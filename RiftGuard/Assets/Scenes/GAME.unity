@@ -28350,6 +28350,7 @@ MonoBehaviour:
   gameManager: {fileID: 14296327}
   cardStored: {fileID: 1242936317}
   cardList: {fileID: 1092923689}
+  _cardCapacity: 6
 --- !u!4 &900181897 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7721296108705473873, guid: 0c607783ac93995449246a73fad83497, type: 3}

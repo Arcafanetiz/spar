@@ -6,11 +6,14 @@ using UnityEngine.Serialization;
 
 public class EnemyControl : MonoBehaviour
 {
+    [SerializeField] private GameObject Sprite;
     [SerializeField] private Image healthBar;
+    [SerializeField] private Image armorBar;
     [Header("Enemy Properties")]
         [SerializeField] private float SPD;
         [SerializeField] private float DEF;
         [SerializeField] private float HP;
+        [SerializeField] private float Armor;
         [SerializeField] private int getMoney;
 
     private Vector2[] path;
@@ -18,12 +21,19 @@ public class EnemyControl : MonoBehaviour
     private GameObject refWaveControl;
     private GameObject baseScript;
     private float currentHP;
+    private float currentArmor;
 
     private int now = 0;
 
     private void Start()
     {
         currentHP = HP;
+        currentArmor = Armor;
+
+        if (Armor == 0)
+        {
+            armorBar.enabled = false;
+        }
     }
 
     private void Update()
@@ -46,6 +56,7 @@ public class EnemyControl : MonoBehaviour
         Vector2 dif = path[now + 1] - path[now];
         if((int)dif.x > 0)
         {
+            Sprite.transform.rotation = Quaternion.Euler(0, 0, -90.0f);
             transform.Translate(Vector3.right * SPD * Time.deltaTime);
             if (transform.position.x >= path[now + 1].x + pathOffset.x)
             {
@@ -54,6 +65,7 @@ public class EnemyControl : MonoBehaviour
         }
         else if((int)dif.x < 0)
         {
+            Sprite.transform.rotation = Quaternion.Euler(0, 0, 90.0f);
             transform.Translate(Vector3.left * SPD * Time.deltaTime);
             if (transform.position.x <= path[now + 1].x + pathOffset.x)
             {
@@ -62,6 +74,7 @@ public class EnemyControl : MonoBehaviour
         }
         else if ((int)dif.y > 0)
         {
+            Sprite.transform.rotation = Quaternion.Euler(0,0,0.0f);
             transform.Translate(Vector3.up * SPD * Time.deltaTime);
             if (transform.position.y >= path[now + 1].y + pathOffset.y)
             {
@@ -70,6 +83,7 @@ public class EnemyControl : MonoBehaviour
         }
         else if ((int)dif.y < 0)
         {
+            Sprite.transform.rotation = Quaternion.Euler(0, 0, 180.0f);
             transform.Translate(Vector3.down * SPD * Time.deltaTime);
             if (transform.position.y <= path[now + 1].y + pathOffset.y)
             {
@@ -88,13 +102,22 @@ public class EnemyControl : MonoBehaviour
             Destroy(gameObject);
         }
         healthBar.fillAmount = (currentHP / HP);
+        armorBar.fillAmount = (currentArmor / Armor);
     }
 
 
     // Other Functions used to SET/GET value
     public void AddHealth(float _health)
     {
-        currentHP += _health;
+        if (currentArmor <= 0)
+        {
+            currentArmor = 0;
+            currentHP += _health;
+        }
+        else
+        {
+            currentArmor += _health;
+        }
     }
 
     // Function for Set path (note: SetPath from EnemyPath.cs)

@@ -21,10 +21,21 @@ public class DeckController : MonoBehaviour, IDropHandler
     // Used as reference
     [SerializeField] private GameObject cardList;
 
+    [SerializeField] private int _cardCapacity;
+
+    static public int cardCapacity;
+    static public int currentCapacity;
+
+    void Start()
+    {
+        cardCapacity = _cardCapacity;
+        currentCapacity = 0;
+    }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.T))
+        //print(currentCapacity + " " + cardCapacity);
+        if (Input.GetKeyDown(KeyCode.T) && currentCapacity < cardCapacity)
         {
             GenCard();
         }
@@ -32,6 +43,8 @@ public class DeckController : MonoBehaviour, IDropHandler
 
     private void GenCard()
     {
+        // Increase amount of card in deck
+        currentCapacity++;
         // Generate GameObject from cardPrefab
         GameObject card = Instantiate(cardPrefab, transform);
         // Set parent for showing in UI
@@ -53,6 +66,8 @@ public class DeckController : MonoBehaviour, IDropHandler
 
     private void GenCard(Card_SO _card)
     {
+        // Increase amount of card in deck
+        currentCapacity++;
         // Generate GameObject from cardPrefab
         GameObject card = Instantiate(cardPrefab, transform);
         card.transform.SetParent(card.transform.parent.gameObject.transform);
@@ -74,8 +89,15 @@ public class DeckController : MonoBehaviour, IDropHandler
         BaseScript _Base = baseRef.GetComponent<BaseScript>();
 
 
+
+        if (currentCapacity == cardCapacity)
+        {
+            return;
+        }
+
         if(_DG.inShop && _Base.money >= _DG.cardInfo.buy)
         {
+            // Decrase Money
             _Base.AddMoney(-_DG.cardInfo.buy);
             // Generate this card back to deck
             GenCard(_card.GetComponent<DragDrop>().cardInfo);

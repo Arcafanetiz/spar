@@ -75,6 +75,7 @@ public class TowerCardScript : MonoBehaviour
             cardGen.GetComponent<DragDrop>().SetCanvas(objectCardUI.transform.parent.gameObject.GetComponent<Canvas>());
             cardGen.GetComponent<DragDrop>().SetGameManage(gameManager);
             cardGen.GetComponent<DragDrop>().baseRef = baseRef;
+            cardGen.GetComponent<DragDrop>().onDeck = false;
 
             // this card has been generated
             cardCheck[j] = true;

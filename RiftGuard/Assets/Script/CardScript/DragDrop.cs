@@ -7,10 +7,10 @@ using UnityEngine.EventSystems;
 public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     // Used as reference
-    [SerializeField] private Canvas canvas;
-    [SerializeField] private GameObject refGameManage;
-    public GameObject cardKeeper;
-    public Card_SO cardInfo;
+    private Canvas canvas;
+    private GameObject refGameManage;
+    [HideInInspector] public GameObject cardKeeper;
+    [HideInInspector] public Card_SO cardInfo;
 
     private CanvasGroup canvasGroup;
     private RectTransform rectTransform;
@@ -42,7 +42,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     private void FixedUpdate()
     {
         // Trigger with Base/Tower/Spawner
-        if (hit)
+        if (hit && GameManage.currentGameStatus != GameManage.GameStatus.SHOP)
         {
             Check();
         }
@@ -238,6 +238,8 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                     {
                         TCS.GenCard();
                     }
+                    // Current Capacity increase
+                    DeckController.currentCapacity--;
                 }
                 // If mana was not enough to transfer card from one tower to another
                 else if (baseRef.GetComponent<BaseScript>().mana < 1.0f)
@@ -291,6 +293,8 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                     {
                         BCS.GenCard();
                     }
+                    // Current Capacity increase
+                    DeckController.currentCapacity--;
                 }
                 // If mana was not enough to transfer card from one base to another
                 else if (baseRef.GetComponent<BaseScript>().mana < 1.0f)
@@ -343,6 +347,8 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                     {
                         SCS.GenCard();
                     }
+                    // Current Capacity increase
+                    DeckController.currentCapacity--;
                 }
                 // If mana was not enough to transfer card from one spawner to another spawner
                 else if (baseRef.GetComponent<BaseScript>().mana < 1.0f)
