@@ -50,7 +50,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ae655d31d13fb1945b4f0490fe90c17d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 1920446719340942990}
   - component: {fileID: 157645195880960204}
   m_Layer: 0
-  m_Name: Tower2
+  m_Name: Tower2.1
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -234,6 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cardCapacity: 2
   gameManager: {fileID: 0}
+  baseRef: {fileID: 0}
   objectCardUI: {fileID: 0}
   cardInteract: {fileID: 3011886432155564643}
 --- !u!120 &157645195880960204
