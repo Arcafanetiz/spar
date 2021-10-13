@@ -30,8 +30,8 @@ public class ResourceUI : MonoBehaviour
 
     public void ShowMana()
     {
-        int _currentMana = (int)this.GetComponent<BaseScript>().mana;
-        int _maxMana = (int)this.GetComponent<BaseScript>().maxMana;
-        manaUI.text = "MANA : " + _currentMana.ToString() + " / " + _maxMana.ToString("0");
+        float  _currentMana = this.GetComponent<BaseScript>().mana;
+        float _maxMana = this.GetComponent<BaseScript>().maxMana;
+        manaUI.text = "MANA : " + _currentMana.ToString("F1") + " / " + _maxMana.ToString("F1");
     }
 }
