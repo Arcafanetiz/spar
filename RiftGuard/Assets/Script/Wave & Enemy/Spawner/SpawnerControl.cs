@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class SpawnerControl : MonoBehaviour
 {
+
+    [System.Serializable] struct Enemy
+    {
+        public GameObject enemy;
+        public int amount;
+    };
+
+
     [System.Serializable] private class WaveInfo
     {
-        public int amount;
-        public float speed;
+        public Enemy[] _enemy;
+        public float speedPerEnemy;
     }
 
     // Collect Direction of spawner
@@ -20,7 +28,6 @@ public class SpawnerControl : MonoBehaviour
     };
 
     [SerializeField] public Direction direction;
-    [SerializeField] private GameObject enemy;
     [SerializeField] private Vector2[] path;
     [SerializeField] private List<WaveInfo> wave;
     private GameObject refWaveControl;
@@ -29,13 +36,28 @@ public class SpawnerControl : MonoBehaviour
     private bool readyToSpawn = false;
     private int currentWave = 0;
     private int checkEnemy = 0;
+    private int allEnemy = 0;
+
+    private int currentType = 0;
 
     [HideInInspector] public float slowRate = 1.0f;
 
     private void Update()
     {
+        if (wave.Count == 0)
+        {
+            return;
+        }
+
         if(readyToSpawn) // Receive from WaveControl.cs
         {
+            if(allEnemy == 0)
+            {
+                for (int j = 0; j < wave[currentWave]._enemy.Length; j++)
+                {
+                    allEnemy += wave[currentWave]._enemy[j].amount;
+                }
+            }
             // Spawn Enemy
             GenerateEnemy(currentWave);
         }
@@ -44,18 +66,29 @@ public class SpawnerControl : MonoBehaviour
     private void GenerateEnemy(int index)
     {
         // if this Spawner spawn all enemy then stop and wait for next Wave
-        if(checkEnemy == wave[index].amount)
+        if(checkEnemy == allEnemy)
         {
             readyToSpawn = false;
             checkEnemy = 0;
+            allEnemy = 0;
+            currentType = 0;
         }
 
         if(GameManage.currentGameStatus != GameManage.GameStatus.PAUSE &&
             GameManage.currentGameStatus != GameManage.GameStatus.GAMEOVER)
         {
             // Use Time.deltaTime to count time (including slowRate)
-            if (timeCount >= wave[index].speed * slowRate)
+            if (timeCount >= wave[index].speedPerEnemy * slowRate)
             {
+                //print(wave[currentWave]._enemy[currentType].amount + " " + currentType);
+                if(wave[currentWave]._enemy[currentType].amount == 0)
+                {
+                    currentType++;
+                }
+
+                wave[currentWave]._enemy[currentType].amount--;
+                GameObject enemy = wave[currentWave]._enemy[currentType].enemy;
+
                 Vector3 targetOffset;
                 targetOffset = new Vector3(Random.Range(-0.4f, 0.4f), Random.Range(-0.4f, 0.4f), 0);
                 GameObject spawnEnemy = Instantiate(enemy, transform.position + targetOffset, Quaternion.identity);
@@ -95,7 +128,17 @@ public class SpawnerControl : MonoBehaviour
 
     public int GetAmount(int index)
     {
-        return wave[index].amount;
+        if(wave.Count == 0)
+        {
+            return 0;
+        }
+
+        int cnt = 0;
+        for (int j = 0; j < wave[index]._enemy.Length; j++)
+        {
+            cnt += wave[index]._enemy[j].amount;
+        }
+        return cnt;
     }
 
     public void SetRefWaveControl(GameObject _object)

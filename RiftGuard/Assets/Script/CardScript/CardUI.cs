@@ -13,7 +13,7 @@ public class CardUI : MonoBehaviour
     {
         Card_SO cardInfoRef = this.GetComponent<DragDrop>().cardInfo;
         // Set Card name UI
-        _cardName.text = cardInfoRef.cardName;
+        _cardName.text = cardInfoRef.description;
 
         // Set Card type UI
         if (cardInfoRef.cardType == Card_SO.Type.BASE)

@@ -66,7 +66,6 @@ public class WaveControl : MonoBehaviour
                 // Set Ready to Spawn = true -> make Enemy appear
                 spawnControl.ReadyToSpawn(true);
             }
-
             waveReady = false;
             _currentWave++;
             doOnce = true;

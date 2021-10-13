@@ -34,7 +34,7 @@ public class TileProperties : MonoBehaviour
         // Change Color when Mouse Hover
         if (GameManage.currentGameStatus == GameManage.GameStatus.PLAY)
         {
-            currentRenderer.color = new Color(currentColor.r + 0.1f, currentColor.g + 0.1f, currentColor.b + 0.1f);
+            currentRenderer.color = new Color(currentColor.r, currentColor.g, currentColor.b, currentColor.a - 0.2f);
         }
     }
 
