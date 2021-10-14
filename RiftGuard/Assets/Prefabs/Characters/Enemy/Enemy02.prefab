@@ -382,11 +382,11 @@ MonoBehaviour:
   Sprite: {fileID: 623430269620311252}
   healthBar: {fileID: 5732380194986584374}
   armorBar: {fileID: 2814756599446233519}
-  SPD: 3
+  SPD: 1
   DEF: 1
-  HP: 30
+  HP: 100
   Armor: 0
-  getMoney: 10
+  getMoney: 5
 --- !u!58 &2767688634944838689
 CircleCollider2D:
   m_ObjectHideFlags: 0

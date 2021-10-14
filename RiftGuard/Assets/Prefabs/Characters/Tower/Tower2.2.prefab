@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: -5815142062653818838}
   - component: {fileID: -584447956650726326}
   m_Layer: 0
-  m_Name: Tower2
+  m_Name: Tower2.2
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -215,7 +215,7 @@ MonoBehaviour:
   towerSprite: {fileID: 1685549193360873783}
   _ATK: 15
   _Range: 2.2
-  _Cooldown: 0.3
+  _Cooldown: 0.5
   ATK: 0
   Range: 0
   Cooldown: 0
@@ -234,6 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cardCapacity: 2
   gameManager: {fileID: 0}
+  baseRef: {fileID: 0}
   objectCardUI: {fileID: 0}
   cardInteract: {fileID: 2847919369222602553}
 --- !u!120 &-584447956650726326

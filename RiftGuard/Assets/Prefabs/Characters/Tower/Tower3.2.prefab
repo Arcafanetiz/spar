@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: -6256099623927576805}
   - component: {fileID: 7427158291757458628}
   m_Layer: 0
-  m_Name: Tower3
+  m_Name: Tower3.2
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,9 +213,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1617935929322705423, guid: a200fa768b229e24cbdcfe1f430e1e19, type: 3}
   towerSprite: {fileID: 4464230041259232070}
-  _ATK: 30
+  _ATK: 100
   _Range: 2.5
-  _Cooldown: 0.65
+  _Cooldown: 1.6
   ATK: 0
   Range: 0
   Cooldown: 0
@@ -234,6 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cardCapacity: 2
   gameManager: {fileID: 0}
+  baseRef: {fileID: 0}
   objectCardUI: {fileID: 0}
   cardInteract: {fileID: 6351491504620109354}
 --- !u!120 &7427158291757458628

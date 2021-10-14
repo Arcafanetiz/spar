@@ -252,7 +252,7 @@ public class SpawnTower : MonoBehaviour
 
         int CheckType = tempTower.GetComponent<TowerControl>().info.Type;
         int CheckLevel = tempTower.GetComponent<TowerControl>().info.Level;
-
+        /*
         if (CheckLevel == Tower_1.Length-1)
         {
             upgradeUI.transform.parent.gameObject.SetActive(false);
@@ -260,26 +260,58 @@ public class SpawnTower : MonoBehaviour
         else
         {
             upgradeUI.transform.parent.gameObject.SetActive(true);
-        }
+        }*/
 
         if(CheckType == 1)
         {
-            upgradeUI.text = Tower_1[CheckLevel].cost.ToString();
+            if (CheckLevel == Tower_1.Length - 1)
+            {
+                upgradeUI.transform.parent.gameObject.SetActive(false);
+            }
+            else
+            {
+                upgradeUI.transform.parent.gameObject.SetActive(true);
+                upgradeUI.text = Tower_1[CheckLevel + 1].cost.ToString();
+            }
             sellUI.text = Tower_1[CheckLevel].sell.ToString();
         }
         else if (CheckType == 2)
         {
-            upgradeUI.text = Tower_2[CheckLevel].cost.ToString();
+            if (CheckLevel == Tower_2.Length - 1)
+            {
+                upgradeUI.transform.parent.gameObject.SetActive(false);
+            }
+            else
+            {
+                upgradeUI.transform.parent.gameObject.SetActive(true);
+                upgradeUI.text = Tower_2[CheckLevel + 1].cost.ToString();
+            }
             sellUI.text = Tower_2[CheckLevel].sell.ToString();
         }
         else if (CheckType == 3)
         {
-            upgradeUI.text = Tower_3[CheckLevel].cost.ToString();
+            if (CheckLevel == Tower_3.Length - 1)
+            {
+                upgradeUI.transform.parent.gameObject.SetActive(false);
+            }
+            else
+            {
+                upgradeUI.transform.parent.gameObject.SetActive(true);
+                upgradeUI.text = Tower_3[CheckLevel + 1].cost.ToString();
+            }
             sellUI.text = Tower_3[CheckLevel].sell.ToString();
         }
         else if (CheckType == 4)
         {
-            upgradeUI.text = Tower_4[CheckLevel].cost.ToString();
+            if (CheckLevel == Tower_4.Length - 1)
+            {
+                upgradeUI.transform.parent.gameObject.SetActive(false);
+            }
+            else
+            {
+                upgradeUI.transform.parent.gameObject.SetActive(true);
+                upgradeUI.text = Tower_4[CheckLevel + 1].cost.ToString();
+            }
             sellUI.text = Tower_4[CheckLevel].sell.ToString();
         }
 

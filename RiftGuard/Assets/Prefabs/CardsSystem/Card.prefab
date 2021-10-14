@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 101.29877}
-  m_SizeDelta: {x: 150, y: 22.4025}
+  m_AnchoredPosition: {x: 24.70421, y: 95.2}
+  m_SizeDelta: {x: 100.5916, y: 22.4025}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4495914882787922113
 CanvasRenderer:
@@ -67,10 +67,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 13
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e6866ead7d3688947adaed2a76fdc4c6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b144e2307516d3b4a86d304135ed6f9f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -310,8 +310,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.3451, y: -39.868484}
-  m_SizeDelta: {x: 137.1279, y: 64.7536}
+  m_AnchoredPosition: {x: 0.0000072122, y: -58.723137}
+  m_SizeDelta: {x: 137.1279, y: 81.9999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &725659006982720954
 CanvasRenderer:
@@ -354,4 +354,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Card Name
+  m_Text: Card Description

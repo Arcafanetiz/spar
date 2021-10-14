@@ -213,9 +213,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1617935929322705423, guid: b79fbe4a0505f2849b709fbd6d3dea8b, type: 3}
   towerSprite: {fileID: 4464230041259232070}
-  _ATK: 15
-  _Range: 1.5
-  _Cooldown: 0.3
+  _ATK: 30
+  _Range: 3
+  _Cooldown: 0.5
   ATK: 0
   Range: 0
   Cooldown: 0
