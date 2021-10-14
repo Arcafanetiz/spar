@@ -15,6 +15,7 @@ public class SpawnTower : MonoBehaviour
     }
     // Used as reference
     [SerializeField] private GameObject basePrefab;
+    [SerializeField] private GameObject debugText;
     private BaseScript _baseScipt;
     private GameObject mapGenerator;
 
@@ -80,6 +81,14 @@ public class SpawnTower : MonoBehaviour
             _baseScipt.AddMoney(-Tower_1[0].cost);
             _baseScipt.AddMana(-Tower_1[0].mana);
         }
+        else if(_baseScipt.money < Tower_1[0].cost)
+        {
+            debugText.GetComponent<TextAlert>().Alert("Don't have enough money to create tower",2.5f);
+        }
+        else if (_baseScipt.mana < Tower_1[0].mana)
+        {
+            debugText.GetComponent<TextAlert>().Alert("Don't have enough mana to create tower", 2.5f);
+        }
     }
 
     public void GenTower_2()
@@ -107,6 +116,14 @@ public class SpawnTower : MonoBehaviour
             // Reduce Money & Mana
             _baseScipt.AddMoney(-Tower_2[0].cost);
             _baseScipt.AddMana(-Tower_2[0].mana);
+        }
+        else if (_baseScipt.money < Tower_2[0].cost)
+        {
+            debugText.GetComponent<TextAlert>().Alert("Don't have enough money to create tower", 2.5f);
+        }
+        else if (_baseScipt.mana < Tower_2[0].mana)
+        {
+            debugText.GetComponent<TextAlert>().Alert("Don't have enough mana to create tower", 2.5f);
         }
     }
 
@@ -136,6 +153,14 @@ public class SpawnTower : MonoBehaviour
             _baseScipt.AddMoney(-Tower_3[0].cost);
             _baseScipt.AddMana(-Tower_3[0].mana);
         }
+        else if (_baseScipt.money < Tower_3[0].cost)
+        {
+            debugText.GetComponent<TextAlert>().Alert("Don't have enough money to create tower", 2.5f);
+        }
+        else if (_baseScipt.mana < Tower_3[0].mana)
+        {
+            debugText.GetComponent<TextAlert>().Alert("Don't have enough mana to create tower", 2.5f);
+        }
     }
 
     public void GenTower_4()
@@ -163,6 +188,14 @@ public class SpawnTower : MonoBehaviour
             // Reduce Money & Mana
             _baseScipt.AddMoney(-Tower_4[0].cost);
             _baseScipt.AddMana(-Tower_4[0].mana);
+        }
+        else if (_baseScipt.money < Tower_4[0].cost)
+        {
+            debugText.GetComponent<TextAlert>().Alert("Don't have enough money to create tower", 2.5f);
+        }
+        else if (_baseScipt.mana < Tower_4[0].mana)
+        {
+            debugText.GetComponent<TextAlert>().Alert("Don't have enough mana to create tower", 2.5f);
         }
     }
 
@@ -215,24 +248,31 @@ public class SpawnTower : MonoBehaviour
         int CheckType = SellTower.GetComponent<TowerControl>().info.Type;
         int CheckLevel = SellTower.GetComponent<TowerControl>().info.Level;
 
-        if (CheckType == 1 && _baseScipt.money >= Tower_1[CheckLevel].cost)
+        if (CheckType == 1 && _baseScipt.money >= Tower_1[CheckLevel + 1].cost)
         {
             UpgradeTower_1(CheckLevel+1);
+            GameManage.currentGameStatus = GameManage.GameStatus.PLAY;
         }
-        else if (CheckType == 2 && _baseScipt.money >= Tower_2[CheckLevel].cost)
+        else if (CheckType == 2 && _baseScipt.money >= Tower_2[CheckLevel + 1].cost)
         {
             UpgradeTower_2(CheckLevel+1);
+            GameManage.currentGameStatus = GameManage.GameStatus.PLAY;
         }
-        else if (CheckType == 3 && _baseScipt.money >= Tower_3[CheckLevel].cost)
+        else if (CheckType == 3 && _baseScipt.money >= Tower_3[CheckLevel + 1].cost)
         {
             UpgradeTower_3(CheckLevel+1);
+            GameManage.currentGameStatus = GameManage.GameStatus.PLAY;
         }
-        else if (CheckType == 4 && _baseScipt.money >= Tower_4[CheckLevel].cost)
+        else if (CheckType == 4 && _baseScipt.money >= Tower_4[CheckLevel + 1].cost)
         {
             UpgradeTower_4(CheckLevel + 1);
+            GameManage.currentGameStatus = GameManage.GameStatus.PLAY;
+        }
+        else
+        {
+            debugText.GetComponent<TextAlert>().Alert("Don't have enough money to upgrade tower",2.0f);
         }
 
-        GameManage.currentGameStatus = GameManage.GameStatus.PLAY;
     }
 
     // Show Cost, Sell & Tower Info in UI

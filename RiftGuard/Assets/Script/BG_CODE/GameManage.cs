@@ -15,6 +15,8 @@ public class GameManage : MonoBehaviour
     [SerializeField] private Canvas createTowerCanvas;
     [SerializeField] private RectTransform createTowerImage;
 
+    [SerializeField] private GameObject DeckUI;
+
     [SerializeField] private GameObject _objectCard;
     public GameObject objectCard => _objectCard;
 
@@ -69,7 +71,12 @@ public class GameManage : MonoBehaviour
         {
             CheckEscButton();
 
-            if(Input.GetKeyDown(KeyCode.Y))
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                DeckUI.SetActive((DeckUI.activeSelf) ? false : true);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Y))
             {
                 currentGameStatus = GameStatus.SHOP;
             }
@@ -113,6 +120,7 @@ public class GameManage : MonoBehaviour
         else if (currentGameStatus == GameStatus.SHOP)
         {
             shopUI.SetActive(true);
+            DeckUI.SetActive(true);
             createTowerCanvas.gameObject.SetActive(false);
         }
         else
