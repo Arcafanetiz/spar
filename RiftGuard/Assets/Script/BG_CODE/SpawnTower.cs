@@ -316,7 +316,7 @@ public class SpawnTower : MonoBehaviour
         }
 
         ATK_Text.text = "ATK : " + ((int)towerStat.ATK).ToString();
-        Speed_Text.text = "Speed : " + ((int)(1/towerStat.Cooldown)).ToString();
+        Speed_Text.text = "Speed : " + ((1/towerStat.Cooldown)).ToString("F2");
         Range_Text.text = "Range : " + ((int)towerStat.Range).ToString();
     }
 
