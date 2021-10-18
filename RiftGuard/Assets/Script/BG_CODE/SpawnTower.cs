@@ -11,7 +11,6 @@ public class SpawnTower : MonoBehaviour
         public GameObject tower;
         public int cost;
         public int sell;
-        public int mana;
     }
     // Used as reference
     [SerializeField] private GameObject basePrefab;
@@ -58,7 +57,7 @@ public class SpawnTower : MonoBehaviour
     // Generate Tower When Clicked in UI
     public void GenTower_1()
     {
-        if (_baseScipt.money >= Tower_1[0].cost && _baseScipt.mana >= Tower_1[0].mana)
+        if (_baseScipt.money >= Tower_1[0].cost && _baseScipt.mana >= _baseScipt.manaUsage)
         {
             // Initialize Postion X & Y
             int posX = (int)GameManage.clickPos.x;
@@ -79,13 +78,13 @@ public class SpawnTower : MonoBehaviour
 
             // Reduce Money & Mana
             _baseScipt.AddMoney(-Tower_1[0].cost);
-            _baseScipt.AddMana(-Tower_1[0].mana);
+            _baseScipt.AddMana(-_baseScipt.manaUsage);
         }
         else if(_baseScipt.money < Tower_1[0].cost)
         {
             debugText.GetComponent<TextAlert>().Alert("Don't have enough money to create tower",2.5f);
         }
-        else if (_baseScipt.mana < Tower_1[0].mana)
+        else if (_baseScipt.mana < _baseScipt.manaUsage)
         {
             debugText.GetComponent<TextAlert>().Alert("Don't have enough mana to create tower", 2.5f);
         }
@@ -93,7 +92,7 @@ public class SpawnTower : MonoBehaviour
 
     public void GenTower_2()
     {
-        if (_baseScipt.money >= Tower_2[0].cost && _baseScipt.mana >= Tower_2[0].mana)
+        if (_baseScipt.money >= Tower_2[0].cost && _baseScipt.mana >= _baseScipt.manaUsage)
         {
 
             // Initialize Postion X & Y
@@ -115,13 +114,13 @@ public class SpawnTower : MonoBehaviour
 
             // Reduce Money & Mana
             _baseScipt.AddMoney(-Tower_2[0].cost);
-            _baseScipt.AddMana(-Tower_2[0].mana);
+            _baseScipt.AddMana(-_baseScipt.manaUsage);
         }
         else if (_baseScipt.money < Tower_2[0].cost)
         {
             debugText.GetComponent<TextAlert>().Alert("Don't have enough money to create tower", 2.5f);
         }
-        else if (_baseScipt.mana < Tower_2[0].mana)
+        else if (_baseScipt.mana < _baseScipt.manaUsage)
         {
             debugText.GetComponent<TextAlert>().Alert("Don't have enough mana to create tower", 2.5f);
         }
@@ -129,7 +128,7 @@ public class SpawnTower : MonoBehaviour
 
     public void GenTower_3()
     {
-        if (_baseScipt.money >= Tower_3[0].cost && _baseScipt.mana >= Tower_3[0].mana)
+        if (_baseScipt.money >= Tower_3[0].cost && _baseScipt.mana >= _baseScipt.manaUsage)
         {
 
             // Initialize Postion X & Y
@@ -151,13 +150,13 @@ public class SpawnTower : MonoBehaviour
 
             // Reduce Money & Mana
             _baseScipt.AddMoney(-Tower_3[0].cost);
-            _baseScipt.AddMana(-Tower_3[0].mana);
+            _baseScipt.AddMana(-_baseScipt.manaUsage);
         }
         else if (_baseScipt.money < Tower_3[0].cost)
         {
             debugText.GetComponent<TextAlert>().Alert("Don't have enough money to create tower", 2.5f);
         }
-        else if (_baseScipt.mana < Tower_3[0].mana)
+        else if (_baseScipt.mana < _baseScipt.manaUsage)
         {
             debugText.GetComponent<TextAlert>().Alert("Don't have enough mana to create tower", 2.5f);
         }
@@ -165,7 +164,7 @@ public class SpawnTower : MonoBehaviour
 
     public void GenTower_4()
     {
-        if (_baseScipt.money >= Tower_4[0].cost && _baseScipt.mana >= Tower_4[0].mana)
+        if (_baseScipt.money >= Tower_4[0].cost && _baseScipt.mana >= _baseScipt.manaUsage)
         {
 
             // Initialize Postion X & Y
@@ -187,13 +186,13 @@ public class SpawnTower : MonoBehaviour
 
             // Reduce Money & Mana
             _baseScipt.AddMoney(-Tower_4[0].cost);
-            _baseScipt.AddMana(-Tower_4[0].mana);
+            _baseScipt.AddMana(-_baseScipt.manaUsage);
         }
         else if (_baseScipt.money < Tower_4[0].cost)
         {
             debugText.GetComponent<TextAlert>().Alert("Don't have enough money to create tower", 2.5f);
         }
-        else if (_baseScipt.mana < Tower_4[0].mana)
+        else if (_baseScipt.mana < _baseScipt.manaUsage)
         {
             debugText.GetComponent<TextAlert>().Alert("Don't have enough mana to create tower", 2.5f);
         }
@@ -292,15 +291,6 @@ public class SpawnTower : MonoBehaviour
 
         int CheckType = tempTower.GetComponent<TowerControl>().info.Type;
         int CheckLevel = tempTower.GetComponent<TowerControl>().info.Level;
-        /*
-        if (CheckLevel == Tower_1.Length-1)
-        {
-            upgradeUI.transform.parent.gameObject.SetActive(false);
-        }
-        else
-        {
-            upgradeUI.transform.parent.gameObject.SetActive(true);
-        }*/
 
         if(CheckType == 1)
         {

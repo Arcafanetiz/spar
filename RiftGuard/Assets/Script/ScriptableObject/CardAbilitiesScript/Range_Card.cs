@@ -9,13 +9,13 @@ public class Range_Card : CardAbilities
 
     public override void ActivateAbility(GameObject _tower)
     {
-        _tower.GetComponent<TowerControl>().Range *= (_range/100);
+        _tower.GetComponent<TowerControl>().Range += (_tower.GetComponent<TowerControl>().Base_Range * (_range / 100));
         _tower.GetComponent<TowerControl>().DrawCircle(_tower.GetComponent<TowerControl>().Range, 0.05f);
     }
 
     public override void DeactivateAbility(GameObject _tower)
     {
-        _tower.GetComponent<TowerControl>().Range /= (_range / 100);
+        _tower.GetComponent<TowerControl>().Range -= (_tower.GetComponent<TowerControl>().Base_Range * (_range / 100));
         _tower.GetComponent<TowerControl>().DrawCircle(_tower.GetComponent<TowerControl>().Range, 0.05f);
     }
 }

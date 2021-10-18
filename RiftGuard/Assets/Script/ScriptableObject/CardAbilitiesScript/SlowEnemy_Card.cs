@@ -9,10 +9,10 @@ public class SlowEnemy_Card : CardAbilities
 
     public override void ActivateAbility(GameObject _spawner)
     {
-        _spawner.GetComponent<SpawnerControl>().slowRate += (_slow / 100);
+        _spawner.GetComponent<SpawnerControl>().speedRate += _slow;
     }
     public override void DeactivateAbility(GameObject _spawner)
     {
-        _spawner.GetComponent<SpawnerControl>().slowRate -= (_slow / 100);
+        _spawner.GetComponent<SpawnerControl>().speedRate -= _slow;
     }
 }

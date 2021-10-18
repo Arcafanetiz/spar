@@ -9,9 +9,9 @@ public class TowerControl : MonoBehaviour
 
     [Header("Tower Properties")]
 
-        [SerializeField] private float _ATK;
-        [SerializeField] private float _Range;
-        [SerializeField] private float _Cooldown;
+        public float Base_ATK;
+        public float Base_Range;
+        public float Base_Cooldown;
 
     [HideInInspector] public float ATK;
     [HideInInspector] public float Range;
@@ -26,6 +26,7 @@ public class TowerControl : MonoBehaviour
     [HideInInspector] public TowerData info;
     private float shootTimeCounter = 0.0f;
     private bool foundEnemy = false;
+    [HideInInspector] public bool piercing = false;
 
     [HideInInspector] public GameObject compTile;
     private LinkedList<GameObject> enemyList;
@@ -35,9 +36,9 @@ public class TowerControl : MonoBehaviour
 
     private void Awake()
     {
-        ATK = _ATK;
-        Range = _Range;
-        Cooldown = _Cooldown;
+        ATK = Base_ATK;
+        Range = Base_Range;
+        Cooldown = Base_Cooldown;
         GetComponent<LineRenderer>().material = new Material(Shader.Find("Sprites/Default"));
         GetComponent<LineRenderer>().startColor = new Color(1.0f, 0.0f, 0.0f, 0.5f);
         GetComponent<LineRenderer>().endColor = new Color(1.0f, 0.0f, 0.0f, 0.5f);
@@ -102,6 +103,7 @@ public class TowerControl : MonoBehaviour
         if (bullet != null)
         {
             bullet.SetDamage(ATK);
+            bullet.piercing = piercing;
             bullet.Seek(enemyList.First.Value);
         }
     }
@@ -139,7 +141,7 @@ public class TowerControl : MonoBehaviour
             enemyList.RemoveFirst();
         }
         // If Enemy is out of range then Remove from list
-        else if (Vector2.Distance(enemyList.First.Value.transform.position, transform.position) > _Range)
+        else if (Vector2.Distance(enemyList.First.Value.transform.position, transform.position) > Range)
         {
             enemyList.RemoveFirst();
         }
@@ -163,9 +165,9 @@ public class TowerControl : MonoBehaviour
 
     public void SetDefault()
     {
-        ATK = _ATK;
-        Range = _Range;
-        Cooldown = _Cooldown;
+        ATK = Base_ATK;
+        Range = Base_Range;
+        Cooldown = Base_Cooldown;
     }
 
     // Draw Circle (Range that can shoot)

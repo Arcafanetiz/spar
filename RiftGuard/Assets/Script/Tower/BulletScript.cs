@@ -8,6 +8,8 @@ public class BulletScript : MonoBehaviour
     private float speed = 10f;
     private float damage;
 
+    [HideInInspector] public bool piercing = false;
+
     private void Update()
     {
         if(GameManage.currentGameStatus != GameManage.GameStatus.PAUSE &&
@@ -35,7 +37,14 @@ public class BulletScript : MonoBehaviour
 
     private void HitTarget()
     {
-        target.GetComponent<EnemyControl>().AddHealth(-damage);
+        if (piercing)
+        {
+            target.GetComponent<EnemyControl>().PierceHit(-damage);
+        }
+        else
+        { 
+            target.GetComponent<EnemyControl>().AddHealth(-damage);
+        }
         Destroy(gameObject);
     }
 

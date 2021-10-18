@@ -36,7 +36,6 @@ public class WaveControl : MonoBehaviour
             // Find maxWave using ternary operator
             _maxWave = (temp > _maxWave) ? temp : _maxWave;
         }
-        print(maxWave);
     }
 
 

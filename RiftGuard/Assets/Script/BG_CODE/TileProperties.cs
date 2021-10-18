@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TileProperties : MonoBehaviour
 {
@@ -45,6 +46,11 @@ public class TileProperties : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if(EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
         // Mouse Click -> Show createTowerUI if there is no tower on that grid
         if (GameManage.currentGameStatus == GameManage.GameStatus.PLAY)
         {

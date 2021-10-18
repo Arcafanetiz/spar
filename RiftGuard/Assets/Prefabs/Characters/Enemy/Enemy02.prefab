@@ -387,6 +387,8 @@ MonoBehaviour:
   HP: 100
   Armor: 0
   getMoney: 5
+  currentHP: 0
+  currentArmor: 0
 --- !u!58 &2767688634944838689
 CircleCollider2D:
   m_ObjectHideFlags: 0

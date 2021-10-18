@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 743db7fd7970b4d4ca261b0f11dc35aa, type: 3}
-  m_Name: ATK200%
+  m_Script: {fileID: 11500000, guid: 8138b1ecf266663429ba058e98c4b4b9, type: 3}
+  m_Name: ManaRegen+50%
   m_EditorClassIdentifier: 
-  _damage: 200
+  _regenRate: 50

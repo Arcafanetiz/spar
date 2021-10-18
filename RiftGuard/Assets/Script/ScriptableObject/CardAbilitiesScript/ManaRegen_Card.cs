@@ -9,11 +9,11 @@ public class ManaRegen_Card : CardAbilities
 
     public override void ActivateAbility(GameObject _base)
     {
-        _base.GetComponent<BaseScript>().manaRegen *= (_regenRate / 100);
+        _base.GetComponent<BaseScript>().manaRegen += (_base.GetComponent<BaseScript>().RefmanaRegen * (_regenRate / 100));
     }
 
     public override void DeactivateAbility(GameObject _base)
     {
-        _base.GetComponent<BaseScript>().manaRegen /= (_regenRate / 100);
+        _base.GetComponent<BaseScript>().manaRegen -= (_base.GetComponent<BaseScript>().RefmanaRegen * (_regenRate / 100));
     }
 }

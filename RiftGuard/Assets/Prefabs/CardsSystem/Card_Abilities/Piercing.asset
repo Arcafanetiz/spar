@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a7e82580318a8f4cad4da4b093f2463, type: 3}
-  m_Name: Range150%
+  m_Script: {fileID: 11500000, guid: 9fe34ce9dfa34f644b54aa839eee6067, type: 3}
+  m_Name: Piercing
   m_EditorClassIdentifier: 
-  _range: 150

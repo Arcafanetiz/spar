@@ -20,7 +20,7 @@ public class ResourceUI : MonoBehaviour
 
     public void ShowMoney()
     {
-        moneyUI.text = "$ " + this.GetComponent<BaseScript>().money.ToString();
+        moneyUI.text = "$ " + ((int)this.GetComponent<BaseScript>().money).ToString();
     }
 
     public void ShowHealth()
