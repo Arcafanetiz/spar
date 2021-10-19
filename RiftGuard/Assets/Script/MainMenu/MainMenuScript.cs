@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class MainMenuScript : MonoBehaviour
 {
     public GameObject AboutPanel;
+    public GameObject OptionUI;
+
     public void ReturnToMainmenu()
     {
         SceneManager.LoadScene(0);
@@ -32,6 +34,18 @@ public class MainMenuScript : MonoBehaviour
     {
         //Credit.SetActive(false);
     }
+
+    public void ShowOption()
+    {
+        OptionUI.SetActive(true);
+    }
+
+    public void CloseOption()
+    {
+        OptionUI.SetActive(false);
+    }
+
+
 
     public void Resume()
     {

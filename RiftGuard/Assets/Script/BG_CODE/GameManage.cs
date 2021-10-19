@@ -42,6 +42,11 @@ public class GameManage : MonoBehaviour
     // Clicking for closeing UI in Tower,Base,SpawnerUI
     [SerializeField] private GameObject closeUI;
 
+    [Header("UI Reference")]
+
+    [SerializeField] private GameObject OptionUI;
+
+
     // GameStage
     /*
     PLAY : while playing game
@@ -174,7 +179,14 @@ public class GameManage : MonoBehaviour
         }
         else if (GameManage.currentGameStatus == GameManage.GameStatus.PAUSE)
         {
-            GameManage.currentGameStatus = GameManage.GameStatus.PLAY;
+            if(OptionUI.activeSelf)
+            {
+                OptionUI.SetActive(false);
+            }
+            else
+            {
+                GameManage.currentGameStatus = GameManage.GameStatus.PLAY;
+            }
         }
         else
         {

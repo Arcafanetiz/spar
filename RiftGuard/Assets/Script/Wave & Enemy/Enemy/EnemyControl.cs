@@ -108,16 +108,17 @@ public class EnemyControl : MonoBehaviour
 
 
     // Other Functions used to SET/GET value
-    public void AddHealth(float _health)
+    public void AddHealth(float _damage)
     {
         if (currentArmor <= 0)
         {
             currentArmor = 0;
-            currentHP += _health;
+            _damage = _damage * -_damage / (-_damage + DEF);
+            currentHP += _damage;
         }
         else
         {
-            currentArmor += _health;
+            currentArmor += _damage;
         }
     }
 
