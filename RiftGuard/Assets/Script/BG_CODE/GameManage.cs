@@ -77,7 +77,7 @@ public class GameManage : MonoBehaviour
 
     private void Start()
     {
-        objectCard.GetComponent<RectTransform>().anchoredPosition = new Vector2(-objectCard.GetComponent<RectTransform>().rect.width / 2, -objectCard.GetComponent<RectTransform>().rect.height + 10);
+        objectCard.GetComponent<RectTransform>().anchoredPosition = new Vector2(-objectCard.GetComponent<RectTransform>().rect.width / 2, 385.0f);
         UpgradeUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(-UpgradeUI.GetComponent<RectTransform>().rect.width / 2, UpgradeUI.GetComponent<RectTransform>().rect.height / 2);
         spawnerUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(-spawnerUI.GetComponent<RectTransform>().rect.width / 2, spawnerUI.GetComponent<RectTransform>().rect.height / 2);
         baseUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(-baseUI.GetComponent<RectTransform>().rect.width / 2, baseUI.GetComponent<RectTransform>().rect.height / 2);

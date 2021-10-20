@@ -39,7 +39,6 @@ public class MainMenuScript : MonoBehaviour
     {
         OptionUI.SetActive(true);
     }
-
     public void CloseOption()
     {
         OptionUI.SetActive(false);

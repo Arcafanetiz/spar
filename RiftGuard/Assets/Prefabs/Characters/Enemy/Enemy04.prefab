@@ -383,10 +383,12 @@ MonoBehaviour:
   healthBar: {fileID: 5732380194986584374}
   armorBar: {fileID: 4865875188816104638}
   SPD: 0.5
-  DEF: 1
+  DEF: 0
   HP: 200
   Armor: 0
   getMoney: 45
+  currentHP: 0
+  currentArmor: 0
 --- !u!58 &2767688634944838689
 CircleCollider2D:
   m_ObjectHideFlags: 0

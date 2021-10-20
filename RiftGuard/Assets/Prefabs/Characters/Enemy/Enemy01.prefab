@@ -383,7 +383,7 @@ MonoBehaviour:
   healthBar: {fileID: 5732380194986584374}
   armorBar: {fileID: 2949296574753194077}
   SPD: 6
-  DEF: 1
+  DEF: 0
   HP: 50
   Armor: 0
   getMoney: 25

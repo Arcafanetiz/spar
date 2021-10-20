@@ -5,9 +5,18 @@ using UnityEngine;
 public class SoundController : MonoBehaviour
 {
     [SerializeField] private GameObject gamePlaySound; // Sound store in Camera
-    private bool MuteBackgroundSound = false;
+    [HideInInspector] public static bool MuteBackgroundSound = false;
+    [HideInInspector] public static bool MuteSound = false;
 
-    public void MuteUnmuteSound()
+    private void Start()
+    {
+        if(MuteBackgroundSound)
+        {
+            gamePlaySound.GetComponent<AudioSource>().volume = 0.0f;
+        }
+    }
+
+    public void MuteUnmuteBackgroundSound()
     {
         if (MuteBackgroundSound)
         {
@@ -18,6 +27,18 @@ public class SoundController : MonoBehaviour
         {
             gamePlaySound.GetComponent<AudioSource>().volume = 0.0f;
             MuteBackgroundSound = true;
+        }
+    }
+
+    public void MuteUnmuteSound()
+    {
+        if (MuteSound)
+        {
+            MuteSound = false;
+        }
+        else
+        {
+            MuteSound = true;
         }
     }
 
