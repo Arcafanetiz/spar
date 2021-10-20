@@ -132,7 +132,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: eb1893d38299c004a92619a4d2aeb171, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -213,12 +213,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1617935929322705423, guid: b79fbe4a0505f2849b709fbd6d3dea8b, type: 3}
   towerSprite: {fileID: 4464230041259232070}
-  _ATK: 60
-  _Range: 2
-  _Cooldown: 1
+  Base_ATK: 60
+  Base_Range: 4
+  Base_Cooldown: 1
   ATK: 0
   Range: 0
   Cooldown: 0
+  piercing: 0
   compTile: {fileID: 0}
 --- !u!114 &-6256099623927576805
 MonoBehaviour:

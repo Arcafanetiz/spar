@@ -7,12 +7,15 @@ public class DeckController : MonoBehaviour, IDropHandler
 {
     // Used as reference
     [SerializeField] private GameObject baseRef;
+    private BaseScript _baseScript;
 
     // Prefab use for generate card
     [SerializeField] private GameObject cardPrefab;
 
     // Used as reference
     [SerializeField] private GameObject gameManager;
+
+    [SerializeField] private GameObject debugText;
 
     // GameObject (Invisible) for storing card only
     [SerializeField] private GameObject cardStored;
@@ -30,6 +33,7 @@ public class DeckController : MonoBehaviour, IDropHandler
     {
         cardCapacity = _cardCapacity;
         currentCapacity = 0;
+        _baseScript = baseRef.GetComponent<BaseScript>();
     }
 
     void Update()
@@ -59,6 +63,7 @@ public class DeckController : MonoBehaviour, IDropHandler
         card.GetComponent<DragDrop>().SetCardKeeper(cardStored);
         card.GetComponent<DragDrop>().SetCanvas(card.transform.parent.parent.gameObject.GetComponent<Canvas>());
         card.GetComponent<DragDrop>().onDeck = true;
+        card.GetComponent<DragDrop>().debugText = debugText;
 
         // Set card info (use info from CardList)
         card.GetComponent<DragDrop>().SetCardInfo(cardList.GetComponent<CardList>().cardList[index]);
@@ -77,6 +82,7 @@ public class DeckController : MonoBehaviour, IDropHandler
         card.GetComponent<DragDrop>().SetCardKeeper(cardStored);
         card.GetComponent<DragDrop>().SetCanvas(card.transform.parent.parent.gameObject.GetComponent<Canvas>());
         card.GetComponent<DragDrop>().onDeck = true;
+        card.GetComponent<DragDrop>().debugText = debugText;
 
         // Set Card Info
         card.GetComponent<DragDrop>().SetCardInfo(_card);
@@ -92,10 +98,11 @@ public class DeckController : MonoBehaviour, IDropHandler
 
         if (currentCapacity == cardCapacity)
         {
+            debugText.GetComponent<TextAlert>().Alert("Card in deck was full", 2.5f);
             return;
         }
 
-        if(_DG.inShop && _Base.money >= _DG.cardInfo.buy)
+        if (_DG.inShop && _Base.money >= _DG.cardInfo.buy)
         {
             // Decrase Money
             _Base.AddMoney(-_DG.cardInfo.buy);
@@ -104,24 +111,28 @@ public class DeckController : MonoBehaviour, IDropHandler
             // Destroy card which show in TowerUI
             Destroy(_card);
         }
+        else if (_DG.inShop && _Base.money < _DG.cardInfo.buy)
+        {
+            debugText.GetComponent<TextAlert>().Alert("Don't have enough money to buy card", 2.5f);
+        }
 
-        // If card was drag back to deck (must have at least 1 mana)
-        else if(!_DG.inShop && !_DG.onDeck && _Base.mana >= 1.0f)
+        // If card was drag back to deck (must have <= manaUsage)
+        else if (!_DG.inShop && !_DG.onDeck && _Base.mana >= _baseScript.manaUsage)
         {
             // Decrease mana
-            _Base.AddMana(-1);
-            if(_DG.attachWith.CompareTag("Platform"))
+            _Base.AddMana(-_baseScript.manaUsage);
+            if (_DG.attachWith.CompareTag("Platform"))
             {
                 // Remove card from data
                 GameObject towerRef = gameManager.GetComponent<MapGenerator>().GetTowerData((int)_DG.attachWith.gameObject.transform.position.x, -(int)_DG.attachWith.gameObject.transform.position.y);
                 towerRef.GetComponent<TowerCardScript>().RemoveDel(_card);
             }
-            else if(_DG.attachWith.CompareTag("Base"))
+            else if (_DG.attachWith.CompareTag("Base"))
             {
                 // Remove card from data
                 _DG.attachWith.GetComponent<BaseCardScript>().RemoveDel(_card);
             }
-            else if(_DG.attachWith.CompareTag("Spawner"))
+            else if (_DG.attachWith.CompareTag("Spawner"))
             {
                 // Remove card from data
                 _DG.attachWith.GetComponent<SpawnerCardScript>().RemoveDel(_card);
@@ -130,6 +141,10 @@ public class DeckController : MonoBehaviour, IDropHandler
             GenCard(_card.GetComponent<DragDrop>().cardInfo);
             // Destroy card which show in TowerUI
             Destroy(_card);
+        }
+        else if (!_DG.inShop && !_DG.onDeck && _Base.mana < _baseScript.manaUsage)
+        {
+            debugText.GetComponent<TextAlert>().Alert("Don't have enough mana to drag card out", 2.5f);
         }
     }
 }

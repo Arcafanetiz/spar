@@ -14,6 +14,9 @@ public class GameManage : MonoBehaviour
     // Create TowerUI
     [SerializeField] private Canvas createTowerCanvas;
     [SerializeField] private RectTransform createTowerImage;
+    [SerializeField] private GameObject DeckUIManage;
+
+    [SerializeField] private GameObject DeckUI;
 
     [SerializeField] private GameObject _objectCard;
     public GameObject objectCard => _objectCard;
@@ -22,7 +25,7 @@ public class GameManage : MonoBehaviour
     [SerializeField] private GameObject UpgradeUI;
 
     // Tower UI
-    [SerializeField] private GameObject towerUI;
+    [SerializeField] private GameObject baseUI;
 
     // Spawner UI
     [SerializeField] private GameObject spawnerUI;
@@ -35,6 +38,14 @@ public class GameManage : MonoBehaviour
 
     // GameOverUI
     [SerializeField] private GameObject gameoverUI;
+
+    // Clicking for closeing UI in Tower,Base,SpawnerUI
+    [SerializeField] private GameObject closeUI;
+
+    [Header("UI Reference")]
+
+    [SerializeField] private GameObject OptionUI;
+
 
     // GameStage
     /*
@@ -62,6 +73,16 @@ public class GameManage : MonoBehaviour
     public static GameStatus currentGameStatus = GameStatus.PLAY; // Track GameStage
     public static Vector3 clickPos; // Track position of tile which have been clicked
 
+    private bool doOnce = true;
+
+    private void Start()
+    {
+        objectCard.GetComponent<RectTransform>().anchoredPosition = new Vector2(-objectCard.GetComponent<RectTransform>().rect.width / 2, -objectCard.GetComponent<RectTransform>().rect.height + 10);
+        UpgradeUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(-UpgradeUI.GetComponent<RectTransform>().rect.width / 2, UpgradeUI.GetComponent<RectTransform>().rect.height / 2);
+        spawnerUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(-spawnerUI.GetComponent<RectTransform>().rect.width / 2, spawnerUI.GetComponent<RectTransform>().rect.height / 2);
+        baseUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(-baseUI.GetComponent<RectTransform>().rect.width / 2, baseUI.GetComponent<RectTransform>().rect.height / 2);
+    }
+
     private void Update()
     {
         // Check If GAMEOVER no need to update
@@ -69,7 +90,12 @@ public class GameManage : MonoBehaviour
         {
             CheckEscButton();
 
-            if(Input.GetKeyDown(KeyCode.Y))
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                DeckUI.SetActive((DeckUI.activeSelf) ? false : true);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Y))
             {
                 currentGameStatus = GameStatus.SHOP;
             }
@@ -88,7 +114,6 @@ public class GameManage : MonoBehaviour
         {
             pauseUI.SetActive(true);
             createTowerCanvas.gameObject.SetActive(false);
-            UpgradeUI.SetActive(false);
         }
         else if (currentGameStatus == GameStatus.CREATE)
         {
@@ -99,32 +124,39 @@ public class GameManage : MonoBehaviour
         {
             UpgradeUI.SetActive(true);
             _objectCard.SetActive(true);
+            closeUI.SetActive(true);
         }
         else if(currentGameStatus == GameStatus.BASE)
         {
-            towerUI.SetActive(true);
+            baseUI.SetActive(true);
             _objectCard.SetActive(true);
+            closeUI.SetActive(true);
         }
         else if (currentGameStatus == GameStatus.SPAWNER)
         {
             spawnerUI.SetActive(true);
             _objectCard.SetActive(true);
+            closeUI.SetActive(true);
         }
         else if (currentGameStatus == GameStatus.SHOP)
         {
             shopUI.SetActive(true);
+            DeckUI.SetActive(true);
+            if(DeckUIManage.GetComponent<CardCollectorUIManage>().isHide && doOnce)
+            {
+                DeckUIManage.GetComponent<CardCollectorUIManage>().CloseOpenUI();
+                doOnce = false;
+            }
             createTowerCanvas.gameObject.SetActive(false);
         }
         else
         {
             // Set all UI (except ResoureUI) to be false
             createTowerCanvas.gameObject.SetActive(false);
-            _objectCard.SetActive(false);
-            UpgradeUI.SetActive(false);
-            towerUI.SetActive(false);
-            spawnerUI.SetActive(false);
+            closeUI.SetActive(false);
             shopUI.SetActive(false);
             pauseUI.SetActive(false);
+            doOnce = true;
         }
     }
 
@@ -147,7 +179,14 @@ public class GameManage : MonoBehaviour
         }
         else if (GameManage.currentGameStatus == GameManage.GameStatus.PAUSE)
         {
-            GameManage.currentGameStatus = GameManage.GameStatus.PLAY;
+            if(OptionUI.activeSelf)
+            {
+                OptionUI.SetActive(false);
+            }
+            else
+            {
+                GameManage.currentGameStatus = GameManage.GameStatus.PLAY;
+            }
         }
         else
         {

@@ -40,7 +40,18 @@ public class SpawnerControl : MonoBehaviour
 
     private int currentType = 0;
 
-    [HideInInspector] public float slowRate = 1.0f;
+    [HideInInspector] public float slowRate;
+    [HideInInspector] public float healthRate;
+    [HideInInspector] public float speedRate;
+    [HideInInspector] public float defRate;
+
+    private void Start()
+    {
+        slowRate = 0.0f;
+        healthRate = 0.0f;
+        speedRate = 0.0f;
+        defRate = 0.0f;
+    }
 
     private void Update()
     {
@@ -78,7 +89,7 @@ public class SpawnerControl : MonoBehaviour
             GameManage.currentGameStatus != GameManage.GameStatus.GAMEOVER)
         {
             // Use Time.deltaTime to count time (including slowRate)
-            if (timeCount >= wave[index].speedPerEnemy * slowRate)
+            if (timeCount >= wave[index].speedPerEnemy * (1 + slowRate / 100))
             {
                 //print(wave[currentWave]._enemy[currentType].amount + " " + currentType);
                 if(wave[currentWave]._enemy[currentType].amount == 0)
@@ -94,6 +105,9 @@ public class SpawnerControl : MonoBehaviour
                 GameObject spawnEnemy = Instantiate(enemy, transform.position + targetOffset, Quaternion.identity);
                 // Access EnemyControl to set value
                 spawnEnemy.GetComponent<EnemyControl>().SetOffset(targetOffset);
+                spawnEnemy.GetComponent<EnemyControl>().HP -= (spawnEnemy.GetComponent<EnemyControl>().HP * (healthRate / 100));
+                spawnEnemy.GetComponent<EnemyControl>().SPD -= (spawnEnemy.GetComponent<EnemyControl>().SPD * (speedRate / 100));
+                spawnEnemy.GetComponent<EnemyControl>().DEF -= (spawnEnemy.GetComponent<EnemyControl>().DEF * (defRate / 100));
                 spawnEnemy.GetComponent<EnemyControl>().SetPath(path);
                 spawnEnemy.GetComponent<EnemyControl>().SetRefWaveControl(refWaveControl);
                 spawnEnemy.GetComponent<EnemyControl>().SetBaseScript(baseScript);

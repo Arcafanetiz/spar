@@ -5,27 +5,31 @@ using UnityEngine;
 public class BaseScript : MonoBehaviour
 {
     [Header("Money Setting")]
-        [SerializeField] private int _money;
+        [SerializeField] private float _money;
 
     [Header("Health Setting")]
         [SerializeField] private int _health;
 
     [Header("Mana Setting")]
         [SerializeField] private float _maxMana;
-        [SerializeField] private float _manaRegen;
+        public float RefmanaRegen;
         private float currentMana;
 
     [HideInInspector] public int health;
-    [HideInInspector] public int money;
+    [HideInInspector] public float money;
     [HideInInspector] public float manaRegen;
     [HideInInspector] public float maxMana;
+    [HideInInspector] public float moneyRegen = 0; // using with card -> used to slightly increase money
+    [HideInInspector] public float enemyKillRate = 0; // using with card -> get more money when killing enemy
+    [HideInInspector] public float manaUsage = 1.0f; // Use as reference -> effect with card that will decrease mana usage
+
     public float mana => currentMana;
 
     private void Awake()
     {
         health = _health;
         money = _money;
-        manaRegen = _manaRegen;
+        manaRegen = RefmanaRegen;
         maxMana = _maxMana;
     }
 
@@ -38,6 +42,12 @@ public class BaseScript : MonoBehaviour
         {
             // Increase Mana
             CheckMana();
+
+            // Check if have card money regen -> regen money every frame
+            if(moneyRegen != 0)
+            {
+                money += (moneyRegen * Time.deltaTime);
+            }
 
             // For Debuging
             if (Input.GetKey(KeyCode.M))
@@ -103,7 +113,7 @@ public class BaseScript : MonoBehaviour
         }
     }
 
-    public void AddMana(int _mana)
+    public void AddMana(float _mana)
     {
         currentMana += _mana;
     }

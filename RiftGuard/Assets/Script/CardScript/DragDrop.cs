@@ -9,6 +9,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     // Used as reference
     private Canvas canvas;
     private GameObject refGameManage;
+    [HideInInspector] public GameObject debugText;
     [HideInInspector] public GameObject cardKeeper;
     [HideInInspector] public Card_SO cardInfo;
 
@@ -71,6 +72,8 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     {
         // rectTransform relate with mouse cursor position
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+
+        ShowCost();
 
         // drag = true(mouse cursor are OnDrag)
         drag = true;
@@ -177,6 +180,12 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             }
             attach = true;
         }
+
+        if (endDrag && attachWith == null)
+        {
+            debugText.GetComponent<TextAlert>().Alert("Mismatch card type", 2.0f);
+            endDrag = false;
+        }
     }
 
     // Green/Red Light be disappear
@@ -244,6 +253,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                 // If mana was not enough to transfer card from one tower to another
                 else if (baseRef.GetComponent<BaseScript>().mana < 1.0f)
                 {
+                    debugText.GetComponent<TextAlert>().Alert("Don't have enough mana to transfer card", 2.5f);
                     // Set back to default
                     hit = false;
                     attach = false;
@@ -266,6 +276,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             }
             else
             {
+                debugText.GetComponent<TextAlert>().Alert("Cards in this tower was full", 2.5f);
                 hit = false;
                 return;
             }
@@ -320,6 +331,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             }
             else
             {
+                debugText.GetComponent<TextAlert>().Alert("Cards in this base was full", 2.5f);
                 hit = false;
                 return;
             }
@@ -353,6 +365,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                 // If mana was not enough to transfer card from one spawner to another spawner
                 else if (baseRef.GetComponent<BaseScript>().mana < 1.0f)
                 {
+                    debugText.GetComponent<TextAlert>().Alert("Don't have enough mana to transfer card", 2.5f);
                     // Set back to default
                     hit = false;
                     attach = false;
@@ -374,8 +387,24 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             }
             else
             {
+                debugText.GetComponent<TextAlert>().Alert("Cards in this spawner was full", 2.5f);
                 hit = false;
                 return;
+            }
+        }
+    }
+
+    void ShowCost()
+    {
+        if (GameManage.currentGameStatus == GameManage.GameStatus.SHOP)
+        {
+            if (inShop)
+            {
+                this.GetComponent<CardUI>().ShowCostBuy(cardInfo.buy.ToString());
+            }
+            else
+            {
+                this.GetComponent<CardUI>().ShowCostSell(cardInfo.sell.ToString());
             }
         }
     }

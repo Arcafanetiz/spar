@@ -8,6 +8,7 @@ public class CardUI : MonoBehaviour
     // Keep Text for showing on Card Prefab
     [SerializeField] private Text _cardName;
     [SerializeField] private Text _cardType;
+    [SerializeField] private Text _cardPrice;
 
     private void Start()
     {
@@ -22,5 +23,24 @@ public class CardUI : MonoBehaviour
             _cardType.text = "TOWER";
         else
             _cardType.text = "SPAWNER";
+    }
+
+    public void ShowCostSell(string _price)
+    {
+        _cardPrice.text = _price;
+        _cardPrice.enabled = true;
+        _cardPrice.color = new Color(1.0f, 0.0f, 0.0f,1.0f);
+    }
+    
+    public void ShowCostBuy(string _price)
+    {
+        _cardPrice.text = _price;
+        _cardPrice.enabled = true;
+        _cardPrice.color = new Color(0.0f, 1.0f, 0.0f, 1.0f);
+    }
+
+    public void HideCost()
+    {
+        _cardPrice.enabled = false;
     }
 }

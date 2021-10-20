@@ -10,9 +10,9 @@ public class EnemyControl : MonoBehaviour
     [SerializeField] private Image healthBar;
     [SerializeField] private Image armorBar;
     [Header("Enemy Properties")]
-        [SerializeField] private float SPD;
-        [SerializeField] private float DEF;
-        [SerializeField] private float HP;
+        public float SPD;
+        public float DEF;
+        public float HP;
         [SerializeField] private float Armor;
         [SerializeField] private int getMoney;
 
@@ -20,8 +20,8 @@ public class EnemyControl : MonoBehaviour
     private Vector3 pathOffset;
     private GameObject refWaveControl;
     private GameObject baseScript;
-    private float currentHP;
-    private float currentArmor;
+    [HideInInspector] public float currentHP;
+    [HideInInspector] public float currentArmor;
 
     private int now = 0;
 
@@ -97,8 +97,9 @@ public class EnemyControl : MonoBehaviour
     {
         if(currentHP <= 0 )
         {
+            float rate = baseScript.GetComponent<BaseScript>().enemyKillRate;
             refWaveControl.GetComponent<WaveControl>().DecreaseEnemy();
-            baseScript.GetComponent<BaseScript>().AddMoney(getMoney);
+            baseScript.GetComponent<BaseScript>().AddMoney(getMoney + (int)((float)getMoney * (rate / 100)));
             Destroy(gameObject);
         }
         healthBar.fillAmount = (currentHP / HP);
@@ -107,17 +108,23 @@ public class EnemyControl : MonoBehaviour
 
 
     // Other Functions used to SET/GET value
-    public void AddHealth(float _health)
+    public void AddHealth(float _damage)
     {
         if (currentArmor <= 0)
         {
             currentArmor = 0;
-            currentHP += _health;
+            _damage = _damage * -_damage / (-_damage + DEF);
+            currentHP += _damage;
         }
         else
         {
-            currentArmor += _health;
+            currentArmor += _damage;
         }
+    }
+
+    public void PierceHit(float _health)
+    {
+        currentHP += _health;
     }
 
     // Function for Set path (note: SetPath from EnemyPath.cs)

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c6703081ca1c8489cdd0dd0e97e3f6, type: 3}
   m_Name: Card001
   m_EditorClassIdentifier: 
-  cardName: ATK 200%
+  cardName: ATK +20%
   cardType: 0
-  description: ATK increase 200%
+  description: ATK increase 20%
   image: {fileID: 0}
   _abilities: {fileID: 11400000, guid: d3ca7b60be32e9e4eaa96dce0cbcfec5, type: 2}
   buy: 20

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class TextAlert : MonoBehaviour
 {
     private Text textObject;
+    [SerializeField] Image debugBG;
 
     private float countTime;
     private bool doOnce;
@@ -15,15 +16,20 @@ public class TextAlert : MonoBehaviour
     private void Start()
     {
         textObject = GetComponent<Text>();
+        debugBG.enabled = false;
+        GetComponent<Text>().enabled = false;
     }
 
     private void Update()
     {
         if(doOnce)
         {
-            Color color = textObject.color;
-            color.a = (currentTime / countTime);
-            textObject.color = color;
+            Color colorText = textObject.color;
+            Color colorBG = debugBG.color;
+            colorText.a = (currentTime / countTime);
+            colorBG.a = (currentTime / countTime);
+            debugBG.color = colorBG;
+            textObject.color = colorText;
 
             if(currentTime > 0)
             {
@@ -33,12 +39,16 @@ public class TextAlert : MonoBehaviour
             {
                 textObject.text = "";
                 doOnce = false;
+                GetComponent<Text>().enabled = false;
+                debugBG.enabled = false;
             }
         }
     }
 
     public void Alert(string _text, float time)
     {
+        debugBG.enabled = true;
+        GetComponent<Text>().enabled = true;
         textObject.text = _text;
         countTime = time;
         doOnce = true;
