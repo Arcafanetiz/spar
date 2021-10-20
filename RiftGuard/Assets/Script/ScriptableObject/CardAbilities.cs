@@ -4,6 +4,6 @@ using UnityEngine;
 
 public abstract class CardAbilities : ScriptableObject
 {
-    public abstract void ActivateAbility(GameObject _tower);
-    public abstract void DeactivateAbility(GameObject _tower);
+    public abstract void ActivateAbility(GameObject _obj);
+    public abstract void DeactivateAbility(GameObject _obj);
 }

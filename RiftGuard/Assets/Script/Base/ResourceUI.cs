@@ -20,7 +20,7 @@ public class ResourceUI : MonoBehaviour
 
     public void ShowMoney()
     {
-        moneyUI.text = "$ " + ((int)this.GetComponent<BaseScript>().money).ToString();
+        moneyUI.text = " $ " + ((int)this.GetComponent<BaseScript>().money).ToString();
     }
 
     public void ShowHealth()
@@ -32,6 +32,6 @@ public class ResourceUI : MonoBehaviour
     {
         float  _currentMana = this.GetComponent<BaseScript>().mana;
         float _maxMana = this.GetComponent<BaseScript>().maxMana;
-        manaUI.text = "MANA : " + _currentMana.ToString("F1") + " / " + _maxMana.ToString("F1");
+        manaUI.text = ": " + _currentMana.ToString("F1") + " / " + _maxMana.ToString("F1");
     }
 }

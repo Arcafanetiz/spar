@@ -15,7 +15,7 @@ MonoBehaviour:
   cardName: Increase Money +5
   cardType: 2
   description: Increase Money 5$ / s
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: f5916e8999f7ec14d8fee45537bb8856, type: 3}
   _abilities: {fileID: 11400000, guid: 99c427cf4fd0d3a419903128eefeedda, type: 2}
   buy: 20
   sell: 20

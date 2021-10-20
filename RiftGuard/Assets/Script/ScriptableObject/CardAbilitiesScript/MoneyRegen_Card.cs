@@ -13,7 +13,6 @@ public class MoneyRegen_Card : CardAbilities
     }
     public override void DeactivateAbility(GameObject _base)
     {
-
         _base.GetComponent<BaseScript>().moneyRegen -= _moneyRegen;
     }
 }

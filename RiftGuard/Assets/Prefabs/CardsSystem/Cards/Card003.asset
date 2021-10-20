@@ -15,7 +15,7 @@ MonoBehaviour:
   cardName: Range +20%
   cardType: 0
   description: Range increase 20%
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 7ab796c9cdad7834e85f5d83c424bf6e, type: 3}
   _abilities: {fileID: 11400000, guid: 7e92e9c0e413c9d41ae11e776785bf6c, type: 2}
   buy: 20
   sell: 20

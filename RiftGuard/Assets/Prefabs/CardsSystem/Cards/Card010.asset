@@ -15,7 +15,7 @@ MonoBehaviour:
   cardName: Delay Enemy Spawner
   cardType: 1
   description: Delay Enemy Spawner 20%
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 1bb3f6e92fd1a2047b24965ecaa4c861, type: 3}
   _abilities: {fileID: 11400000, guid: 13efd1f992d15c940974bff40995b687, type: 2}
   buy: 20
   sell: 20

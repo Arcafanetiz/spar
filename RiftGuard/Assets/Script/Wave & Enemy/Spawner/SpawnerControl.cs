@@ -92,13 +92,13 @@ public class SpawnerControl : MonoBehaviour
             if (timeCount >= wave[index].speedPerEnemy * (1 + slowRate / 100))
             {
                 //print(wave[currentWave]._enemy[currentType].amount + " " + currentType);
-                if(wave[currentWave]._enemy[currentType].amount == 0)
+                if(wave[index]._enemy[currentType].amount == 0)
                 {
                     currentType++;
                 }
 
-                wave[currentWave]._enemy[currentType].amount--;
-                GameObject enemy = wave[currentWave]._enemy[currentType].enemy;
+                wave[index]._enemy[currentType].amount--;
+                GameObject enemy = wave[index]._enemy[currentType].enemy;
 
                 Vector3 targetOffset;
                 targetOffset = new Vector3(Random.Range(-0.4f, 0.4f), Random.Range(-0.4f, 0.4f), 0);

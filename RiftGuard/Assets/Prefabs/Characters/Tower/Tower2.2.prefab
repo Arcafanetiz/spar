@@ -215,7 +215,7 @@ MonoBehaviour:
   towerSprite: {fileID: 1685549193360873783}
   Base_ATK: 30
   Base_Range: 2.2
-  Base_Cooldown: 0.5
+  Base_Cooldown: 0.15
   ATK: 0
   Range: 0
   Cooldown: 0

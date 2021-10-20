@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 623430269620311252}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7888739207785141695}
   m_RootOrder: 0
@@ -71,8 +71,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: c2a82882d40f0f44799ce301843f9530, type: 3}
-  m_Color: {r: 0.9960785, g: 0.3647059, b: 0.3647059, a: 1}
+  m_Sprite: {fileID: 21300000, guid: d89a7e1be64a7344caf19e80bdccdd50, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -382,7 +382,7 @@ MonoBehaviour:
   Sprite: {fileID: 623430269620311252}
   healthBar: {fileID: 5732380194986584374}
   armorBar: {fileID: 4569419550230037460}
-  SPD: 2
+  SPD: 1.5
   DEF: 0
   HP: 100
   Armor: 100

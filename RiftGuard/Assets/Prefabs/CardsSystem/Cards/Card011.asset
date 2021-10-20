@@ -15,7 +15,7 @@ MonoBehaviour:
   cardName: Delay Enemy Defense
   cardType: 1
   description: Decrease Enemy Defense 20%
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: d3c1caa97aea2164391298b403946dd2, type: 3}
   _abilities: {fileID: 11400000, guid: 5066b26fc86532144ab0859039ec6782, type: 2}
   buy: 20
   sell: 20

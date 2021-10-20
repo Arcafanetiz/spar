@@ -38,7 +38,7 @@ Material:
     m_Floats:
     - _Thickness: 0.00002
     m_Colors:
-    - Color_3212fe6a107849fdbef3b619b2b0c0cf: {r: 23.138023, g: 18.171223, b: 0, a: 1}
+    - Color_3212fe6a107849fdbef3b619b2b0c0cf: {r: 4.6628036, g: 2.1114938, b: 0, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &1661372335221510574
 MonoBehaviour:

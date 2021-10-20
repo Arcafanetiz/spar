@@ -15,7 +15,7 @@ MonoBehaviour:
   cardName: Piercing Shoot
   cardType: 0
   description: Shooting ignore enemy armor
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 91c72be096748db44b270c23bf011c4e, type: 3}
   _abilities: {fileID: 11400000, guid: a00645dd6fad89b4083a35f3bbd7674b, type: 2}
   buy: 20
   sell: 20

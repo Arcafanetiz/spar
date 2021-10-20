@@ -54,6 +54,7 @@ public class WaveControl : MonoBehaviour
             {
                 SpawnerControl spawnControl = allSpawn[j].GetComponent<SpawnerControl>();
                 // waveAmount -> Contain all of enemy in each wave
+                spawnControl.SetCurrentWave(_currentWave);
                 waveAmount += spawnControl.GetAmount(_currentWave);
 
                 // If there are enemy check that direction
@@ -62,7 +63,6 @@ public class WaveControl : MonoBehaviour
                     Check(spawnControl);
                 }
                 // Set current wave to each spawner
-                spawnControl.SetCurrentWave(_currentWave);
                 // Set Ready to Spawn = true -> make Enemy appear
                 spawnControl.ReadyToSpawn(true);
             }
@@ -73,7 +73,7 @@ public class WaveControl : MonoBehaviour
         }
         else if(doOnce && waveAmount == 0)
         {
-            if (_currentWave % 2 == 0)
+            if (_currentWave % 5 == 0)
             {
                 GameManage.currentGameStatus = GameManage.GameStatus.SHOP;
             }

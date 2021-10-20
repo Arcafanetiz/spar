@@ -15,7 +15,7 @@ MonoBehaviour:
   cardName: Decrease Enemy Health
   cardType: 1
   description: Decrease Enemy Health 20%
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 6274fb81cef8b684297cc23ee327abef, type: 3}
   _abilities: {fileID: 11400000, guid: cd84589af6eee4c429dbcc932551497a, type: 2}
   buy: 20
   sell: 20

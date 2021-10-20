@@ -95,7 +95,6 @@ public class DeckController : MonoBehaviour, IDropHandler
         BaseScript _Base = baseRef.GetComponent<BaseScript>();
 
 
-
         if (currentCapacity == cardCapacity)
         {
             debugText.GetComponent<TextAlert>().Alert("Card in deck was full", 2.5f);

@@ -17,7 +17,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     private RectTransform rectTransform;
     private Transform parentToReturnTo = null;
 
-    [HideInInspector] public GameObject attachWith;
+    [HideInInspector] public GameObject attachWith = null;
     public GameObject baseRef;
 
     // For Super Cheking many things
@@ -94,6 +94,11 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     // Green/Red Light appear for GuideLine
     private void OnTriggerStay2D(Collider2D collision)
     {
+        if (parentObject != null)
+        {
+            return;
+        }
+
         // Collision Only Tile
         // Check if That grid have tower and EndDrag
 
@@ -191,6 +196,11 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     // Green/Red Light be disappear
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (parentObject != null)
+        {
+            return;
+        }
+
         if (collision.gameObject.CompareTag("Platform") && attach)
         {
             attachWith = collision.gameObject;
