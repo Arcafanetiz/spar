@@ -89,6 +89,7 @@ public class ShopScript : MonoBehaviour, IDropHandler
 
         if (_DG.onDeck)
         {
+            _card.transform.parent.GetComponent<Canvas>().sortingOrder = 58;
             int _money = _DG.cardInfo.sell;
             _Base.AddMoney(_money);
             Destroy(_card);

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class WaveControl : MonoBehaviour
 {
     [SerializeField] private GameObject Base;
+    [SerializeField] private GameObject YouWin;
     [SerializeField] private List<GameObject> allSpawn;
     [SerializeField] private float timePerWave;
 
@@ -46,6 +47,7 @@ public class WaveControl : MonoBehaviour
             // if all wave are done
             if (_currentWave == maxWave)
             {
+                YouWin.SetActive(true);
                 return;
             }
 

@@ -15,7 +15,7 @@ MonoBehaviour:
   cardName: ManaRegen +50%
   cardType: 2
   description: Mana regeneration increase 50%
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 6877d727b634ba94aa6d9d74583ad4c2, type: 3}
   _abilities: {fileID: 11400000, guid: bb36f50ecc7b72e4ab077bb2b6ab8188, type: 2}
   buy: 20
   sell: 20

@@ -103,6 +103,11 @@ public class DeckController : MonoBehaviour, IDropHandler
 
         if (_DG.inShop && _Base.money >= _DG.cardInfo.buy)
         {
+            if (GameManage.currentGameStatus == GameManage.GameStatus.SHOP)
+            {
+                _card.transform.parent.GetComponent<Canvas>().sortingOrder = 58;
+            }
+
             // Decrase Money
             _Base.AddMoney(-_DG.cardInfo.buy);
             // Generate this card back to deck

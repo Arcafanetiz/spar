@@ -32,6 +32,7 @@ public class GameManage : MonoBehaviour
 
     // Shop UI
     [SerializeField] private GameObject shopUI;
+    [SerializeField] private GameObject shopBG;
 
     // PauseUI
     [SerializeField] private GameObject pauseUI;
@@ -142,7 +143,8 @@ public class GameManage : MonoBehaviour
         {
             shopUI.SetActive(true);
             DeckUI.SetActive(true);
-            if(DeckUIManage.GetComponent<CardCollectorUIManage>().isHide && doOnce)
+            shopBG.SetActive(true);
+            if (DeckUIManage.GetComponent<CardCollectorUIManage>().isHide && doOnce)
             {
                 DeckUIManage.GetComponent<CardCollectorUIManage>().CloseOpenUI();
                 doOnce = false;
@@ -155,6 +157,7 @@ public class GameManage : MonoBehaviour
             createTowerCanvas.gameObject.SetActive(false);
             closeUI.SetActive(false);
             shopUI.SetActive(false);
+            shopBG.SetActive(false);
             pauseUI.SetActive(false);
             doOnce = true;
         }

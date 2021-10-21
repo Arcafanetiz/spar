@@ -15,7 +15,7 @@ MonoBehaviour:
   cardName: Decrease Mana Usage
   cardType: 2
   description: Decrease Mana Usage by 20%
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: e96e0d7bff2d91249abd9e51d35c9dba, type: 3}
   _abilities: {fileID: 11400000, guid: 2c4b245bc52da7b4880d541facb9e838, type: 2}
   buy: 20
   sell: 20

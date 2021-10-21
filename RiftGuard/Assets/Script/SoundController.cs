@@ -20,7 +20,7 @@ public class SoundController : MonoBehaviour
     {
         if (MuteBackgroundSound)
         {
-            gamePlaySound.GetComponent<AudioSource>().volume = 0.7f;
+            gamePlaySound.GetComponent<AudioSource>().volume = 0.3f;
             MuteBackgroundSound = false;
         }
         else

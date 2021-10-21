@@ -24,7 +24,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     private bool endDrag = false;
     private bool hit = false;
     private bool doOnce = false;
-    private bool drag = false;
+    [HideInInspector] public bool drag = false;
     [HideInInspector] public bool onDeck = false;
     [HideInInspector] public bool attach = true;
     [HideInInspector] public bool inShop = false;
@@ -50,6 +50,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         else if(doOnce && !drag)
         {
             this.transform.SetParent(parentToReturnTo);
+            this.gameObject.GetComponent<CardUI>().HideCost();
         }
     }
 
@@ -124,7 +125,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             int y = -(int)attachWith.transform.position.y;
 
             GameObject Tower = refGameManage.GetComponent<MapGenerator>().GetTowerData(x, y);
-            if (Tower == null)
+            if (Tower == null  || inShop || GameManage.currentGameStatus == GameManage.GameStatus.SHOP)
             {
                 return;
             }
@@ -152,6 +153,11 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         // Attach with Base -> Green/Red Light appear
         else if (collision.gameObject.CompareTag("Base"))
         {
+            if (inShop || GameManage.currentGameStatus == GameManage.GameStatus.SHOP)
+            {
+                return;
+            }
+
             if(cardInfo.cardType != Card_SO.Type.BASE || !collision.gameObject.GetComponent<BaseCardScript>().Check())
             {
                 collision.gameObject.GetComponent<BaseCardScript>().CardActive(false); 
@@ -174,6 +180,11 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         // Attach with Spawner -> Green/Red Light appear
         else if (collision.gameObject.CompareTag("Spawner"))
         {
+            if (inShop || GameManage.currentGameStatus == GameManage.GameStatus.SHOP)
+            {
+                return;
+            }
+
             if (cardInfo.cardType != Card_SO.Type.SPAWNER || !collision.gameObject.GetComponent<SpawnerCardScript>().Check())
             {
                 collision.gameObject.GetComponent<SpawnerCardScript>().CardActive(false);
