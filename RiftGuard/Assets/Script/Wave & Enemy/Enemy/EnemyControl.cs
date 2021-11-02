@@ -16,12 +16,18 @@ public class EnemyControl : MonoBehaviour
         [SerializeField] private float Armor;
         [SerializeField] private int getMoney;
 
+    [SerializeField] private GameObject DestroyParticle;
+
     private Vector2[] path;
     private Vector3 pathOffset;
     private GameObject refWaveControl;
     private GameObject baseScript;
     [HideInInspector] public float currentHP;
     [HideInInspector] public float currentArmor;
+
+    private float time = 0.2f;
+    private float currentTime = 0.0f;
+    private bool getHit = false;
 
     private int now = 0;
 
@@ -47,6 +53,10 @@ public class EnemyControl : MonoBehaviour
                 Walk();
             }
             CheckHealth();
+            if (getHit)
+            {
+                ChangeColor();
+            }
         }
     }
 
@@ -100,10 +110,26 @@ public class EnemyControl : MonoBehaviour
             float rate = baseScript.GetComponent<BaseScript>().enemyKillRate;
             refWaveControl.GetComponent<WaveControl>().DecreaseEnemy();
             baseScript.GetComponent<BaseScript>().AddMoney(getMoney + (int)((float)getMoney * (rate / 100)));
+            Instantiate(DestroyParticle,this.transform.position,this.transform.rotation);
             Destroy(gameObject);
         }
         healthBar.fillAmount = (currentHP / HP);
         armorBar.fillAmount = (currentArmor / Armor);
+    }
+
+    private void ChangeColor()
+    {
+        if(currentTime < time)
+        {
+            Sprite.GetComponent<SpriteRenderer>().color = Color.red;
+            currentTime += Time.deltaTime;
+        }
+        else
+        {
+            Sprite.GetComponent<SpriteRenderer>().color = Color.white;
+            getHit = false;
+            currentTime = 0.0f;
+        }
     }
 
 
@@ -120,11 +146,13 @@ public class EnemyControl : MonoBehaviour
         {
             currentArmor += _damage;
         }
+        getHit = true;
     }
 
     public void PierceHit(float _health)
     {
         currentHP += _health;
+        getHit = true;
     }
 
     // Function for Set path (note: SetPath from EnemyPath.cs)
