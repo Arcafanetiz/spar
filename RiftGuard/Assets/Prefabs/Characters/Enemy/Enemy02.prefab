@@ -386,7 +386,7 @@ MonoBehaviour:
   DEF: 10
   HP: 100
   Armor: 0
-  getMoney: 5
+  getMoney: 2
   DestroyParticle: {fileID: 2407694680159395411, guid: d6b5d4197209632428934adaf71ade9e, type: 3}
   currentHP: 0
   currentArmor: 0

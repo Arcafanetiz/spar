@@ -368,6 +368,7 @@ public class SpawnTower : MonoBehaviour
         T1.GetComponent<TowerControl>().compTile = GetComponent<MapGenerator>().GetMapData(posX, posY);
         T1.GetComponent<TowerControl>().SetTowerType(1, level);
         TCS.SetListCard(oldTower.GetComponent<TowerCardScript>().GetListCard());
+        TCS._currentCardCapacity = oldTower.GetComponent<TowerCardScript>()._currentCardCapacity;
         TCS.gameManager = this.gameObject;
         TCS.objectCardUI = this.GetComponent<GameManage>().objectCard;
         TCS.baseRef = basePrefab;
@@ -396,6 +397,7 @@ public class SpawnTower : MonoBehaviour
         T2.GetComponent<TowerControl>().compTile = GetComponent<MapGenerator>().GetMapData(posX, posY);
         T2.GetComponent<TowerControl>().SetTowerType(2, level);
         TCS.SetListCard(oldTower.GetComponent<TowerCardScript>().GetListCard());
+        TCS._currentCardCapacity = oldTower.GetComponent<TowerCardScript>()._currentCardCapacity;
         TCS.gameManager = this.gameObject;
         TCS.objectCardUI = this.GetComponent<GameManage>().objectCard;
         TCS.baseRef = basePrefab;
@@ -424,6 +426,7 @@ public class SpawnTower : MonoBehaviour
         T3.GetComponent<TowerControl>().compTile = GetComponent<MapGenerator>().GetMapData(posX, posY);
         T3.GetComponent<TowerControl>().SetTowerType(3, level);
         TCS.SetListCard(oldTower.GetComponent<TowerCardScript>().GetListCard());
+        TCS._currentCardCapacity = oldTower.GetComponent<TowerCardScript>()._currentCardCapacity;
         TCS.gameManager = this.gameObject;
         TCS.objectCardUI = this.GetComponent<GameManage>().objectCard;
         TCS.baseRef = basePrefab;
@@ -452,6 +455,7 @@ public class SpawnTower : MonoBehaviour
         T4.GetComponent<TowerControl>().compTile = GetComponent<MapGenerator>().GetMapData(posX, posY);
         T4.GetComponent<TowerControl>().SetTowerType(4, level);
         TCS.SetListCard(oldTower.GetComponent<TowerCardScript>().GetListCard());
+        TCS._currentCardCapacity = oldTower.GetComponent<TowerCardScript>()._currentCardCapacity;
         TCS.gameManager = this.gameObject;
         TCS.objectCardUI = this.GetComponent<GameManage>().objectCard;
         TCS.baseRef = basePrefab;

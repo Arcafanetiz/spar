@@ -11,7 +11,7 @@ public class TowerCardScript : MonoBehaviour
     [HideInInspector] public GameObject baseRef;
     [HideInInspector] public GameObject objectCardUI;
 
-    private int _currentCardCapacity;
+    [HideInInspector] public int _currentCardCapacity;
     private List<GameObject> card;
     private bool[] cardCheck;
 

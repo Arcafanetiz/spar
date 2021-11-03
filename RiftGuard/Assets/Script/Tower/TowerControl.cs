@@ -93,9 +93,16 @@ public class TowerControl : MonoBehaviour
     {
         // Go to Direction of Enemy
         CheckEnemy();
-        Vector3 dir = towerSprite.transform.position - enemyList.First.Value.gameObject.transform.position;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        towerSprite.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+        if (enemyList.First.Value.gameObject != null)
+        {
+            Vector3 dir = towerSprite.transform.position - enemyList.First.Value.gameObject.transform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            towerSprite.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+        }
+        else
+        {
+            return;
+        }
 
 
         GameObject bulletGo = Instantiate(bulletPrefab, transform.position, transform.rotation);

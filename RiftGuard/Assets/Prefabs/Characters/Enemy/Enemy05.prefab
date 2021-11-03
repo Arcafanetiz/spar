@@ -384,9 +384,9 @@ MonoBehaviour:
   armorBar: {fileID: 19514887280703246}
   SPD: 0.25
   DEF: 0
-  HP: 150
-  Armor: 150
-  getMoney: 100
+  HP: 10000
+  Armor: 5000
+  getMoney: 50
   DestroyParticle: {fileID: 2407694680159395411, guid: d6b5d4197209632428934adaf71ade9e, type: 3}
   currentHP: 0
   currentArmor: 0

@@ -10,7 +10,6 @@ public class ParticleDuration : MonoBehaviour
     void Start()
     {
         time = GetComponent<ParticleSystem>().main.duration;
-        print(time);
     }
 
     void Update()
