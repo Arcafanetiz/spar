@@ -52,7 +52,6 @@ public class TutorialCheck : MonoBehaviour
             else if(Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.E))
             {
                 currentTime += Time.deltaTime;
-                print(currentTime);
             }
         }
         if(!CheckTask2)
