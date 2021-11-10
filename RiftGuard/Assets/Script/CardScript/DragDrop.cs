@@ -33,6 +33,9 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     [HideInInspector] public GameObject parentCard;
     [HideInInspector] public GameObject parentObject;
 
+    bool checkOnce;
+    bool mismatchCard;
+
     private void Start()
     {
         // Set Component
@@ -45,13 +48,14 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         // Trigger with Base/Tower/Spawner
         if (hit && GameManage.currentGameStatus != GameManage.GameStatus.SHOP)
         {
-            Check();
         }
         else if(doOnce && !drag)
         {
             this.transform.SetParent(parentToReturnTo);
             this.gameObject.GetComponent<CardUI>().HideCost();
         }
+        checkOnce = false;
+        hit = false;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -86,6 +90,11 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         canvasGroup.alpha = 1.0f;
         canvasGroup.blocksRaycasts = true;
 
+        if (hit && GameManage.currentGameStatus != GameManage.GameStatus.SHOP)
+        {
+            Check();
+        }
+        
         // Set variable for Checking 
         endDrag = true;
         drag = false;
@@ -110,16 +119,16 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
         // Attach With Tower through Platform (endDrag)
         if (refGameManage.GetComponent<MapGenerator>().CheckMap((int)(collision.transform.position.x), (int)(-collision.transform.position.y))
-            && collision.gameObject.CompareTag("Platform") && endDrag && cardInfo.cardType == Card_SO.Type.TOWER)
+            && collision.gameObject.CompareTag("Platform") && !checkOnce)
         {
-            attachWith = collision.gameObject;
-            hit = true;
-            onDeck = false;
-        }
-        // Attach with Tower through Platform -> Green/Red Light appear
-        else if (refGameManage.GetComponent<MapGenerator>().CheckMap((int)(collision.transform.position.x), (int)(-collision.transform.position.y))
-            && collision.gameObject.CompareTag("Platform"))
-        {
+            checkOnce = true;
+            if (cardInfo.cardType == Card_SO.Type.TOWER)
+            {
+                attachWith = collision.gameObject;
+                mismatchCard = false;
+                onDeck = false;
+            }
+
             attachWith = collision.gameObject;
             int x = (int)attachWith.transform.position.x;
             int y = -(int)attachWith.transform.position.y;
@@ -130,77 +139,88 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                 return;
             }
 
-            if (cardInfo.cardType != Card_SO.Type.TOWER || !Tower.GetComponent<TowerCardScript>().Check())
+            if (cardInfo.cardType != Card_SO.Type.TOWER)
             {
                 Tower.GetComponent<TowerCardScript>().CardActive(false);
-                attachWith = null;
+                mismatchCard = true;
+            }
+            else if (!Tower.GetComponent<TowerCardScript>().Check())
+            {
+                Tower.GetComponent<TowerCardScript>().CardActive(false);
             }
             else
             {
                 Tower.GetComponent<TowerCardScript>().CardActive(true);
             }
+            hit = true;
             attach = true;
         }
 
 
         // Attach With Base (endDrag)
-        if (collision.gameObject.CompareTag("Base") && endDrag && cardInfo.cardType == Card_SO.Type.BASE)
+        if (collision.gameObject.CompareTag("Base") && !checkOnce)
         {
-            attachWith = collision.gameObject;
-            hit = true;
-            onDeck = false;
-        }
-        // Attach with Base -> Green/Red Light appear
-        else if (collision.gameObject.CompareTag("Base"))
-        {
+            checkOnce = true;
+            if (cardInfo.cardType == Card_SO.Type.BASE)
+            {
+                attachWith = collision.gameObject;
+                mismatchCard = false;
+                onDeck = false;
+            }
+
             if (inShop || GameManage.currentGameStatus == GameManage.GameStatus.SHOP)
             {
                 return;
             }
 
-            if(cardInfo.cardType != Card_SO.Type.BASE || !collision.gameObject.GetComponent<BaseCardScript>().Check())
+            if (cardInfo.cardType != Card_SO.Type.BASE)
             {
-                collision.gameObject.GetComponent<BaseCardScript>().CardActive(false); 
-                attachWith = null;
+                collision.gameObject.GetComponent<BaseCardScript>().CardActive(false);
+                mismatchCard = true;
+            }
+            else if (!collision.gameObject.GetComponent<BaseCardScript>().Check())
+            {
+                collision.gameObject.GetComponent<BaseCardScript>().CardActive(false);
             }
             else
             {
                 collision.gameObject.GetComponent<BaseCardScript>().CardActive(true);
             }
+            hit = true;
             attach = true;
         }
 
         // Attach With Spawner (endDrag)
-        if (collision.gameObject.CompareTag("Spawner") && endDrag && cardInfo.cardType == Card_SO.Type.SPAWNER)
+        if (collision.gameObject.CompareTag("Spawner") && !checkOnce)
         {
-            attachWith = collision.gameObject;
-            hit = true;
-            onDeck = false;
-        }
-        // Attach with Spawner -> Green/Red Light appear
-        else if (collision.gameObject.CompareTag("Spawner"))
-        {
+            checkOnce = true;
+            if (cardInfo.cardType == Card_SO.Type.SPAWNER)
+            {
+                attachWith = collision.gameObject;
+                mismatchCard = false;
+                onDeck = false;
+            }
+
             if (inShop || GameManage.currentGameStatus == GameManage.GameStatus.SHOP)
             {
                 return;
             }
 
-            if (cardInfo.cardType != Card_SO.Type.SPAWNER || !collision.gameObject.GetComponent<SpawnerCardScript>().Check())
+            if (cardInfo.cardType != Card_SO.Type.SPAWNER)
             {
                 collision.gameObject.GetComponent<SpawnerCardScript>().CardActive(false);
-                attachWith = null;
+                mismatchCard = true;
+            }
+            else if(!collision.gameObject.GetComponent<SpawnerCardScript>().Check())
+            {
+                collision.gameObject.GetComponent<SpawnerCardScript>().CardActive(false);
             }
             else
             {
                 collision.gameObject.GetComponent<SpawnerCardScript>().CardActive(true);
             }
+            hit = true;
             attach = true;
-        }
-
-        if (endDrag && attachWith == null)
-        {
-            debugText.GetComponent<TextAlert>().Alert("Mismatch card type", 2.0f);
-            endDrag = false;
         }
     }
 
@@ -242,6 +262,14 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     void Check()
     {
+        if (mismatchCard)
+        {
+            debugText.GetComponent<TextAlert>().Alert("Mismatch card type", 2.0f);
+            mismatchCard = false;
+            hit = false;
+            return;
+        }
+
         if(attachWith.CompareTag("Platform"))
         {
             int x = (int)attachWith.transform.position.x;
@@ -336,16 +364,6 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                     attach = false;
                     attachWith = null;
                     return;
-                }
-                // If mana was enough to transfer from one base to another base
-                else
-                {
-                    // Decrease mana
-                    baseRef.GetComponent<BaseScript>().AddMana(-1);
-                    // Add card to another base
-                    BCS.Add(this.gameObject);
-                    // Remove this card from this base
-                    parentObject.GetComponent<BaseCardScript>().RemoveDel(this.gameObject);
                 }
                 // Set to cardKeeper
                 this.transform.SetParent(cardKeeper.transform);

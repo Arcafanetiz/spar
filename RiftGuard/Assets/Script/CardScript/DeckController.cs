@@ -45,7 +45,7 @@ public class DeckController : MonoBehaviour, IDropHandler
         }
     }
 
-    private void GenCard()
+    public void GenCard()
     {
         // Increase amount of card in deck
         currentCapacity++;
@@ -150,5 +150,10 @@ public class DeckController : MonoBehaviour, IDropHandler
         {
             debugText.GetComponent<TextAlert>().Alert("Don't have enough mana to drag card out", 2.5f);
         }
+    }
+
+    public int currentCard()
+    {
+        return currentCapacity;
     }
 }

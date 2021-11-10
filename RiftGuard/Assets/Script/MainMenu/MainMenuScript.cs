@@ -44,7 +44,10 @@ public class MainMenuScript : MonoBehaviour
         OptionUI.SetActive(false);
     }
 
-
+    public void GoToGameScene()
+    {
+        SceneManager.LoadScene(2);
+    }
 
     public void Resume()
     {

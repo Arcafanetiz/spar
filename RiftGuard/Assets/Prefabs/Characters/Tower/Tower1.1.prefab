@@ -320,6 +320,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   baseRef: {fileID: 0}
   objectCardUI: {fileID: 0}
+  _currentCardCapacity: 0
   cardInteract: {fileID: 6344572737049678014}
 --- !u!120 &-2548934112437238282
 LineRenderer:

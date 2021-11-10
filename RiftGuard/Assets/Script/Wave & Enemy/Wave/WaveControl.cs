@@ -75,7 +75,7 @@ public class WaveControl : MonoBehaviour
         }
         else if(doOnce && waveAmount == 0)
         {
-            if (_currentWave % 5 == 0)
+            if (_currentWave % 3 == 0)
             {
                 GameManage.currentGameStatus = GameManage.GameStatus.SHOP;
             }

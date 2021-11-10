@@ -12,7 +12,10 @@ public class WaveUI : MonoBehaviour
         if(GameManage.currentGameStatus != GameManage.GameStatus.PAUSE &&
            GameManage.currentGameStatus != GameManage.GameStatus.GAMEOVER)
         {
-            ShowNumWave();
+            if (waveText != null)
+            {
+                ShowNumWave();
+            }
         }
     }
 
