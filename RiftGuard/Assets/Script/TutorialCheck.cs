@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class TutorialCheck : MonoBehaviour
 {
+    [SerializeField] GameObject Help;
     [SerializeField] GameObject Deck;
 
     [SerializeField] Text task1;
@@ -20,25 +21,33 @@ public class TutorialCheck : MonoBehaviour
     bool CheckTask3;
     int cardTask3;
 
+    bool checkOnce = true;
     bool doOnce = true;
 
     private void Update()
     {
-        CheckTips();
-        if (CheckTask1)
+        if(GameManage.currentGameStatus != GameManage.GameStatus.PAUSE &&
+           GameManage.currentGameStatus != GameManage.GameStatus.TUTORIAL_PAUSE)
         {
-            task1.GetComponent<Text>().color = Color.green;
+            Help.SetActive(false);
+
+            CheckTips();
+            if (CheckTask1)
+            {
+                task1.GetComponent<Text>().color = Color.green;
+            }
+            if(CheckTask2)
+            {
+                task2.GetComponent<Text>().color = Color.green;
+            }
+            if (CheckTask3)
+            {
+                task3.GetComponent<Text>().color = Color.green;
+            }
+            Tutorial();
+            GenTask3();
         }
-        if(CheckTask2)
-        {
-            task2.GetComponent<Text>().color = Color.green;
-        }
-        if (CheckTask3)
-        {
-            task3.GetComponent<Text>().color = Color.green;
-        }
-        Tutorial();
-        GenTask3();
+
     }
 
     private void Tutorial()
@@ -83,9 +92,11 @@ public class TutorialCheck : MonoBehaviour
 
     private void CheckTips()
     {
-        if (CheckTask1 && CheckTask2 && CheckTask3)
+        if (CheckTask1 && CheckTask2 && CheckTask3 && checkOnce)
         {
+            checkOnce = false;
             Tips.SetActive(true);
+            GameManage.currentGameStatus = GameManage.GameStatus.TUTORIAL_PAUSE;
         }
     }
 }

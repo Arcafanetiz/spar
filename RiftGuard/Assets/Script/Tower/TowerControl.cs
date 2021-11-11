@@ -53,7 +53,8 @@ public class TowerControl : MonoBehaviour
     private void Update()
     {
         if (GameManage.currentGameStatus != GameManage.GameStatus.PAUSE &&
-            GameManage.currentGameStatus != GameManage.GameStatus.GAMEOVER)
+            GameManage.currentGameStatus != GameManage.GameStatus.GAMEOVER &&
+            GameManage.currentGameStatus != GameManage.GameStatus.TUTORIAL_PAUSE)
         {
             // If tower was clicked -> Show RangeArea(LineRenderer) that can shoot
             if(GameManage.currentGameStatus == GameManage.GameStatus.UPGRADE &&

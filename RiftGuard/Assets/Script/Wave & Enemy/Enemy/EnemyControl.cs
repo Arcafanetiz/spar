@@ -29,7 +29,7 @@ public class EnemyControl : MonoBehaviour
     private float currentTime = 0.0f;
     private bool getHit = false;
 
-    private int now = 0;
+    [HideInInspector] public int now = 0;
 
     private void Start()
     {
@@ -45,7 +45,8 @@ public class EnemyControl : MonoBehaviour
     private void Update()
     {
         if(GameManage.currentGameStatus != GameManage.GameStatus.PAUSE &&
-            GameManage.currentGameStatus != GameManage.GameStatus.GAMEOVER)
+            GameManage.currentGameStatus != GameManage.GameStatus.GAMEOVER &&
+            GameManage.currentGameStatus != GameManage.GameStatus.TUTORIAL_PAUSE)
         {
             // Walk until there have no path
             if(now<path.Length-1)
@@ -160,6 +161,10 @@ public class EnemyControl : MonoBehaviour
     {
         path = pathRef;
     }
+    public Vector2[] GetPath()
+    {
+        return path;
+    }
     public void SetOffset(Vector3 offset)
     {
         pathOffset = offset;
@@ -180,5 +185,8 @@ public class EnemyControl : MonoBehaviour
         return refWaveControl;
     }
 
-
+    public GameObject getBaseRef()
+    {
+        return baseScript;
+    }
 }

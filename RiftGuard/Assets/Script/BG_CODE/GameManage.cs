@@ -69,6 +69,7 @@ public class GameManage : MonoBehaviour
         SHOP,
         PAUSE,
         GAMEOVER,
+        TUTORIAL_PAUSE
     };
 
     public static GameStatus currentGameStatus = GameStatus.PLAY; // Track GameStage

@@ -10,6 +10,16 @@ public class BulletScript : MonoBehaviour
 
     [HideInInspector] public bool piercing = false;
 
+    [SerializeField] private GameObject soundBullet;
+    [SerializeField] private AudioClip shootSound;
+    [SerializeField] private AudioClip hitSound;
+
+    private void Start()
+    {
+        GameObject sound = Instantiate(soundBullet,transform.position,transform.rotation);
+        sound.GetComponent<AudioSource>().clip = shootSound;
+    }
+
     private void Update()
     {
         if(GameManage.currentGameStatus != GameManage.GameStatus.PAUSE &&
@@ -45,6 +55,8 @@ public class BulletScript : MonoBehaviour
         { 
             target.GetComponent<EnemyControl>().AddHealth(-damage);
         }
+        GameObject sound = Instantiate(soundBullet, transform.position, transform.rotation);
+        sound.GetComponent<AudioSource>().clip = hitSound;
         Destroy(gameObject);
     }
 

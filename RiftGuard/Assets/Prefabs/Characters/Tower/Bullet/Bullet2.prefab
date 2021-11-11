@@ -98,6 +98,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   piercing: 0
+  soundBullet: {fileID: 8123915714493520757, guid: 70d6cab17ab3a0846a716e559a5ce6f4, type: 3}
+  shootSound: {fileID: 0}
+  hitSound: {fileID: 0}
 --- !u!199 &4161465677312546302
 ParticleSystemRenderer:
   serializedVersion: 6

@@ -13,9 +13,9 @@ public class MainMenuScript : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-    public void Play()
+    public void Tutorial()
     {
-        GameManage.currentGameStatus = GameManage.GameStatus.PLAY;
+        GameManage.currentGameStatus = GameManage.GameStatus.TUTORIAL_PAUSE;
         SceneManager.LoadScene(1);
     }
     public void ShowAbout()
@@ -46,7 +46,18 @@ public class MainMenuScript : MonoBehaviour
 
     public void GoToGameScene()
     {
+        GameManage.currentGameStatus = GameManage.GameStatus.PLAY;
         SceneManager.LoadScene(2);
+    }
+
+    public void GoToEndCredit()
+    {
+        SceneManager.LoadScene(3);
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void Resume()

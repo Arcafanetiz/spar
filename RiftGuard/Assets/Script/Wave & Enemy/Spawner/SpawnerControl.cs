@@ -86,7 +86,8 @@ public class SpawnerControl : MonoBehaviour
         }
 
         if(GameManage.currentGameStatus != GameManage.GameStatus.PAUSE &&
-            GameManage.currentGameStatus != GameManage.GameStatus.GAMEOVER)
+            GameManage.currentGameStatus != GameManage.GameStatus.GAMEOVER &&
+            GameManage.currentGameStatus != GameManage.GameStatus.TUTORIAL_PAUSE)
         {
             // Use Time.deltaTime to count time (including slowRate)
             if (timeCount >= wave[index].speedPerEnemy * (1 + slowRate / 100))

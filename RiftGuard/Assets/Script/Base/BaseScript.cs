@@ -38,7 +38,8 @@ public class BaseScript : MonoBehaviour
         // Check If GAMEOVER no need to update
         if (GameManage.currentGameStatus != GameManage.GameStatus.GAMEOVER &&
             GameManage.currentGameStatus != GameManage.GameStatus.PAUSE &&
-            GameManage.currentGameStatus != GameManage.GameStatus.SHOP)
+            GameManage.currentGameStatus != GameManage.GameStatus.SHOP &&
+            GameManage.currentGameStatus != GameManage.GameStatus.TUTORIAL_PAUSE)
         {
             // Increase Mana
             CheckMana();

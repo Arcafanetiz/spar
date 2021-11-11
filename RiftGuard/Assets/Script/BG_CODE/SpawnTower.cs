@@ -24,6 +24,7 @@ public class SpawnTower : MonoBehaviour
     [SerializeField] private Text ATK_Text;
     [SerializeField] private Text Speed_Text;
     [SerializeField] private Text Range_Text;
+    [SerializeField] private Text Level_Text;
 
     // Keep Tower Type (note : maybe can keep in form of array)
     [SerializeField] private TowerData[] Tower_1;
@@ -348,6 +349,7 @@ public class SpawnTower : MonoBehaviour
         ATK_Text.text = "ATK : " + ((int)towerStat.ATK).ToString();
         Speed_Text.text = "Speed : " + ((1/towerStat.Cooldown)).ToString("F2");
         Range_Text.text = "Range : " + ((int)towerStat.Range).ToString();
+        Level_Text.text = "Level : " + (CheckLevel+1).ToString();
     }
 
     // Use In Script(Function Upgrade) (NOT FOR UI!!)

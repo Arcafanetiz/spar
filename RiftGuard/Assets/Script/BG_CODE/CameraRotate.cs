@@ -14,7 +14,10 @@ public class CameraRotate : MonoBehaviour
 
     void Update()
     {
-        GetInput();
+        if (GameManage.currentGameStatus == GameManage.GameStatus.PLAY)
+        {
+            GetInput();
+        }
     }
 
     void GetInput()
