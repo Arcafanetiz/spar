@@ -47,6 +47,8 @@ public class GameManage : MonoBehaviour
 
     [SerializeField] private GameObject OptionUI;
 
+    [SerializeField] private GameObject BossUI;
+
 
     // GameStage
     /*

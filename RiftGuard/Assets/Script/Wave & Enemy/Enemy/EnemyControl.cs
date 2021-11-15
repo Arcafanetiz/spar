@@ -13,7 +13,7 @@ public class EnemyControl : MonoBehaviour
         public float SPD;
         public float DEF;
         public float HP;
-        [SerializeField] private float Armor;
+        public float Armor;
         [SerializeField] private int getMoney;
 
     [SerializeField] private GameObject DestroyParticle;

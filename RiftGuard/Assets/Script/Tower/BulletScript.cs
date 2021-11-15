@@ -17,7 +17,10 @@ public class BulletScript : MonoBehaviour
     private void Start()
     {
         GameObject sound = Instantiate(soundBullet,transform.position,transform.rotation);
-        sound.GetComponent<AudioSource>().clip = shootSound;
+        if (!SoundController.MuteSound)
+        {
+            sound.GetComponent<AudioSource>().clip = shootSound;
+        }
     }
 
     private void Update()
@@ -55,8 +58,12 @@ public class BulletScript : MonoBehaviour
         { 
             target.GetComponent<EnemyControl>().AddHealth(-damage);
         }
-        GameObject sound = Instantiate(soundBullet, transform.position, transform.rotation);
-        sound.GetComponent<AudioSource>().clip = hitSound;
+
+        if (!SoundController.MuteSound)
+        {
+            GameObject sound = Instantiate(soundBullet, transform.position, transform.rotation);
+            sound.GetComponent<AudioSource>().clip = hitSound;
+        }
         Destroy(gameObject);
     }
 
