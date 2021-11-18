@@ -9,6 +9,17 @@ public class TowerDescription : MonoBehaviour
     [SerializeField] private GameObject des_Tower_3;
     [SerializeField] private GameObject des_Tower_4;
 
+    private void Update()
+    {
+        if (GameManage.currentGameStatus != GameManage.GameStatus.CREATE)
+        {
+            des_Tower_1.SetActive(false);
+            des_Tower_2.SetActive(false);
+            des_Tower_3.SetActive(false);
+            des_Tower_4.SetActive(false);
+        }
+    }
+
     public void Show1()
     {
         des_Tower_1.SetActive(true);

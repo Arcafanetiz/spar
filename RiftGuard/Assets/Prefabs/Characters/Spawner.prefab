@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41f9ebe1dcf98be4a838d35a5f7eeee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 8239060523995320160, guid: 823dc3b32b48cdf4ca1b4a6c3ff8c091, type: 3}
+  direction: 0
   path:
   - {x: 0, y: 0}
   - {x: 0, y: -1}
@@ -129,7 +129,13 @@ MonoBehaviour:
   - {x: 6, y: -5}
   - {x: 8, y: -5}
   wave: []
+  checkEnemy: 0
+  allEnemy: 0
+  currentType: 0
   slowRate: 1
+  healthRate: 0
+  speedRate: 0
+  defRate: 0
 --- !u!114 &-525672347274815228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,6 +163,7 @@ MonoBehaviour:
   _cardCapacity: 3
   gameManager: {fileID: 0}
   objectCardUI: {fileID: 0}
+  baseRef: {fileID: 0}
   cardInteract: {fileID: 7457695001697439865}
 --- !u!1 &7457695001697439865
 GameObject:
@@ -228,7 +235,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 0, g: 1, b: 0, a: 0.49803922}
   m_FlipX: 0
