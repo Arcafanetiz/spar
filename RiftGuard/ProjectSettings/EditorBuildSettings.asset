@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Tutorial.unity
     guid: a57437348a677d54288430c60e53feed
   - enabled: 1
-    path: Assets/Scenes/GAMEPLAY.unity
-    guid: 28f63d1ac9de83841b6a05beb6dbd17a
+    path: Assets/Scenes/GAMEPLAY Latest.unity
+    guid: 8f992073c49139e4380ec44ca1fec531
   - enabled: 1
     path: Assets/Scenes/EndCredit.unity
     guid: 78b41b0beba84fc42aa209118105bf1f
