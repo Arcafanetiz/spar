@@ -35,10 +35,10 @@ public class SpawnerControl : MonoBehaviour
     private float timeCount;
     private bool readyToSpawn = false;
     private int currentWave = 0;
-    private int checkEnemy = 0;
-    private int allEnemy = 0;
+    [HideInInspector] public int checkEnemy = 0;
+    [HideInInspector] public int allEnemy = 0;
 
-    private int currentType = 0;
+    [HideInInspector] public int currentType = 0;
 
     [HideInInspector] public float slowRate;
     [HideInInspector] public float healthRate;
@@ -92,9 +92,26 @@ public class SpawnerControl : MonoBehaviour
             // Use Time.deltaTime to count time (including slowRate)
             if (timeCount >= wave[index].speedPerEnemy * (1 + slowRate / 100))
             {
-                //print(wave[currentWave]._enemy[currentType].amount + " " + currentType);
-                if(wave[index]._enemy[currentType].amount == 0)
+                if (wave[index] == null || wave[index]._enemy == null)
                 {
+                    return;
+                }
+
+                /*
+                    Puttakamo Lapeputtang Thanagamo Laphethanang
+
+                    Atthikaye Kaya Yaya Devanang Piyatang Suttawa
+                    
+                    Itipisobhagava Yamarachano Thao Wessuwanno
+                    
+                    death sukhang arahangsukato namoputthaya
+                */
+                if (wave[index]._enemy[currentType].amount == 0)
+                {
+                    if (currentType == wave[index]._enemy.Length - 1)
+                    {
+                        return;
+                    }
                     currentType++;
                 }
 

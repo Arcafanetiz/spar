@@ -100,7 +100,9 @@ MonoBehaviour:
   piercing: 0
   soundBullet: {fileID: 8123915714493520757, guid: 70d6cab17ab3a0846a716e559a5ce6f4, type: 3}
   shootSound: {fileID: 8300000, guid: bd30505e20c2a544ba68ba2d3b217b3b, type: 3}
-  hitSound: {fileID: 8300000, guid: e7651296803919349aa760545e2b4f5b, type: 3}
+  hitSound: {fileID: 0}
+  shootSoundVolume: 0.1
+  hitSoundVolume: 0
 --- !u!199 &6399672691787787559
 ParticleSystemRenderer:
   serializedVersion: 6

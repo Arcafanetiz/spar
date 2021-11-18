@@ -12,11 +12,19 @@ public class BossUIController : MonoBehaviour
 
     public void ActivateBossUI()
     {
+        if (BossUI == null)
+        {
+            return;
+        }
         BossUI.SetActive(true);
     }
 
     public void DeactivateBossUI()
     {
+        if (BossUI == null)
+        {
+            return;
+        }
         BossUI.SetActive(false);
     }
 

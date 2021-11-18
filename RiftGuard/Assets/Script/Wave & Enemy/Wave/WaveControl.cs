@@ -42,10 +42,11 @@ public class WaveControl : MonoBehaviour
 
     void Update()
     {
+        SkipWave();
         if (waveReady && GameManage.currentGameStatus != GameManage.GameStatus.SHOP)
         {
             // if all wave are done
-            if (_currentWave == maxWave)
+            if (_currentWave >= maxWave)
             {
                 YouWin.SetActive(true);
                 return;
@@ -58,7 +59,9 @@ public class WaveControl : MonoBehaviour
                 // waveAmount -> Contain all of enemy in each wave
                 spawnControl.SetCurrentWave(_currentWave);
                 waveAmount += spawnControl.GetAmount(_currentWave);
-
+                spawnControl.allEnemy = 0;
+                spawnControl.currentType = 0;
+                spawnControl.checkEnemy= 0;
                 // If there are enemy check that direction
                 if(spawnControl.GetAmount(_currentWave) > 0)
                 {
@@ -99,6 +102,86 @@ public class WaveControl : MonoBehaviour
             {
                 timeCount += Time.deltaTime;
             }
+        }
+    }
+
+    private void SkipWave()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            // Set all direction to be false
+            top = false;
+            bot = false;
+            right = false;
+            left = false;
+            if (_currentWave >= maxWave)
+            {
+                return;
+            }
+            waveAmount = 0;
+            for (int j = 0; j < allSpawn.Count; j++)
+            {
+                SpawnerControl spawnControl = allSpawn[j].GetComponent<SpawnerControl>();
+                if (spawnControl.GetAmount(_currentWave) > 0)
+                {
+                    Check(spawnControl);
+                }
+                // Set current wave to each spawner
+                // Set Ready to Spawn = true -> make Enemy appear
+                spawnControl.ReadyToSpawn(false);
+            }
+            _currentWave++;
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            // Set all direction to be false
+            top = false;
+            bot = false;
+            right = false;
+            left = false;
+            if (_currentWave >= maxWave)
+            {
+                return;
+            }
+            waveAmount = 0;
+            for (int j = 0; j < allSpawn.Count; j++)
+            {
+                SpawnerControl spawnControl = allSpawn[j].GetComponent<SpawnerControl>();
+                if (spawnControl.GetAmount(_currentWave) > 0)
+                {
+                    Check(spawnControl);
+                }
+                // Set current wave to each spawner
+                // Set Ready to Spawn = true -> make Enemy appear
+                spawnControl.ReadyToSpawn(false);
+            }
+            _currentWave+=5;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            // Set all direction to be false
+            top = false;
+            bot = false;
+            right = false;
+            left = false;
+            if (_currentWave >= maxWave)
+            {
+                return;
+            }
+            waveAmount = 0;
+            for (int j = 0; j < allSpawn.Count; j++)
+            {
+                SpawnerControl spawnControl = allSpawn[j].GetComponent<SpawnerControl>();
+                if (spawnControl.GetAmount(_currentWave) > 0)
+                {
+                    Check(spawnControl);
+                }
+                // Set current wave to each spawner
+                // Set Ready to Spawn = true -> make Enemy appear
+                spawnControl.ReadyToSpawn(false);
+            }
+            _currentWave += 10;
         }
     }
 

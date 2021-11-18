@@ -14,11 +14,15 @@ public class BulletScript : MonoBehaviour
     [SerializeField] private AudioClip shootSound;
     [SerializeField] private AudioClip hitSound;
 
+    [SerializeField] private float shootSoundVolume;
+    [SerializeField] private float hitSoundVolume;
+
     private void Start()
     {
         GameObject sound = Instantiate(soundBullet,transform.position,transform.rotation);
         if (!SoundController.MuteSound)
         {
+            sound.GetComponent<AudioSource>().volume = shootSoundVolume;
             sound.GetComponent<AudioSource>().clip = shootSound;
         }
     }
@@ -62,6 +66,7 @@ public class BulletScript : MonoBehaviour
         if (!SoundController.MuteSound)
         {
             GameObject sound = Instantiate(soundBullet, transform.position, transform.rotation);
+            sound.GetComponent<AudioSource>().volume = hitSoundVolume;
             sound.GetComponent<AudioSource>().clip = hitSound;
         }
         Destroy(gameObject);
