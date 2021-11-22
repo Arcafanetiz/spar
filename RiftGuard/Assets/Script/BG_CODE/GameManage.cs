@@ -123,24 +123,28 @@ public class GameManage : MonoBehaviour
         {
             MoveCanvas(createTowerImage);
             createTowerCanvas.gameObject.SetActive(true);
+            TimeSlowdown();
         }
         else if (currentGameStatus == GameStatus.UPGRADE)
         {
             UpgradeUI.SetActive(true);
             _objectCard.SetActive(true);
             closeUI.SetActive(true);
+            TimeSlowdown();
         }
         else if(currentGameStatus == GameStatus.BASE)
         {
             baseUI.SetActive(true);
             _objectCard.SetActive(true);
             closeUI.SetActive(true);
+            TimeSlowdown();
         }
         else if (currentGameStatus == GameStatus.SPAWNER)
         {
             spawnerUI.SetActive(true);
             _objectCard.SetActive(true);
             closeUI.SetActive(true);
+            TimeSlowdown();
         }
         else if (currentGameStatus == GameStatus.SHOP)
         {
@@ -162,6 +166,7 @@ public class GameManage : MonoBehaviour
             shopUI.SetActive(false);
             shopBG.SetActive(false);
             pauseUI.SetActive(false);
+            BackToNormalTime();
             doOnce = true;
         }
     }
@@ -197,6 +202,23 @@ public class GameManage : MonoBehaviour
         else
         {
             GameManage.currentGameStatus = GameManage.GameStatus.PAUSE;
+        }
+    }
+
+    private void TimeSlowdown()
+    {
+        Time.timeScale = 0.25f;
+    }
+
+    private void BackToNormalTime()
+    {
+        if (GetComponent<SpeedUpWave>().isSpeedUp)
+        {
+            Time.timeScale = 2.5f;
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
         }
     }
 

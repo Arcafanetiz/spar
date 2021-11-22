@@ -11,7 +11,7 @@ public class SoundGameUI : MonoBehaviour
 
     private void Update()
     {
-        if(!SoundController.MuteSound)
+        if(SoundController.VFX_Volume != 0.0f)
         {
             this.GetComponent<Image>().sprite = Unmute;
         }

@@ -251,22 +251,18 @@ public class SpawnTower : MonoBehaviour
         if (CheckType == 1 && _baseScipt.money >= Tower_1[CheckLevel + 1].cost)
         {
             UpgradeTower_1(CheckLevel+1);
-            GameManage.currentGameStatus = GameManage.GameStatus.PLAY;
         }
         else if (CheckType == 2 && _baseScipt.money >= Tower_2[CheckLevel + 1].cost)
         {
             UpgradeTower_2(CheckLevel+1);
-            GameManage.currentGameStatus = GameManage.GameStatus.PLAY;
         }
         else if (CheckType == 3 && _baseScipt.money >= Tower_3[CheckLevel + 1].cost)
         {
             UpgradeTower_3(CheckLevel+1);
-            GameManage.currentGameStatus = GameManage.GameStatus.PLAY;
         }
         else if (CheckType == 4 && _baseScipt.money >= Tower_4[CheckLevel + 1].cost)
         {
             UpgradeTower_4(CheckLevel + 1);
-            GameManage.currentGameStatus = GameManage.GameStatus.PLAY;
         }
         else
         {

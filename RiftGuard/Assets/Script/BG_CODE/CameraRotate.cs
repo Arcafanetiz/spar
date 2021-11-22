@@ -25,11 +25,11 @@ public class CameraRotate : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Q))
         {
-            CamObject.transform.eulerAngles = new Vector3(0, 0, CamObject.transform.eulerAngles.z + Time.deltaTime * CamSpeed);
+            CamObject.transform.eulerAngles = new Vector3(0, 0, CamObject.transform.eulerAngles.z + Time.deltaTime * CamSpeed / Time.timeScale);
         }
         if (Input.GetKey(KeyCode.E))
         {
-            CamObject.transform.eulerAngles = new Vector3(0, 0, CamObject.transform.eulerAngles.z - Time.deltaTime * CamSpeed);
+            CamObject.transform.eulerAngles = new Vector3(0, 0, CamObject.transform.eulerAngles.z - Time.deltaTime * CamSpeed / Time.timeScale);
         }
 
         if (Input.GetKeyUp(KeyCode.Q) || Input.GetKeyUp(KeyCode.E))

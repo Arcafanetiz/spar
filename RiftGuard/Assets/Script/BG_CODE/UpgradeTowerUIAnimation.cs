@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class UpgradeTowerUIAnimation : MonoBehaviour
 {
     public GameObject UpgradeTowerUI;
@@ -18,6 +19,8 @@ public class UpgradeTowerUIAnimation : MonoBehaviour
 
     private bool doOnce = true;
 
+    float ConvertToNormal;
+
     private enum InfoType
     { 
         TOWER, SPAWNER, BASE
@@ -31,45 +34,47 @@ public class UpgradeTowerUIAnimation : MonoBehaviour
         CardCollectWidth = CardCollect.GetComponent<RectTransform>().rect.width;
         BaseUIWidth = BaseUI.GetComponent<RectTransform>().rect.width;
         SpawnerUIWidth = SpawnerUI.GetComponent<RectTransform>().rect.width;
+
     }
 
     private void Update()
     {
         if (doOnce && Check())
         {
+            ConvertToNormal = 1.0f / Time.timeScale;
             if (GameManage.currentGameStatus == GameManage.GameStatus.UPGRADE)
             {
-                UpgradeTowerUI.GetComponent<RectTransform>().DOAnchorPosX(UpgradeWidth / 2, 1.0f, false);
+                UpgradeTowerUI.GetComponent<RectTransform>().DOAnchorPosX(UpgradeWidth / 2, 1.0f / ConvertToNormal, false);
                 infoType = InfoType.TOWER;
             }
             else if (GameManage.currentGameStatus == GameManage.GameStatus.BASE)
             {
-                BaseUI.GetComponent<RectTransform>().DOAnchorPosX(BaseUIWidth / 2, 1.0f, false);
+                BaseUI.GetComponent<RectTransform>().DOAnchorPosX(BaseUIWidth / 2, 1.0f / ConvertToNormal, false);
                 infoType = InfoType.BASE;
             }
             else
             {
-                SpawnerUI.GetComponent<RectTransform>().DOAnchorPosX(SpawnerUIWidth / 2, 1.0f, false);
+                SpawnerUI.GetComponent<RectTransform>().DOAnchorPosX(SpawnerUIWidth / 2, 1.0f / ConvertToNormal, false);
                 infoType = InfoType.SPAWNER;
             }
-            CardCollect.GetComponent<RectTransform>().DOAnchorPosX(CardCollectWidth / 2, 1.0f, false);
+            CardCollect.GetComponent<RectTransform>().DOAnchorPosX(CardCollectWidth / 2, 1.0f / ConvertToNormal, false);
             doOnce = false;
         }
         else if (!doOnce && GameManage.currentGameStatus == GameManage.GameStatus.PLAY)
         {
             if(infoType == InfoType.TOWER)
             {
-                UpgradeTowerUI.GetComponent<RectTransform>().DOAnchorPosX(-UpgradeWidth / 2, 1.0f, false);
+                UpgradeTowerUI.GetComponent<RectTransform>().DOAnchorPosX(-UpgradeWidth / 2, 1.0f / ConvertToNormal, false);
             }
             else if (infoType == InfoType.BASE)
             {
-                BaseUI.GetComponent<RectTransform>().DOAnchorPosX(-BaseUIWidth / 2, 1.0f, false);
+                BaseUI.GetComponent<RectTransform>().DOAnchorPosX(-BaseUIWidth / 2, 1.0f / ConvertToNormal, false);
             }
             else
             {
-                SpawnerUI.GetComponent<RectTransform>().DOAnchorPosX(-SpawnerUIWidth / 2, 1.0f, false);
+                SpawnerUI.GetComponent<RectTransform>().DOAnchorPosX(-SpawnerUIWidth / 2, 1.0f / ConvertToNormal, false);
             }
-            CardCollect.GetComponent<RectTransform>().DOAnchorPosX(-CardCollectWidth / 2, 1.0f, false);
+            CardCollect.GetComponent<RectTransform>().DOAnchorPosX(-CardCollectWidth / 2, 1.0f / ConvertToNormal, false);
             doOnce = true;
         }
     }

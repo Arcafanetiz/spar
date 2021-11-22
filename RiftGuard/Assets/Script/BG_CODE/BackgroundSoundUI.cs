@@ -11,7 +11,7 @@ public class BackgroundSoundUI : MonoBehaviour
 
     private void Update()
     {
-        if (!SoundController.MuteBackgroundSound)
+        if (SoundController.BGM_Volume != 0.0f)
         {
             this.GetComponent<Image>().sprite = Unmute;
         }

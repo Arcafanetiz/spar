@@ -1,45 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundController : MonoBehaviour
 {
     [SerializeField] private GameObject gamePlaySound; // Sound store in Camera
-    [HideInInspector] public static bool MuteBackgroundSound = false;
-    [HideInInspector] public static bool MuteSound = false;
+    [HideInInspector] public static float BGM_Volume = 0.3f;
+    [HideInInspector] public static float VFX_Volume = 1.0f;
 
-    private void Start()
-    {
-        if(MuteBackgroundSound)
-        {
-            gamePlaySound.GetComponent<AudioSource>().volume = 0.0f;
-        }
-    }
+    [SerializeField] private GameObject BGM;
+    [SerializeField] private GameObject VFX;
 
-    public void MuteUnmuteBackgroundSound()
+    public void UpdateSound()
     {
-        if (MuteBackgroundSound)
-        {
-            gamePlaySound.GetComponent<AudioSource>().volume = 0.3f;
-            MuteBackgroundSound = false;
-        }
-        else
-        {
-            gamePlaySound.GetComponent<AudioSource>().volume = 0.0f;
-            MuteBackgroundSound = true;
-        }
-    }
+        BGM_Volume = BGM.GetComponent<Slider>().value;
+        VFX_Volume = VFX.GetComponent<Slider>().value;
 
-    public void MuteUnmuteSound()
-    {
-        if (MuteSound)
-        {
-            MuteSound = false;
-        }
-        else
-        {
-            MuteSound = true;
-        }
+        gamePlaySound.GetComponent<AudioSource>().volume = BGM_Volume;
     }
 
 }

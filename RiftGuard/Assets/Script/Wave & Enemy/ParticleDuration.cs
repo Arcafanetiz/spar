@@ -9,10 +9,8 @@ public class ParticleDuration : MonoBehaviour
 
     void Start()
     {
-        if (!SoundController.MuteSound)
-        {
-            this.GetComponent<AudioSource>().Play();
-        }
+        this.GetComponent<AudioSource>().volume *= SoundController.VFX_Volume;
+        this.GetComponent<AudioSource>().Play();
         time = GetComponent<ParticleSystem>().main.duration;
     }
 

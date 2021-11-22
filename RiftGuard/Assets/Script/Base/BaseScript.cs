@@ -97,6 +97,7 @@ public class BaseScript : MonoBehaviour
         if (health <= 0)
         {
             GameManage.currentGameStatus = GameManage.GameStatus.GAMEOVER;
+            health = 0;
         }
     }
 
