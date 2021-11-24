@@ -71,8 +71,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 1d4b16c2d6f2cf844bf39c23909010c3, type: 3}
-  m_Color: {r: 0.9960785, g: 0.3647059, b: 0.3647059, a: 1}
+  m_Sprite: {fileID: 21300000, guid: b621fc25e89c93d4fa86d19ca9a99593, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -384,12 +384,13 @@ MonoBehaviour:
   armorBar: {fileID: 19514887280703246}
   SPD: 0.25
   DEF: 0
-  HP: 10000
+  HP: 5000
   Armor: 5000
   getMoney: 50
   DestroyParticle: {fileID: 2407694680159395411, guid: d6b5d4197209632428934adaf71ade9e, type: 3}
   currentHP: 0
   currentArmor: 0
+  now: 0
 --- !u!58 &2767688634944838689
 CircleCollider2D:
   m_ObjectHideFlags: 0
