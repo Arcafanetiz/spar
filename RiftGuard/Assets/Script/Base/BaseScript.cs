@@ -55,9 +55,9 @@ public class BaseScript : MonoBehaviour
             {
                 money += 10;
             }
-            if (Input.GetKey(KeyCode.N))
+            if (Input.GetKey(KeyCode.N) && currentMana < 10.0f)
             {
-                money -= 10;
+                currentMana += 0.2f;
             }
         }
     }
